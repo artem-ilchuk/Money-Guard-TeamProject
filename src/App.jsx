@@ -1,34 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
+import { lazy, Suspense} from 'react';
+import { Route, Routes } from 'react-router-dom';
+import PublicRoute from './components/PublicRoute/PublicRoute';
+import RestrictedRoute from './components/RestrictedRoute/RestrictedRoute';
+
+
+
+const HomeTab = lazy(() => import('./pages/HomeTab/HomeTab'));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage/NotFoundPage'));
+const DashboardPage = lazy(() => import('./pages/DashboardPage/DashboardPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage/LoginPage'));
+const RegistrationPage = lazy(() => import('./pages/RegistrationPage/RegistrationPage'));
+const CurrencyTab = lazy(() => import('./pages/CurrencyTab/CurrencyTab'));
+const StatisticsTab = lazy(() => import('./pages/StatisticsTab/StatisticsTab'));
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Suspense fallback={<p>Loading page...</p>}>
+    <Routes >
+      <Route path='/home' element={ <RestrictedRoute> <HomeTab /></RestrictedRoute> } /> 
+      <Route path='/dashboard' element={ <RestrictedRoute><DashboardPage/></RestrictedRoute>} />
+      <Route path='/currency' element={ <RestrictedRoute><CurrencyTab /></RestrictedRoute>} />
+      <Route path='/statistics' element={ <RestrictedRoute><StatisticsTab/></RestrictedRoute>} />
+
+
+        <Route path='/register' element={<PublicRoute><RegistrationPage /></PublicRoute>}/>
+        <Route path='/login' element={<PublicRoute><LoginPage /></PublicRoute>} />
+        <Route path='*' element={<NotFoundPage/>} />
+    </Routes>
+    </Suspense>
   )
 }
 

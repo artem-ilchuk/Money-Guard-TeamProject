@@ -9,7 +9,6 @@ const RegistrationForm = () => {
     email: "",
     password: "",
     name: "",
-    confirmPassword: "",
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,37 +23,66 @@ const RegistrationForm = () => {
     <>
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         <Form className={css.form}>
-          <h3 className={css.title}>Money Guard</h3>
-          <Field
-            name="name"
-            className={css.field}
-            placeholder="Name"
-            required
-          ></Field>
+          <div className={css.logoThumb}>
+            <svg className={css.iconLogo}>
+              <use href={"../../../public/icons.svg#icon-logo"}></use>
+            </svg>
+            <h3 className={css.title}>Money Guard</h3>
+          </div>
 
-          <Field
-            name="email"
-            type="email"
-            className={css.field}
-            placeholder="E-mail"
-            required
-          ></Field>
+          <div className={css.iconThumb}>
+            <svg className={css.icon}>
+              <use href={"../../../public/icons.svg#icon-user"}></use>
+            </svg>
+            <Field
+              name="name"
+              className={css.field}
+              placeholder="Name"
+              required
+            ></Field>
+          </div>
 
-          <Field
-            name="password"
+          <div className={css.iconThumb}>
+            <svg className={css.icon}>
+              <use href={"../../../public/icons.svg#icon-email"}></use>
+            </svg>
+            <Field
+              name="email"
+              type="email"
+              className={css.field}
+              placeholder="E-mail"
+              required
+            ></Field>
+          </div>
+
+          <div className={css.iconThumb}>
+            <svg className={css.icon}>
+              <use href={"../../../public/icons.svg#icon-lock"}></use>
+            </svg>
+            <Field
+              name="password"
+              type="password"
+              className={css.field}
+              placeholder="Password"
+              required
+            ></Field>
+          </div>
+
+          {/* <Field
+            name="confirmPassword"
             type="password"
             className={css.field}
-            placeholder="Password"
+            placeholder="Confirm password"
             required
-          ></Field>
-
-          <button type="submit" className={css.regButton}>
-            Register
-          </button>
-
-          <Link to="/login" className={css.logButton}>
-            <button className={css.logButton}>Log in</button>
-          </Link>
+          ></Field> */}
+          <div className={css.buttonThumb}>
+            <button type="submit" className={css.regButton}>
+              Register
+            </button>
+            <Link to="/login" className={css.linkButton}>
+              <button className={css.logButton}>Log in</button>
+            </Link>
+          </div>
         </Form>
       </Formik>
     </>

@@ -1,0 +1,81 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  margin: 0 auto;
+  height: 568px;
+  min-width: 320px;
+  max-width: 360px;
+  padding: 23px 20px;
+  background-image: url(../../assets/img/bg_mobile_1x.jpg);
+}
+
+.title {
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: #fbfbfb;
+}
+
+.field {
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.regButton {
+  width: 100%;
+  height: 50px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fbfbfb;
+}
+
+.logButton {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: #fcfcfc;
+
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #623f8b;
+}
+
+.regButton:hover,
+.logButton:hover {
+  border: 1px solid rgb(0, 100, 100);
+}
+
+.logo {
+  margin: 100;
+  padding: 0;
+}

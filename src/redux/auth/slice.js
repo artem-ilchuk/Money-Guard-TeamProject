@@ -35,8 +35,11 @@ const authSlice = createSlice({
           ...initialState,
         };
       })
+      .addCase(getTotalBalanceThunk.fulfilled, (state, action) => {
+        state.user.balance = action.payload;
+      })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
-        state.user.name = action.payload.data.name;
+        state.user = action.payload.data;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.isAuthLoading = false;
@@ -54,17 +57,17 @@ const authSlice = createSlice({
       .addMatcher(
         isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled),
         (state, action) => {
-          state.user.name = action.payload.data.name;
-          state.user.email = action.payload.data.email;
-          state.user.balance = action.payload.data.balance;
-          state.token = action.payload.accessToken;
+          state.user.name = action.payload.data.user.name;
+          state.user.email = action.payload.data.user.email;
+          state.user.balance = action.payload.data.user.balance;
+          state.token = action.payload.data.accessToken;
           state.isLoggedIn = true;
         }
       )
       .addMatcher(
         isAnyOf(registerThunk.pending, loginThunk.pending),
         (state) => {
-          state.isAuthLoading = false;
+          state.isAuthLoading = true;
           state.isAuthError = null;
         }
       )
@@ -74,10 +77,7 @@ const authSlice = createSlice({
           state.isAuthLoading = false;
           state.isAuthError = action.payload;
         }
-      )
-      .addCase(getTotalBalanceThunk.fulfilled, (state, action) => {
-        state.user.balance = action.payload;
-      });
+      );
   },
 });
 

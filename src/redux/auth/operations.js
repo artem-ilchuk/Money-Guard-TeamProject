@@ -14,11 +14,11 @@ export const resetAuthHeader = () => {
 };
 
 export const registerThunk = createAsyncThunk(
-  "auth/register",
+  "user/register",
   async (credentials, thunkAPI) => {
     try {
       const { data } = await moneyGuardAPI.post("/auth/register", credentials);
-      setAuthHeader(data.token);
+      setAuthHeader(data.accessToken);
       toast.success("Registration successful! Welcome aboard.");
       return data;
     } catch (error) {
@@ -33,11 +33,11 @@ export const registerThunk = createAsyncThunk(
 );
 
 export const loginThunk = createAsyncThunk(
-  "auth/login",
+  "user/login",
   async (credentials, thunkAPI) => {
     try {
       const { data } = await moneyGuardAPI.post("/auth/login", credentials);
-      setAuthHeader(data.token);
+      setAuthHeader(data.accessToken);
       toast.success("Login successful! Welcome back.");
       return data;
     } catch (error) {
@@ -48,7 +48,7 @@ export const loginThunk = createAsyncThunk(
 );
 
 export const logoutThunk = createAsyncThunk(
-  "auth/logout",
+  "user/logout",
   async (_, thunkAPI) => {
     try {
       const state = thunkAPI.getState();
@@ -66,19 +66,31 @@ export const logoutThunk = createAsyncThunk(
   }
 );
 
-// export const refreshUserThunk = createAsyncThunk(
-//   "auth/refresh",
-//   async (_, thunkAPI) => {
-//     const savedToken = thunkAPI.getState().auth.token;
-//     if (!savedToken) {
-//       return thunkAPI.rejectWithValue("token is not exist");
-//     }
-//     setAuthHeader(savedToken);
-//     try {
-//       const { data } = await moneyGuardAPI.get("/auth/current");
-//       return data;
-//     } catch (error) {
-//       return thunkAPI.rejectWithValue(error.message);
-//     }
-//   }
-// );
+export const refreshUserThunk = createAsyncThunk(
+  "user/refresh",
+  async (_, thunkAPI) => {
+    const savedToken = thunkAPI.getState().auth.token;
+    if (!savedToken) {
+      return thunkAPI.rejectWithValue("Token is not exist");
+    }
+    setAuthHeader(savedToken);
+    try {
+      const { data } = await moneyGuardAPI.get("/users/current");
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const getTotalBalanceThunk = createAsyncThunk(
+  "balance/get",
+  async (_, thunkAPI) => {
+    try {
+      const { data } = await moneyGuardAPI.get("/users/current");
+      return data.balance;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

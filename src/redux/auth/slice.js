@@ -4,21 +4,30 @@ import {
   logoutThunk,
   refreshUserThunk,
   registerThunk,
+  getTotalBalanceThunk,
 } from "./operations";
 
 const initialState = {
   user: {
     name: null,
     email: null,
+    balance: null,
   },
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
+  isAuthLoading: false,
+  isAuthError: null,
 };
 
 const authSlice = createSlice({
   name: "auth",
   initialState,
+  reducers: {
+    updateBalance: (state, action) => {
+      state.user.balance = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(logoutThunk.fulfilled, () => {
@@ -27,27 +36,50 @@ const authSlice = createSlice({
         };
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
-        state.user.name = action.payload.name;
-        state.user.email = action.payload.email;
+        state.user.name = action.payload.data.name;
         state.isLoggedIn = true;
         state.isRefreshing = false;
+        state.isAuthLoading = false;
       })
       .addCase(refreshUserThunk.pending, (state) => {
         state.isRefreshing = true;
+        state.isAuthLoading = true;
+        state.isLoggedIn = true;
       })
       .addCase(refreshUserThunk.rejected, (state) => {
         state.isRefreshing = false;
+        state.isAuthLoading = false;
+        state.isLoggedIn = false;
       })
       .addMatcher(
         isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled),
         (state, action) => {
-          state.user = action.payload.user;
-          state.isLoggedIn = true;
+          state.user.name = action.payload.data.name;
+          state.user.email = action.payload.data.email;
+          state.user.balance = action.payload.data.balance;
           state.token = action.payload.token;
+          state.isLoggedIn = true;
         }
-      );
+      )
+      .addMatcher(
+        isAnyOf(registerThunk.pending, loginThunk.pending),
+        (state) => {
+          state.isAuthLoading = false;
+          state.isAuthError = null;
+        }
+      )
+      .addMatcher(
+        isAnyOf(registerThunk.rejected, loginThunk.rejected),
+        (state, action) => {
+          state.isAuthLoading = false;
+          state.isAuthError = action.payload;
+        }
+      )
+      .addCase(getTotalBalanceThunk.fulfilled, (state, action) => {
+        state.user.balance = action.payload;
+      });
   },
 });
 
-export default authSlice.reducer;
-export const { logout } = authSlice.actions;
+export const authReducer = authSlice.reducer;
+export const { updateBalance } = authSlice.actions;

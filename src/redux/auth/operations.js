@@ -18,7 +18,7 @@ export const registerThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await moneyGuardAPI.post("/auth/register", credentials);
-      setAuthHeader(data.token);
+      setAuthHeader(data.accessToken);
       toast.success("Registration successful! Welcome aboard.");
       return data;
     } catch (error) {
@@ -37,7 +37,7 @@ export const loginThunk = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const { data } = await moneyGuardAPI.post("/auth/login", credentials);
-      setAuthHeader(data.token);
+      setAuthHeader(data.accessToken);
       toast.success("Login successful! Welcome back.");
       return data;
     } catch (error) {

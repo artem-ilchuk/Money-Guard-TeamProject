@@ -1,10 +1,9 @@
 @import-normalize;
-@import 'modern-normalize/modern-normalize.css';
+@import "modern-normalize/modern-normalize.css";
 
 :root {
   --font-family: "Poppins", sans-serif;
   --second-family: "Circe", sans-serif;
-
 
   --yellow: #ffb627;
   --icon-violet: #734aef;
@@ -14,10 +13,13 @@
   --text-button: #623f8b;
   --dashboard-text: #ff868d;
   --form-color: rgba(255, 255, 255, 0.1);
-  --button-gradient: linear-gradient(167deg, #ffc727 0%, #9e40ba 61.46%, #7000ff 90.54%);
-  
+  --button-gradient: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
 }
-
 
 h1,
 h2,
@@ -62,7 +64,6 @@ textarea {
   outline: none;
 }
 
-
 body {
   font-family: var(--font-family);
   font-weight: 400;
@@ -70,7 +71,6 @@ body {
   color: var(--white-600);
   min-width: 320px;
   min-height: 100vh;
-
 }
 
 .container {
@@ -78,7 +78,6 @@ body {
   max-width: 360px;
   margin: 0 auto;
 }
-
 
 @media screen and (min-width: 768px) {
   .container {

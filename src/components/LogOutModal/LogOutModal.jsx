@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { logout } from "../../redux/auth/operations";
+import { logout, logoutThunk } from "../../redux/auth/operations";
 import { useState, useEffect } from "react";
 import styles from "./LogOutModal.module.css";
 
@@ -37,7 +37,7 @@ const LogOutModal = ({ closeModal }) => {
   }, []);
 
   const handleLogout = () => {
-    dispatch(logout())
+    dispatch(logoutThunk())
       .then(() => closeModal())
       .catch((error) => console.error("Logout failed", error));
   };

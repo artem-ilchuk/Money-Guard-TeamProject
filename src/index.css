@@ -1,3 +1,6 @@
+@import-normalize;
+@import 'modern-normalize/modern-normalize.css';
+
 :root {
   --font-family: "Poppins", sans-serif;
   --second-family: "Circe", sans-serif;
@@ -28,7 +31,6 @@ body {
 .container {
   min-width: 320px;
   max-width: 360px;
-  padding: 0 20px;
   margin: 0 auto;
 }
 
@@ -36,7 +38,6 @@ body {
 @media screen and (min-width: 768px) {
   .container {
     max-width: 768px;
-    padding: 0 32px;
   }
 }
 

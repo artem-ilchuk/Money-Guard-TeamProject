@@ -29,7 +29,6 @@ const RegistrationForm = () => {
             </svg>
             <p className={css.title}>Money Guard</p>
           </div>
-
           <div className={css.iconThumb}>
             <svg className={css.icon}>
               <use href={"/icons.svg#icon-user"}></use>

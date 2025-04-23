@@ -42,7 +42,6 @@ const LoginForm = () => {
             </svg>
             <h3 className={s.title}>Money Guard</h3>
           </div>
-
           <div className={s.inputs}>
             <div className={s.label}>
               <div className={s.iconWrapper}>

@@ -54,7 +54,6 @@ const modalsSlice = createSlice({
   },
 });
 
-
 export const {
   operateTransactionData,
   openEditModal,
@@ -67,6 +66,5 @@ export const {
   openLogOutModal,
   closeLogOutModal,
 } = modalsSlice.actions;
-
 
 export const modalsReducer = modalsSlice.reducer;

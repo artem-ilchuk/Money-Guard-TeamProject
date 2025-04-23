@@ -12,6 +12,7 @@ const initialState = {
     name: null,
     email: null,
     balance: null,
+    avatar: null,
   },
   token: null,
   isLoggedIn: false,

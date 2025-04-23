@@ -83,6 +83,34 @@ export const refreshUserThunk = createAsyncThunk(
   }
 );
 
+export const editUserName = createAsyncThunk(
+  "users/editName",
+  async ({ name }, thunkAPI) => {
+    try {
+      const { data } = await moneyGuardAPI.patch(`/users/current`, {
+        name,
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const editUserAvatar = createAsyncThunk(
+  "users/editAvatar",
+  async ({ avatar }, thunkAPI) => {
+    try {
+      const { data } = await moneyGuardAPI.patch(`/users/current/avatar`, {
+        avatar,
+      });
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 export const getTotalBalanceThunk = createAsyncThunk(
   "balance/get",
   async (_, thunkAPI) => {

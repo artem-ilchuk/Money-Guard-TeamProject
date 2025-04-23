@@ -18,6 +18,12 @@
     #9e40ba 61.46%,
     #7000ff 90.54%
   );
+  --button-gradient: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
 }
 
 h1,

@@ -1,0 +1,105 @@
+.header {
+  width: 100%;
+  box-shadow: 0 4px 40px 0 rgba(0, 0, 0, 0.25),
+    inset 0 -3px 2px 0 rgba(0, 0, 0, 0.1);
+  background: linear-gradient(276deg, #2e1746 3.19%, #2e225f 100%);
+}
+
+.container {
+  display: flex;
+  height: 60px;
+}
+.content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+.logoLink {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.title {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 0.7px;
+  color: var(--white);
+  margin: 0;
+}
+.iconLogo {
+  width: 17px;
+  height: 17px;
+}
+
+.authMenu {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
+}
+
+.userName {
+  font-weight: 400;
+  font-size: 16px;
+  color: var(--white-600);
+  margin: 0;
+}
+
+.exit {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.exitIcon {
+  font-size: 24px;
+  color: var(--white-600);
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    height: 80px;
+  }
+  .content {
+    margin: 0 auto;
+    max-width: 768px;
+  }
+  .line {
+    height: 30px;
+    width: 1px;
+    background-color: var(--white-600);
+  }
+  .authMenu {
+    gap: 12px;
+  }
+  .exit {
+    gap: 8px;
+  }
+  .exitText {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--white-600);
+  }
+}
+@media screen and (min-width: 1280px) {
+  .container {
+    width: 1280px;
+    margin: auto;
+  }
+
+  .content {
+    max-width: 1280px;
+  }
+}

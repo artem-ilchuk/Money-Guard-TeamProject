@@ -17,7 +17,7 @@ const RegistrationForm = () => {
     options.resetForm();
     dispatch(registerThunk(values))
       .unwrap()
-      .then(() => navigate("/"));
+      .then(() => navigate("/dashboard"));
   };
   return (
     <>

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { logout, logoutThunk } from "../../redux/auth/operations";
+import { logoutThunk } from "../../redux/auth/operations";
 import { useState, useEffect } from "react";
 import styles from "./LogOutModal.module.css";
 

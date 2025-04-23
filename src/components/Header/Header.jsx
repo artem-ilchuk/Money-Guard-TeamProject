@@ -2,7 +2,7 @@ import s from "./Header.module.css";
 import { IoExitOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import useMedia from "../../hooks/UseMedia";
+import useMedia from "../../hooks/UseMadia";
 import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
 import { openLogOutModal } from "../../redux/modal/slice";
 
@@ -17,8 +17,8 @@ const Header = () => {
   };
 
   return (
-    <div className="container">
-      <section className={s.header}>
+    <section className={s.header}>
+      <div className={s.container}>
         <div className={s.content}>
           <Link to="/" className={s.logoLink}>
             <svg className={s.iconLogo}>
@@ -39,8 +39,8 @@ const Header = () => {
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   );
 };
 

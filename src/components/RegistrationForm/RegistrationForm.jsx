@@ -25,14 +25,14 @@ const RegistrationForm = () => {
         <Form className={css.form}>
           <div className={css.logoThumb}>
             <svg className={css.iconLogo}>
-              <use href={"../../../public/icons.svg#icon-logo"}></use>
+              <use href={"/icons.svg#icon-logo"}></use>
             </svg>
             <h3 className={css.title}>Money Guard</h3>
           </div>
 
           <div className={css.iconThumb}>
             <svg className={css.icon}>
-              <use href={"../../../public/icons.svg#icon-user"}></use>
+              <use href={"/icons.svg#icon-user"}></use>
             </svg>
             <Field
               name="name"
@@ -44,7 +44,7 @@ const RegistrationForm = () => {
 
           <div className={css.iconThumb}>
             <svg className={css.icon}>
-              <use href={"../../../public/icons.svg#icon-email"}></use>
+              <use href={"/icons.svg#icon-email"}></use>
             </svg>
             <Field
               name="email"
@@ -57,7 +57,7 @@ const RegistrationForm = () => {
 
           <div className={css.iconThumb}>
             <svg className={css.icon}>
-              <use href={"../../../public/icons.svg#icon-lock"}></use>
+              <use href={"/icons.svg#icon-lock"}></use>
             </svg>
             <Field
               name="password"

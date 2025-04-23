@@ -1,6 +1,8 @@
 .header {
   padding-top: 12px;
   padding-bottom: 12px;
+  padding-left: 20px;
+  padding-right: 20px;
   background: linear-gradient(276deg, #2e1746 3.19%, #2e225f 100%);
 }
 .content {
@@ -9,22 +11,25 @@
   align-items: center;
   justify-content: space-between;
 }
-.logoThumb {
+.logoLink {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 5px;
+  cursor: pointer;
 }
 
 .title {
-  font-family: var(--font-family);
+  font-family: "Poppins", sans-serif;
   font-weight: 400;
   font-size: 12px;
+  letter-spacing: 0.7px;
   color: var(--white);
   margin: 0;
 }
 .iconLogo {
-  width: 27px;
-  height: 26px;
+  width: 17px;
+  height: 17px;
 }
 
 .authMenu {
@@ -40,24 +45,34 @@
   color: var(--white-600);
   margin: 0;
 }
-/* .line {
-} */
 
 .exit {
-  width: 18px;
-  height: 18px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.exitIcon {
+  font-size: 24px;
   color: var(--white-600);
   cursor: pointer;
 }
-/* @media screen and (min-width: 768px) {
-  .container {
-    max-width: 768px;
-    padding: 0 32px;
+
+@media screen and (min-width: 768px) {
+  .line {
+    height: 30px;
+    width: 1px;
+    background-color: var(--white-600);
+  }
+  .authMenu {
+    gap: 12px;
+  }
+  .exit {
+    gap: 8px;
+  }
+  .exitText {
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--white-600);
   }
 }
-
-@media screen and (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-} */

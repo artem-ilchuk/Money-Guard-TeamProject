@@ -37,7 +37,7 @@ const LoginForm = () => {
       {({ isSubmitting }) => (
         <Form className={s.form}>
           <svg className={s.iconLogo}>
-            <use href={"../../../public/icons.svg#icon-logo"}></use>
+            <use href={"/icons.svg#icon-logo"}></use>
           </svg>
           <h3 className={s.title}>Money Guard</h3>
 

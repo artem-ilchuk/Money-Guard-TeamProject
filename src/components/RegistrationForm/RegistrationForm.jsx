@@ -1,6 +1,6 @@
 import { Field, Form, Formik } from "formik";
 import css from "./RegistrationForm.module.css";
-import { Link, useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerThunk } from "../../redux/auth/operations";
 
@@ -27,7 +27,7 @@ const RegistrationForm = () => {
             <svg className={css.iconLogo}>
               <use href={"/icons.svg#icon-logo"}></use>
             </svg>
-            <h3 className={css.title}>Money Guard</h3>
+            <p className={css.title}>Money Guard</p>
           </div>
 
           <div className={css.iconThumb}>
@@ -79,9 +79,9 @@ const RegistrationForm = () => {
             <button type="submit" className={css.regButton}>
               Register
             </button>
-            <Link to="/login" className={css.linkButton}>
+            <NavLink to="/login" className={css.logButton}>
               <button className={css.logButton}>Log in</button>
-            </Link>
+            </NavLink>
           </div>
         </Form>
       </Formik>

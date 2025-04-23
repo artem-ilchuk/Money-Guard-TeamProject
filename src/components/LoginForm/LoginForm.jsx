@@ -2,7 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-// import { toast } from "react-toastify";
+import { toast } from "react-hot-toast";
 
 import { loginThunk } from "../../redux/auth/operations.js";
 import { loginSchema } from "../../schemas/schemas.js";

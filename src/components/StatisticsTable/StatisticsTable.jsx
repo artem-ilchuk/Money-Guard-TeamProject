@@ -1,7 +1,7 @@
 import styles from "./StatisticsTable.module.css";
 // import { useSelector } from "react-redux";
 // import { selectCategoriesSummary, selectSummaryTotals } from "../../redux/statistics/selectors";
-import { mockStatistics, mockIsLoading } from "../../mock/statistics";
+// import { mockStatistics, mockIsLoading } from "../../mock/statistics";
 
 const StatisticsTable = () => {
   // const categoriesData = useSelector(selectCategoriesSummary);

@@ -10,7 +10,7 @@ import CurrencyTab from "../Currency/Currency";
 // import { useSelector } from "react-redux";
 // import { selectBalance } from "../../redux/auth/selectors";
 // import { selectCategoriesSummary, selectSummaryTotals } from "../../redux/statistics/selectors";
-import { mockStatistics } from "../../mock/statistics";
+// import { mockStatistics } from "../../mock/statistics";
 
 const StatisticsDashboard = () => {
   const [selectedMonth, setSelectedMonth] = useState(null);

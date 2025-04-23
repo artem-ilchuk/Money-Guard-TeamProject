@@ -4,7 +4,7 @@ import styles from "./Chart.module.css";
 // import { useSelector } from "react-redux";
 // import { selectBalance } from "../../redux/auth/selectors";
 // import { selectCategoriesSummary } from "../../redux/statistics/selectors";
-import { mockStatistics, mockIsLoading } from "../../mock/statistics";
+// import { mockStatistics, mockIsLoading } from "../../mock/statistics";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 

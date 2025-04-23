@@ -1,0 +1,128 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  margin: 0 auto;
+  height: 568px;
+  min-width: 320px;
+  max-width: 360px;
+  padding: 97px 20px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-image: url(../../assets/img/bg_mobile_1x.jpg);
+}
+.iconBox {
+  margin-bottom: 52px;
+  justify-items: center;
+}
+
+.iconLogo {
+  width: 27px;
+  height: 26px;
+}
+
+.title {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 19px;
+  color: #fbfbfb;
+}
+
+.inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-bottom: 20px;
+}
+
+.label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  border-bottom: 1px solid #ccc;
+}
+
+.icon {
+  font-size: 20px;
+  color: #888;
+  margin-right: 19.5px;
+}
+.iconLogo {
+  width: 27px;
+  height: 26px;
+}
+.logoThumb {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.field {
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-radius: 5px;
+  border: none;
+
+  background-color: transparent;
+  color: rgba(255, 255, 255, 0.4);
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+}
+
+.button_reg {
+  border-radius: 20px;
+  width: 300px;
+  height: 50px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+  color: white;
+  border: none;
+}
+
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
+.toggleButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.button_log {
+  border-radius: 20px;
+  width: 300px;
+  height: 50px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: #fcfcfc;
+  border: none;
+}
+
+.button_log:hover,
+.button_reg:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 10px 20px rgba(0, 100, 100, 0.2);
+}

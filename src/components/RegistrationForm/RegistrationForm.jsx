@@ -75,9 +75,7 @@ const RegistrationForm = () => {
             required
           ></Field> */}
           <div className={css.buttonThumb}>
-            <button type="submit" className={css.regButton}>
-              Register
-            </button>
+            <button type="submit" className={css.regButton}>Register</button>
             <NavLink to="/login" className={css.logButton}>
               <button className={css.logButton}>Log in</button>
             </NavLink>

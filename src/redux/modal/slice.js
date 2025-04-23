@@ -54,3 +54,15 @@ const modalsSlice = createSlice({
   },
 });
 export const modalsReducer = modalsSlice.reducer;
+export const {
+  operateTransactionData,
+  openEditModal,
+  closeEditModal,
+  openAddModal,
+  closeAddModal,
+  addEditId,
+  openProfileModal,
+  closeProfileModal,
+  openLogOutModal,
+  closeLogOutModal,
+} = modalsSlice.actions;

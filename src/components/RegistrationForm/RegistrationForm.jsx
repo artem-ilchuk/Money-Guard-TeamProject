@@ -1,11 +1,92 @@
-
+import { Field, Form, Formik } from "formik";
+import css from "./RegistrationForm.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerThunk } from "../../redux/auth/operations";
 
 const RegistrationForm = () => {
-  return (
-    <div>
-      
-    </div>
-  )
-}
+  const initialValues = {
+    email: "",
+    password: "",
+    name: "",
+  };
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-export default RegistrationForm
+  const handleSubmit = (values, options) => {
+    options.resetForm();
+    dispatch(registerThunk(values))
+      .unwrap()
+      .then(() => navigate("/"));
+  };
+  return (
+    <>
+      <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Form className={css.form}>
+          <div className={css.logoThumb}>
+            <svg className={css.iconLogo}>
+              <use href={"../../../public/icons.svg#icon-logo"}></use>
+            </svg>
+            <h3 className={css.title}>Money Guard</h3>
+          </div>
+
+          <div className={css.iconThumb}>
+            <svg className={css.icon}>
+              <use href={"../../../public/icons.svg#icon-user"}></use>
+            </svg>
+            <Field
+              name="name"
+              className={css.field}
+              placeholder="Name"
+              required
+            ></Field>
+          </div>
+
+          <div className={css.iconThumb}>
+            <svg className={css.icon}>
+              <use href={"../../../public/icons.svg#icon-email"}></use>
+            </svg>
+            <Field
+              name="email"
+              type="email"
+              className={css.field}
+              placeholder="E-mail"
+              required
+            ></Field>
+          </div>
+
+          <div className={css.iconThumb}>
+            <svg className={css.icon}>
+              <use href={"../../../public/icons.svg#icon-lock"}></use>
+            </svg>
+            <Field
+              name="password"
+              type="password"
+              className={css.field}
+              placeholder="Password"
+              required
+            ></Field>
+          </div>
+
+          {/* <Field
+            name="confirmPassword"
+            type="password"
+            className={css.field}
+            placeholder="Confirm password"
+            required
+          ></Field> */}
+          <div className={css.buttonThumb}>
+            <button type="submit" className={css.regButton}>
+              Register
+            </button>
+            <Link to="/login" className={css.linkButton}>
+              <button className={css.logButton}>Log in</button>
+            </Link>
+          </div>
+        </Form>
+      </Formik>
+    </>
+  );
+};
+
+export default RegistrationForm;

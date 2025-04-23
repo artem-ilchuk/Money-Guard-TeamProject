@@ -54,7 +54,7 @@ const LogOutModal = ({ closeModal }) => {
         <button className={styles.closeBtn} onClick={closeModal}></button>
 
         <svg className={styles.iconLogo}>
-          <use href={"../../../public/icons.svg#icon-logo"}></use>
+          <use href={"/icons.svg#icon-logo"}></use>
         </svg>
 
         <p className={styles.text}>Are you sure you want to log out?</p>

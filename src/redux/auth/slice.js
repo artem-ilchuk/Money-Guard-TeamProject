@@ -4,6 +4,8 @@ import {
   logoutThunk,
   refreshUserThunk,
   registerThunk,
+  editUserName,
+  editUserAvatar,
   getTotalBalanceThunk,
 } from "./operations";
 
@@ -13,6 +15,7 @@ const initialState = {
     email: null,
     balance: null,
     avatar: null,
+    preview: null,
   },
   token: null,
   isLoggedIn: false,
@@ -27,6 +30,14 @@ const authSlice = createSlice({
   reducers: {
     updateBalance: (state, action) => {
       state.user.balance = action.payload;
+    },
+    reducers: {
+      setAvatarPreview: (state, action) => {
+        state.preview = action.payload;
+      },
+      clearAvatarPreview: (state) => {
+        state.preview = null;
+      },
     },
   },
   extraReducers: (builder) => {
@@ -55,12 +66,34 @@ const authSlice = createSlice({
         state.isAuthLoading = false;
         state.isLoggedIn = false;
       })
+      .addCase(
+        editUserName.fulfilled,
+        editUserAvatar.fulfilled,
+        (state, action) => {
+          state.user.name = action.payload.data.user.name;
+          state.user.avatar = action.payload.data.user.avatar;
+          state.isLoggedIn = true;
+          state.isRefreshing = false;
+          state.isAuthLoading = false;
+        }
+      )
+      .addCase(editUserName.pending, editUserAvatar.pending, (state) => {
+        state.isRefreshing = false;
+        state.isAuthLoading = true;
+        state.isLoggedIn = true;
+      })
+      .addCase(editUserName.rejected, editUserAvatar.rejected, (state) => {
+        state.isRefreshing = false;
+        state.isAuthLoading = false;
+        state.isLoggedIn = true;
+      })
       .addMatcher(
         isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled),
         (state, action) => {
           state.user.name = action.payload.data.user.name;
           state.user.email = action.payload.data.user.email;
           state.user.balance = action.payload.data.user.balance;
+          state.user.avatar = action.payload.data.user.avatar;
           state.token = action.payload.data.accessToken;
           state.isLoggedIn = true;
         }

@@ -90,6 +90,7 @@ export const editUserName = createAsyncThunk(
       const { data } = await moneyGuardAPI.patch(`/users/current`, {
         name,
       });
+      refreshUserThunk();
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -104,6 +105,7 @@ export const editUserAvatar = createAsyncThunk(
       const { data } = await moneyGuardAPI.patch(`/users/current/avatar`, {
         avatar,
       });
+      refreshUserThunk();
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

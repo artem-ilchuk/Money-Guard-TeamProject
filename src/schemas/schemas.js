@@ -3,12 +3,13 @@ import * as yup from "yup";
 export const registerSchema = yup.object().shape({
   name: yup
     .string()
-    .min(2, "Name must be at least 2 characters")
-    .max(50, "Name cannot exceed 50 characters")
+    .min(3, "Name must be at least 3 characters")
+    .max(30, "Name cannot exceed 30 characters")
     .required("Required"),
   email: yup
     .string()
     .email("Please enter a valid email address")
+    .max(64, "Name cannot exceed 64 characters")
     .matches(
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+.[A-Z]{2,}$/i,
       "Please enter a valid email address"

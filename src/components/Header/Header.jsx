@@ -1,18 +1,19 @@
 import s from "./Header.module.css";
 import { IoExitOutline } from "react-icons/io5";
-import { useDispatch, useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import useMedia from "../../hooks/UseMadia";
-import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
-import { openLogOutModal } from "../../redux/modal/slice";
+import { openLogOutModal, openProfileModal } from "../../redux/modal/slice";
+import UserAvatar from "../UserAvatar/UserAvatar";
 
 const Header = () => {
   const dispatch = useDispatch();
-  const user = useSelector(selectUser);
   const { isMobile } = useMedia();
-  const loggedIn = useSelector(selectIsLoggedIn);
 
-  const handleOpenModal = () => {
+  const handleEditProfileOpenModal = () => {
+    dispatch(openProfileModal());
+  };
+
+  const handleLogoutOpenModal = () => {
     dispatch(openLogOutModal());
   };
 
@@ -20,21 +21,19 @@ const Header = () => {
     <section className={s.header}>
       <div className={s.container}>
         <div className={s.content}>
-          <Link to="/" className={s.logoLink}>
+          <div className={s.logo}>
             <svg className={s.iconLogo}>
               <use href={"/icons.svg#icon-logo"}></use>
             </svg>
             <h3 className={s.title}>Money Guard</h3>
-          </Link>
+          </div>
           <div className={s.authMenu}>
-            {loggedIn ? (
-              <p className={s.userName}>{user.name}</p>
-            ) : (
-              <p className={s.userName}>Name</p>
-            )}
+            <div className={s.avatar} onClick={handleEditProfileOpenModal}>
+              <UserAvatar />
+            </div>
             {!isMobile && <div className={s.line}></div>}
-            <div className={s.exit} onClick={handleOpenModal}>
-              <IoExitOutline className={s.exitIcon} onClick={handleOpenModal} />
+            <div className={s.exit} onClick={handleLogoutOpenModal}>
+              <IoExitOutline className={s.exitIcon} />
               {!isMobile && <p className={s.exitText}>Exit</p>}
             </div>
           </div>

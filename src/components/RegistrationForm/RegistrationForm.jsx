@@ -108,7 +108,7 @@ const RegistrationForm = () => {
             Register
           </button>
           <NavLink to="/login" className={css.logButton}>
-            <button className={css.logButton}>Log in</button>
+            Log in
           </NavLink>
         </div>
       </form>

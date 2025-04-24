@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { logoutThunk } from "../../redux/auth/operations";
 import { useState, useEffect } from "react";
-import styles from "./LogOutModal.module.css";
+import s from "./LogOutModal.module.css";
 
 import FormButton from "../FormButton/FormButton";
 
@@ -49,17 +49,19 @@ const LogOutModal = ({ closeModal }) => {
   };
 
   return (
-    <div className={styles.overlay} onClick={closeOnClickOutside}>
-      <div className={styles.modal}>
-        <button className={styles.closeBtn} onClick={closeModal}></button>
+    <div className={s.logOutModal} onClick={closeOnClickOutside}>
+      <div className={s.modalContent}>
+        <button className={s.closeBtn} onClick={closeModal}></button>
+        <div className={s.iconBox}>
+          <svg className={s.iconLogo}>
+            <use href={"/icons.svg#icon-logo"}></use>
+          </svg>
+          <h3 className={s.title}>Money Guard</h3>
+        </div>
 
-        <svg className={styles.iconLogo}>
-          <use href={"../../../public/icons.svg#icon-logo"}></use>
-        </svg>
+        <p className={s.text}>Are you sure you want to log out?</p>
 
-        <p className={styles.text}>Are you sure you want to log out?</p>
-
-        <div className={styles.buttons}>
+        <div className={s.buttons}>
           <FormButton text="Logout" handlerFunction={handleLogout} />
           <FormButton
             text="Cancel"

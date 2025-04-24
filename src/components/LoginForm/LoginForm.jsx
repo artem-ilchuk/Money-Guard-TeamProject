@@ -20,7 +20,7 @@ const LoginForm = () => {
       const data = await dispatch(loginThunk(values)).unwrap();
       toast.success("Welcome, ${data.user.username}!");
       resetForm();
-      navigate("/Dashboard");
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid email or password");
     } finally {
@@ -38,7 +38,7 @@ const LoginForm = () => {
         <Form className={s.form}>
           <div className={s.iconBox}>
             <svg className={s.iconLogo}>
-              <use href={"../../../public/icons.svg#icon-logo"}></use>
+              <use href={"/icons.svg#icon-logo"}></use>
             </svg>
             <h3 className={s.title}>Money Guard</h3>
           </div>

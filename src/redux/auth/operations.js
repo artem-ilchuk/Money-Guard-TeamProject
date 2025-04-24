@@ -23,7 +23,7 @@ export const registerThunk = createAsyncThunk(
       return data;
     } catch (error) {
       if (error.response?.status === 409) {
-        toast.error("User with this name or email already exists.");
+        toast.error("User with the same email already exists.");
       } else {
         toast.error("Registration failed. Please try again.");
       }

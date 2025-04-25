@@ -5,6 +5,8 @@ import { registerThunk } from "../../redux/auth/operations";
 import { registerSchema } from "../../schemas/schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
+import clsx from "clsx";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -13,6 +15,7 @@ const RegistrationForm = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: yupResolver(registerSchema),
@@ -98,8 +101,18 @@ const RegistrationForm = () => {
               placeholder="Confirm password"
             ></input>
           </div>
-          <div className={css.errorThumb}>
+          <div className={clsx(css.errorThumb, css.marginErrorThumb)}>
             <div className={css.error}>{errors.confirmPassword?.message}</div>
+          </div>
+          <div className={css.passwordStrengthBarThumb}>
+            <PasswordStrengthBar
+              password={watch("password")}
+              className={css.passwordStrengthBar}
+              minLength={8}
+              minScore={1}
+              barColors={["#ddd", "#FFB627", "#f6b44d", "#2b90ef", "#25c281"]}
+              scoreWords={["weak", "weak", "okay", "good", "strong"]}
+            />
           </div>
         </div>
 

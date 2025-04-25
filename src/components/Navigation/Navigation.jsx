@@ -11,7 +11,7 @@ const Navigation = () => {
   return (
     <section className={s.navigation}>
       <div className={s.container}>
-        <NavLink to="/home" className={getNavLinkClass}>
+        <NavLink to="/home" className={s.navLinkActive}>
           <div className={s.transactions}>
             <IoMdHome className={s.homeIcon} />
           </div>

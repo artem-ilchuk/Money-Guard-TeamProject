@@ -74,19 +74,20 @@ const LoginForm = () => {
                 className={s.error}
               />
             </div>
+            <div className={s.buttonThumb}>
+              <button
+                type="submit"
+                className={s.button_log}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
+              </button>
+            </div>
 
-            <button
-              type="submit"
-              className={s.button_log}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
-            </button>
+            <NavLink to="/register" className={s.button_reg}>
+              REGISTER
+            </NavLink>
           </div>
-
-          <NavLink className={s.button_reg} to="/register">
-            REGISTER
-          </NavLink>
         </Form>
       )}
     </Formik>

@@ -4,7 +4,7 @@ const FormButton = ({
   type,
   text,
   handlerFunction,
-  variant,
+  variant = "multiColorButton",
   isDisabled = false,
 }) => {
   return (

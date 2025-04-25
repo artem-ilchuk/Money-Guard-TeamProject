@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import s from "./Header.module.css";
 import { IoExitOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
@@ -8,6 +9,14 @@ import UserAvatar from "../UserAvatar/UserAvatar";
 const Header = () => {
   const dispatch = useDispatch();
   const { isMobile } = useMedia();
+  const [animateAvatar, setAnimateAvatar] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setAnimateAvatar(true);
+    }, 200);
+    return () => clearTimeout(timeout);
+  }, []);
 
   const handleEditProfileOpenModal = () => {
     dispatch(openProfileModal());
@@ -28,7 +37,10 @@ const Header = () => {
             <h3 className={s.title}>Money Guard</h3>
           </div>
           <div className={s.authMenu}>
-            <div className={s.avatar} onClick={handleEditProfileOpenModal}>
+            <div
+              className={`${s.avatar} ${animateAvatar ? s.animate : ""}`}
+              onClick={handleEditProfileOpenModal}
+            >
               <UserAvatar />
             </div>
             {!isMobile && <div className={s.line}></div>}

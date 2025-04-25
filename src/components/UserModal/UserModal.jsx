@@ -77,7 +77,9 @@ const UserModal = () => {
     <div className={s.overlay} onClick={handleBackdropClick}>
       <div className={s.modal}>
         <button className={s.closeBtn} onClick={closeModal}>
-          ✕
+        <svg className={s.iconClose}>
+              <use href={"/icons.svg#icon-close"}></use>
+            </svg>
         </button>
         <p className={s.text}>Edit profile</p>
 
@@ -90,10 +92,9 @@ const UserModal = () => {
               onChange={handleAvatarChange}
               className={s.hiddenFileInput}
             />
-            <div className={s.plusIcon}><svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <path d="M7 3.11108V10.8889" stroke="#161616" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M3.11035 7H10.8881" stroke="#161616" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round" />
-</svg></div>
+            <div className={s.plusIcon}><svg className={s.iconPlus}>
+              <use href={"/icons.svg#icon-plus"}></use>
+            </svg></div>
           </label>
 
          <div className={s.labelBox}>

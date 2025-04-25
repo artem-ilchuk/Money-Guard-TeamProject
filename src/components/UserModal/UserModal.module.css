@@ -1,3 +1,17 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  backdrop-filter: blur(7px);
+  background: rgba(34, 13, 91, 0.23);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
 .modal {
   padding: 28px 20px;
   top: 50%;
@@ -18,7 +32,10 @@
 }
 
 .closeBtn {
-    display: none;
+    background-color: inherit;
+    position: absolute;
+    top: 20px;
+    right: 20px;
 }
 
 .text {
@@ -47,7 +64,12 @@ margin-bottom: 83px;
 .hiddenFileInput {
     display: none;
 }
-
+.iconPlus {
+  fill: #000;
+  stroke: #000;
+  width: 13px;
+  height: 13px;
+}
 .plusIcon {
     border: #ffc727;
     width: 32px;
@@ -118,4 +140,63 @@ color: var(--white);
 }
 .saveBtn:disabled {
     opacity: 0.5;
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    border-radius: 8px;
+width: 540px;
+height: 421px;
+box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+padding: 41px 80px;
+
+  }
+.iconClose {
+  stroke: #fff;
+  background-color: inherit;
+  width: 18px;
+  height: 18px;
+}
+
+  .text {
+font-size: 30px;
+margin-bottom: 24px;
+}
+
+.avatarLabel {
+  width: 68px;
+  margin-bottom: 30px;
+}
+
+.avatarPreview {
+  width: 68px;
+  height: 68px;
+  border-radius: 8px;
+
+}
+.plusIcon {
+ 
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+top: 55px;
+left: 22px;
+}
+
+.labelBox {
+  margin-bottom: 57px;
+}
+}
+
+@media screen and (min-width: 1280px) {
+  .modal {
+    border-radius: 8px;
+width: 540px;
+height: 390px;
+  }
+  .labelBox {
+    margin-bottom: 49px;
+  }
+
+
 }

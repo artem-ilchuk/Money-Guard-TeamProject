@@ -1,18 +1,19 @@
+import { useSelector } from "react-redux";
+import {
+  selectCategoriesSummary,
+  selectSummaryTotals,
+} from "../../redux/statistics/selectors";
+import styles from "./Chart.module.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import styles from "./Chart.module.css";
-// import { useSelector } from "react-redux";
-// import { selectBalance } from "../../redux/auth/selectors";
-// import { selectCategoriesSummary } from "../../redux/statistics/selectors";
-// import { mockStatistics, mockIsLoading } from "../../mock/statistics";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = () => {
-  // const balance = useSelector(selectBalance);
-  // const categoriesData = useSelector(selectCategoriesSummary);
-  const statistics = mockStatistics;
-  const isLoading = mockIsLoading;
+  const categoriesData = useSelector(selectCategoriesSummary);
+  const { incomeSummary, expenseSummary } = useSelector(selectSummaryTotals);
+
+  const balance = incomeSummary - expenseSummary;
 
   const categoryColors = {
     "Main expenses": "#FFD700",
@@ -26,26 +27,18 @@ const Chart = () => {
     "Other expenses": "#00CED1",
   };
 
-  if (isLoading) {
-    return <div className={styles.container}>Loading...</div>;
+  if (!categoriesData.length) {
+    return <div className={styles.container}>No data available</div>;
   }
 
-  const categoriesData = statistics.categoriesSummary || [];
-  const expenseSummary = statistics.expenseSummary || 0;
-  const incomeSummary = statistics.incomeSummary || 0;
-  const balance = incomeSummary - expenseSummary;
-
-  const chartData = categoriesData.filter((cat) => cat.name !== "INCOME");
-
   const data = {
-    labels: chartData.map((category) => category.name),
+    labels: categoriesData.map((c) => c.category),
     datasets: [
       {
-        data: chartData.map((category) => category.total),
-        backgroundColor: chartData.map(
-          (category) => categoryColors[category.name] || "#808080"
+        data: categoriesData.map((c) => c.total),
+        backgroundColor: categoriesData.map(
+          (c) => categoryColors[c.category] || "#808080"
         ),
-        borderColor: "transparent",
         borderWidth: 0,
         hoverOffset: 4,
       },
@@ -58,12 +51,10 @@ const Chart = () => {
       legend: { display: false },
       tooltip: {
         callbacks: {
-          label: function (context) {
-            const index = context.dataIndex;
-            const categoryName = chartData[index]?.name || "";
-            const value = context.raw || 0;
-            return `${categoryName}: ₺${value.toFixed(2)}`;
-          },
+          label: (ctx) =>
+            `${ctx.label}: ₴${ctx.raw.toLocaleString("uk-UA", {
+              minimumFractionDigits: 2,
+            })}`,
         },
       },
     },
@@ -72,18 +63,14 @@ const Chart = () => {
 
   return (
     <div className={styles.container}>
-      {chartData.length > 0 ? (
-        <div className={styles.chartWrapper}>
-          <Doughnut data={data} options={options} />
-          <div className={styles.balanceDisplay}>
-            <p className={styles.balanceAmount}>
-              ₴ {balance.toLocaleString("uk-UA", { minimumFractionDigits: 2 })}
-            </p>
-          </div>
+      <div className={styles.chartWrapper}>
+        <Doughnut data={data} options={options} />
+        <div className={styles.balanceDisplay}>
+          <p className={styles.balanceAmount}>
+            ₴ {balance.toLocaleString("uk-UA", { minimumFractionDigits: 2 })}
+          </p>
         </div>
-      ) : (
-        <div className={styles.noData}>No data available</div>
-      )}
+      </div>
     </div>
   );
 };

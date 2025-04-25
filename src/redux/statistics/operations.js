@@ -4,17 +4,15 @@ import { moneyGuardAPI, setAuthHeader } from "../auth/operations";
 export const getTransSummary = createAsyncThunk(
   "transactions/summary",
   async ({ month, year }, thunkApi) => {
-    const storedToken = thunkApi.getState().auth.token;
-    if (storedToken) {
-      setAuthHeader(storedToken);
-    } else {
-      return thunkApi.rejectWithValue(
-        "Something went wrong. Please try again."
-      );
-    }
+    const token = thunkApi.getState().auth.token;
+    if (!token) return thunkApi.rejectWithValue("No token");
+
+    setAuthHeader(token);
+    const date = `${month}-${year}`;
+
     try {
-      const { data } = await moneyGuardAPI.get(`/home?date=${date}`);
-      return data.data.data;
+      const { data } = await moneyGuardAPI.get(`/summary?date=${date}`);
+      return data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

@@ -10,22 +10,26 @@ const getNavLinkClass = ({ isActive }) =>
 const Navigation = () => {
   return (
     <section className={s.navigation}>
-      <div className={s.container}>
-        <NavLink to="/home" className={getNavLinkClass}>
-          <div className={s.transactions}>
-            <IoMdHome className={s.homeIcon} />
-          </div>
-        </NavLink>
-        <NavLink to="/statistics" className={getNavLinkClass}>
-          <div className={s.statistics}>
-            <TbTimeline className={s.statsIcon} />
-          </div>
-        </NavLink>
-        <NavLink to="/currency" className={getNavLinkClass}>
-          <div className={s.currency}>
-            <BsCurrencyDollar className={s.currIcon} />
-          </div>
-        </NavLink>
+      <div className="container">
+        <nav className={s.navElements}>
+          <NavLink to="/home" className={getNavLinkClass}>
+            <div className={s.transactions}>
+              <IoMdHome className={s.homeIcon} />
+            </div>
+            <p className={s.linkText}>Home</p>
+          </NavLink>
+          <NavLink to="/statistics" className={getNavLinkClass}>
+            <div className={s.statistics}>
+              <TbTimeline className={s.statsIcon} />
+            </div>
+            <p className={s.linkText}>Statistics</p>
+          </NavLink>
+          <NavLink to="/currency" className={getNavLinkClass}>
+            <div className={s.currency}>
+              <BsCurrencyDollar className={s.currIcon} />
+            </div>
+          </NavLink>
+        </nav>
       </div>
     </section>
   );

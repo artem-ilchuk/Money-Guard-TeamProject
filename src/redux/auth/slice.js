@@ -31,13 +31,11 @@ const authSlice = createSlice({
     updateBalance: (state, action) => {
       state.user.balance = action.payload;
     },
-    reducers: {
-      setAvatarPreview: (state, action) => {
-        state.preview = action.payload;
-      },
-      clearAvatarPreview: (state) => {
-        state.preview = null;
-      },
+    setAvatarPreview: (state, action) => {
+      state.preview = action.payload;
+    },
+    clearAvatarPreview: (state) => {
+      state.preview = null;
     },
   },
   extraReducers: (builder) => {
@@ -66,23 +64,34 @@ const authSlice = createSlice({
         state.isAuthLoading = false;
         state.isLoggedIn = false;
       })
-      .addCase(
-        editUserName.fulfilled,
-        editUserAvatar.fulfilled,
-        (state, action) => {
-          state.user.name = action.payload.data.user.name;
-          state.user.avatar = action.payload.data.user.avatar;
-          state.isLoggedIn = true;
-          state.isRefreshing = false;
-          state.isAuthLoading = false;
-        }
-      )
-      .addCase(editUserName.pending, editUserAvatar.pending, (state) => {
+      .addCase(editUserName.fulfilled, (state, action) => {
+        state.user.name = action.payload.data.name;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+        state.isAuthLoading = false;
+      })
+      .addCase(editUserName.pending, (state) => {
         state.isRefreshing = false;
         state.isAuthLoading = true;
         state.isLoggedIn = true;
       })
-      .addCase(editUserName.rejected, editUserAvatar.rejected, (state) => {
+      .addCase(editUserName.rejected, (state) => {
+        state.isRefreshing = false;
+        state.isAuthLoading = false;
+        state.isLoggedIn = true;
+      })
+      .addCase(editUserAvatar.fulfilled, (state, action) => {
+        state.user.avatar = action.payload.data.avatar;
+        state.isLoggedIn = true;
+        state.isRefreshing = false;
+        state.isAuthLoading = false;
+      })
+      .addCase(editUserAvatar.pending, (state) => {
+        state.isRefreshing = false;
+        state.isAuthLoading = true;
+        state.isLoggedIn = true;
+      })
+      .addCase(editUserAvatar.rejected, (state) => {
         state.isRefreshing = false;
         state.isAuthLoading = false;
         state.isLoggedIn = true;
@@ -116,4 +125,5 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { updateBalance } = authSlice.actions;
+export const { updateBalance, setAvatarPreview, clearAvatarPreview } =
+  authSlice.actions;

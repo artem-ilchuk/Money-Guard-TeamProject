@@ -23,10 +23,10 @@ export const getTransSummary = createAsyncThunk(
 
 export const getTransCategories = createAsyncThunk(
   "transactions/categories",
-  async (_, thunkApi) => {
+  async (filter, thunkApi) => {
     try {
-      const { data } = await moneyGuardAPI.get("/home-categories");
-      return data.data.data;
+      const { data } = await moneyGuardAPI.get(`/summary?date${filter}`);
+      return data.data;
     } catch (error) {
       return thunkApi.rejectWithValue(error.message);
     }

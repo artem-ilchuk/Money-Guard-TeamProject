@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { closeProfileModal } from "../../redux/modal/slice";
 import s from "./UserModal.module.css";
 import { selectUser } from "../../redux/auth/selectors";
+import { editUserAvatar, editUserName } from "../../redux/auth/operations";
+
 
 const UserModal = () => {
   const dispatch = useDispatch();
@@ -24,18 +26,25 @@ const UserModal = () => {
 
   const watchedName = watch("name");
 
-  const onSubmit = (data) => {
-    if (!data.name.trim()) return;
-
-    const formData = new FormData();
-    formData.append("name", data.name);
-    if (file) {
-      formData.append("avatar", file);
-    }
-
-    // dispatch(updateUserThunk(formData)); 
-    dispatch(closeProfileModal());
-  };
+    const onSubmit = async (data) => {
+      if (!data.name.trim() && !file) return; 
+  
+      const namePromise = data.name.trim()
+        ? dispatch(editUserName({ name: data.name.trim() }))
+        : null;
+  
+      
+      const avatarPromise = file
+        ? dispatch(editUserAvatar({ avatar: file }))
+        : null;
+  
+      try {
+        await Promise.all([namePromise, avatarPromise]);
+        
+      } catch (error) {
+        console.error("Error updating profile:", error);
+      }
+    };
 
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
@@ -63,9 +72,6 @@ const UserModal = () => {
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  useEffect(() => {
-    console.log(errors);
-  }, [errors]);
 
   return (
     <div className={s.overlay} onClick={handleBackdropClick}>

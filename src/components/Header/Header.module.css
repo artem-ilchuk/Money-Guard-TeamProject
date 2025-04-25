@@ -55,8 +55,13 @@
   flex-direction: row;
   align-items: center;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+.exit:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+}
 .exitIcon {
   font-size: 24px;
   color: var(--white-600);
@@ -84,6 +89,17 @@
     font-weight: 400;
     font-size: 16px;
     color: var(--white-600);
+  }
+  .avatar {
+    cursor: pointer;
+    opacity: 0;
+    transform: scale(3);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .animate {
+    opacity: 1;
+    transform: scale(1);
   }
 }
 @media screen and (min-width: 1280px) {

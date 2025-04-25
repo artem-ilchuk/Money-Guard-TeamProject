@@ -102,9 +102,18 @@ export const editUserAvatar = createAsyncThunk(
   "users/editAvatar",
   async ({ avatar }, thunkAPI) => {
     try {
-      const { data } = await moneyGuardAPI.patch(`/users/current/avatar`, {
-        avatar,
-      });
+      const formData = new FormData();
+      formData.append("avatar", avatar);
+
+      const { data } = await moneyGuardAPI.patch(
+        "/users/current/avatar",
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
       refreshUserThunk();
       return data;
     } catch (error) {

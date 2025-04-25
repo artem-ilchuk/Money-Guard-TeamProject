@@ -80,9 +80,10 @@
 }
 
 .button_reg {
-  border-radius: 20px;
-  width: 300px;
+  width: 100%;
   height: 50px;
+  border: none;
+  border-radius: 20px;
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     167deg,
@@ -90,8 +91,14 @@
     #9e40ba 61.46%,
     #7000ff 90.54%
   );
-  color: white;
-  border: none;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .passwordWrapper {
@@ -112,13 +119,38 @@
   align-items: center;
 }
 
-.button_log {
+/* .link {
   border-radius: 20px;
-  width: 300px;
+  padding: 13px 0;
+  width: 280px;
   height: 50px;
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
   background: #fcfcfc;
   border: none;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--text-button);
+} */
+
+.button_log {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: #fcfcfc;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .button_log:hover,

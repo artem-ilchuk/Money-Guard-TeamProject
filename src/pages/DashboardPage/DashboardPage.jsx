@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectIsLogOutModalOpen } from "../../redux/modal/selectors";
 import { closeLogOutModal } from "../../redux/modal/slice";
 import LogOutModal from "../../components/LogOutModal/LogOutModal";
+import Navigation from "../../components/Navigation/Navigation";
 
 const DashboardPage = () => {
   const isLogOutModalOpen = useSelector(selectIsLogOutModalOpen);
@@ -16,6 +17,7 @@ const DashboardPage = () => {
     <div>
       <Header />
       {isLogOutModalOpen && <LogOutModal closeModal={handleCloseModal} />}
+      <Navigation />
     </div>
   );
 };

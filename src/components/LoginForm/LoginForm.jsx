@@ -20,7 +20,7 @@ const LoginForm = () => {
       const data = await dispatch(loginThunk(values)).unwrap();
       toast.success("Welcome, ${data.user.username}!");
       resetForm();
-      navigate("/Dashboard");
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid email or password");
     } finally {

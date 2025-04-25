@@ -2,36 +2,46 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
+const CURRENCY_KEY = "currencyData";
+const ONE_HOUR = 60 * 60 * 1000;
+
 export const monoBankAPI = axios.create({
   baseURL: "https://api.monobank.ua/",
 });
 
-const CURRENCY_KEY = "currencyData";
-const ONE_HOUR = 60 * 60 * 1000;
+export const fetchCurrency = createAsyncThunk(
+  "currency/fetchAll",
+  async (_, thunkAPI) => {
+    const cached = localStorage.getItem(CURRENCY_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.date < ONE_HOUR) {
+        return parsed;
+      }
+    }
 
-export const fetchCurrencyRate = async () => {
-  const { data } = await monoBankAPI.get("/bank/currency");
-  const getCurrency = (codeA) =>
-    data.find((c) => c.currencyCodeA === codeA && c.currencyCodeB === 980);
-  return {
-    usd: getCurrency(840),
-    euro: getCurrency(978),
-  };
-};
+    try {
+      const response = await axios.get(`${BASE_URL}/bank/currency`);
+      const usd = response.data.find(
+        (item) => item.currencyCodeA === 840 && item.currencyCodeB === 980
+      );
+      const eur = response.data.find(
+        (item) => item.currencyCodeA === 978 && item.currencyCodeB === 980
+      );
 
-const getCurrencyFromStorage = () => {
-  const savedData = localStorage.getItem(CURRENCY_KEY);
-  if (!savedData) return null;
-  const { timestamp, rate } = JSON.parse(savedData);
-  return Date.now() - timestamp < ONE_HOUR ? rate : null;
-};
+      const allData = {
+        date: Date.now(),
+        usd: { buy: usd.rateBuy.toFixed(2), sell: usd.rateSell.toFixed(2) },
+        euro: { buy: eur.rateBuy.toFixed(2), sell: eur.rateSell.toFixed(2) },
+      };
 
-const saveCurrencyToStorage = (rate) => {
-  localStorage.setItem(
-    CURRENCY_KEY,
-    JSON.stringify({ timestamp: Date.now(), rate })
-  );
-};
+      localStorage.setItem(CURRENCY_KEY, JSON.stringify(allData));
+      return allData;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
 
 export const getCurrency = createAsyncThunk(
   "currency/fetch",

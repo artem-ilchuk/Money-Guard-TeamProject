@@ -8,7 +8,7 @@ import StatisticsChart from "../Chart/Chart";
 import BallanceTab from "../Balance/Balance";
 import CurrencyTab from "../Currency/Currency";
 import { getTransSummary } from "../../redux/statistics/operations";
-import { selectSummaryTotals } from "../../redux/statistics/selectors";
+import { selectSummary } from "../../redux/statistics/selectors";
 
 const StatisticsDashboard = () => {
   const dispatch = useDispatch();
@@ -20,7 +20,7 @@ const StatisticsDashboard = () => {
     String(new Date().getFullYear())
   );
 
-  const { incomeSummary, expenseSummary } = useSelector(selectSummaryTotals);
+  const { incomeSummary, expenseSummary } = useSelector(selectSummary);
   const balance = incomeSummary - expenseSummary;
 
   const monthOptions = [

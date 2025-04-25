@@ -1,15 +1,14 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { selectBalance } from "../../redux/auth/selectors";
-import { getCurrentUser } from "../../redux/auth/operations";
+import { selectTotalBalance } from "../../redux/auth/selectors";
+import { getTotalBalanceThunk } from "../../redux/auth/operations";
 import styles from "./Balance.module.css";
 
 const Balance = () => {
   const dispatch = useDispatch();
-  const balance = useSelector(selectBalance);
-
+  const balance = useSelector(selectTotalBalance);
   useEffect(() => {
-    dispatch(getCurrentUser());
+    dispatch(getTotalBalanceThunk());
   }, [dispatch]);
 
   const formatted =

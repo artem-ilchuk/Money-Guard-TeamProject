@@ -1,0 +1,28 @@
+.page {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-image: url(../../assets/img/bg_page_1x.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+@media screen and (min-resolution: 192dpi) {
+  .page {
+    background-image: url(../../assets/img/bg_page_2x.jpg);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .page {
+    background-image: url(../../assets/img/bg_full_1x.jpg);
+  }
+  @media screen and (min-resolution: 192dpi) {
+    .page {
+      background-image: url(../../assets/img/bg_full_2x.jpg);
+    }
+  }
+}

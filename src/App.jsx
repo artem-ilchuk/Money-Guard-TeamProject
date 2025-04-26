@@ -6,6 +6,7 @@ import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshUserThunk } from "./redux/auth/operations";
+import Preloader from "./components/Preloader/Preloader";
 
 const HomeTab = lazy(() => import("./pages/HomeTab/HomeTab"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
@@ -25,61 +26,64 @@ function App() {
   }, [dispatch]);
 
   return isRefreshing ? null : (
-    <Suspense fallback={<p>Loading page...</p>}>
-      <Routes>
-        <Route
-          path="/home"
-          element={
-            <RestrictedRoute>
-              {" "}
-              <HomeTab />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/dashboard"
-          element={
-            <RestrictedRoute>
-              <DashboardPage />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/currency"
-          element={
-            <RestrictedRoute>
-              <CurrencyTab />
-            </RestrictedRoute>
-          }
-        />
-        <Route
-          path="/statistics"
-          element={
-            <RestrictedRoute>
-              <StatisticsTab />
-            </RestrictedRoute>
-          }
-        />
+    <>
+      <Preloader />
+      <Suspense fallback={<p>Loading page...</p>}>
+        <Routes>
+          <Route
+            path="/home"
+            element={
+              <RestrictedRoute>
+                {" "}
+                <HomeTab />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/dashboard"
+            element={
+              <RestrictedRoute>
+                <DashboardPage />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/currency"
+            element={
+              <RestrictedRoute>
+                <CurrencyTab />
+              </RestrictedRoute>
+            }
+          />
+          <Route
+            path="/statistics"
+            element={
+              <RestrictedRoute>
+                <StatisticsTab />
+              </RestrictedRoute>
+            }
+          />
 
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <RegistrationPage />
-            </PublicRoute>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <LoginPage />
-            </PublicRoute>
-          }
-        />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
-    </Suspense>
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <RegistrationPage />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <LoginPage />
+              </PublicRoute>
+            }
+          />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </Suspense>
+    </>
   );
 }
 

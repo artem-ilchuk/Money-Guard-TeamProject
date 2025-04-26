@@ -26,6 +26,7 @@ const Chart = () => {
     Education: "#AFEEEE",
     Leisure: "#00FA9A",
     "Other expenses": "#00CED1",
+    Entertainment: "#E16E6E",
   };
 
   if (!categoriesData.length) {

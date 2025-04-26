@@ -122,7 +122,7 @@ export const getTotalBalanceThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await moneyGuardAPI.get("/users/current");
-      return data.data.balance;
+      return data.balance;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

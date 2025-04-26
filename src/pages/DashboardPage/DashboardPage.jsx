@@ -8,6 +8,7 @@ import { closeLogOutModal, closeProfileModal } from "../../redux/modal/slice";
 import LogOutModal from "../../components/LogOutModal/LogOutModal";
 import Navigation from "../../components/Navigation/Navigation";
 import UserModal from "../../components/UserModal/UserModal";
+import StatisticsDashboard from "../../components/StatisticsDashboard/StatisticsDashboard";
 
 const DashboardPage = () => {
   const isLogOutModalOpen = useSelector(selectIsLogOutModalOpen);
@@ -27,6 +28,9 @@ const DashboardPage = () => {
       {isLogOutModalOpen && <LogOutModal closeModal={handleCloseModal} />}
       {isProfileModalOpen && <UserModal closeModal={handleCloseProfile} />}
       <Navigation />
+
+      {/* Тут додаємо Статистику */}
+      <StatisticsDashboard />
     </div>
   );
 };

@@ -7,6 +7,7 @@ import { selectUser } from "../../redux/auth/selectors";
 import { editUserAvatar, editUserName } from "../../redux/auth/operations";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import useMedia from "../../hooks/UseMadia";
+import FormButton from "../FormButton/FormButton";
 
 
 const UserModal = () => {

@@ -1,3 +1,5 @@
+
+
 .modal {
   padding: 28px 20px;
   min-width: 320px;
@@ -59,12 +61,26 @@ align-items: center;
 position: absolute;
 top: 73px;
 left: 32px;
+transition: all 1s ease 0s;
+}
+.plusIcon:hover,
+.plusIcon:focus {
+  transform: scale(1.05);
+  background-image: linear-gradient(
+    to right,
+    #7000ff 0%,
+    #9e40ba 31%,
+    #ffc727 100%
+  );
+  background-size: 200%;
+  background-position: right center;
 }
 
 .avatarLabel {
     width: 96px;
     margin-bottom: 75px;
     position: relative;
+    cursor: pointer;
 }
 .labelBox {
     margin-bottom: 80px;
@@ -114,9 +130,23 @@ letter-spacing: 0.1em;
 text-transform: uppercase;
 text-align: center;
 color: var(--white);
+transition: all 1s ease 0s;
 }
 .saveBtn:disabled {
     opacity: 0.5;
+}
+
+.saveBtn:hover,
+.saveBtn:focus {
+  transform: scale(1.05);
+  background-image: linear-gradient(
+    to right,
+    #7000ff 0%,
+    #9e40ba 31%,
+    #ffc727 100%
+  );
+  background-size: 200%;
+  background-position: right center;
 }
 
 

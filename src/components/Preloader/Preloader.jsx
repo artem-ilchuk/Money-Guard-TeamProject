@@ -11,17 +11,17 @@ const Preloader = () => {
 
   const totalLetters = firstPart.length + secondPart.length;
 
-  //   useEffect(() => {
-  //     const animationDuration =
-  //       totalLetters * 100 + secondPart.length * 100 + 2000;
-  //     const timer = setTimeout(() => {
-  //       setVisible(false);
-  //     }, animationDuration);
+  useEffect(() => {
+    const animationDuration =
+      totalLetters * 100 + secondPart.length * 100 + 2000;
+    const timer = setTimeout(() => {
+      setVisible(false);
+    }, animationDuration);
 
-  //     return () => clearTimeout(timer);
-  //   }, [totalLetters]);
+    return () => clearTimeout(timer);
+  }, [totalLetters]);
 
-  //   if (!visible) return null;
+  if (!visible) return null;
 
   let fontSize = "14px";
   if (isTablet) fontSize = "40px";

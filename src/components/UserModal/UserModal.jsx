@@ -95,7 +95,7 @@ const UserModal = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <label className={s.avatarLabel}>
-            {isMobile ? <UserAvatar  customAvatar={avatar} size={96} borderRadius={11}/> : <UserAvatar customAvatar={avatar} size={68} borderRadius={8}/>}
+            {isMobile ? <UserAvatar  customAvatar={avatar} size={96} borderRadius={11} fontSize={48}/> : <UserAvatar customAvatar={avatar} size={68} borderRadius={8} fontSize={36}/>}
             <input
               type="file"
               accept="image/*"

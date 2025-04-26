@@ -54,7 +54,6 @@ export const logoutThunk = createAsyncThunk(
       const state = thunkAPI.getState();
       const lastPath =
         state.router?.location?.pathname || window.location.pathname;
-
       localStorage.setItem("lastVisitedPage", lastPath);
       await moneyGuardAPI.post("/auth/logout");
       resetAuthHeader();
@@ -87,9 +86,7 @@ export const editUserName = createAsyncThunk(
   "users/editName",
   async ({ name }, thunkAPI) => {
     try {
-      const { data } = await moneyGuardAPI.patch(`/users/current`, {
-        name,
-      });
+      const { data } = await moneyGuardAPI.patch(`/users/current`, { name });
       refreshUserThunk();
       return data;
     } catch (error) {
@@ -109,9 +106,7 @@ export const editUserAvatar = createAsyncThunk(
         "/users/current/avatar",
         formData,
         {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
+          headers: { "Content-Type": "multipart/form-data" },
         }
       );
       refreshUserThunk();
@@ -127,7 +122,7 @@ export const getTotalBalanceThunk = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const { data } = await moneyGuardAPI.get("/users/current");
-      return data.balance;
+      return data.data.balance;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

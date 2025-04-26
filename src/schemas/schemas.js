@@ -18,7 +18,7 @@ export const registerSchema = yup.object().shape({
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters")
-    .max(12, "Password cannot exceed 12 characters")
+    .max(64, "Password cannot exceed 64 characters")
     .required("Required"),
   confirmPassword: yup
     .string()
@@ -38,6 +38,6 @@ export const loginSchema = yup.object().shape({
   password: yup
     .string()
     .min(8, "Password must be at least 8 characters")
-    .max(12, "Password cannot exceed 12 characters")
+    .max(64, "Password cannot exceed 64 characters")
     .required("Password is required"),
 });

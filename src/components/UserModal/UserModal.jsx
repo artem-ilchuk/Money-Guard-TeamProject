@@ -5,10 +5,13 @@ import { closeProfileModal } from "../../redux/modal/slice";
 import s from "./UserModal.module.css";
 import { selectUser } from "../../redux/auth/selectors";
 import { editUserAvatar, editUserName } from "../../redux/auth/operations";
+import UserAvatar from "../UserAvatar/UserAvatar";
+import useMedia from "../../hooks/UseMadia";
 
 
 const UserModal = () => {
   const dispatch = useDispatch();
+  const { isMobile } = useMedia();
   const { name: currentName, avatar: currentAvatar } = useSelector(selectUser);
 
   const {
@@ -40,6 +43,7 @@ const UserModal = () => {
   
       try {
         await Promise.all([namePromise, avatarPromise]);
+        dispatch(closeProfileModal());
         
       } catch (error) {
         console.error("Error updating profile:", error);
@@ -68,8 +72,13 @@ const UserModal = () => {
         closeModal();
       }
     };
+
+
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    return () => {
+    window.removeEventListener("keydown", handleKeyDown);
+  };
   }, []);
 
 
@@ -85,7 +94,7 @@ const UserModal = () => {
 
         <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
           <label className={s.avatarLabel}>
-            <img src={avatar} alt="Avatar" className={s.avatarPreview} />
+            {isMobile ? <UserAvatar  customAvatar={avatar} size={96} borderRadius={11}/> : <UserAvatar customAvatar={avatar} size={68} borderRadius={8}/>}
             <input
               type="file"
               accept="image/*"

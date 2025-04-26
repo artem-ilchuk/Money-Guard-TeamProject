@@ -41,7 +41,7 @@ const Header = () => {
               className={`${s.avatar} ${animateAvatar ? s.animate : ""}`}
               onClick={handleEditProfileOpenModal}
             >
-              <UserAvatar />
+              <UserAvatar size={32} fontSize={14} borderRadius={8} />
             </div>
             {!isMobile && <div className={s.line}></div>}
             <div className={s.exit} onClick={handleLogoutOpenModal}>

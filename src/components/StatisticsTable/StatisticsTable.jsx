@@ -2,12 +2,14 @@ import { useSelector } from "react-redux";
 import {
   selectCategories,
   selectStatLoading,
+  selectSummary,
 } from "../../redux/statistics/selectors";
 import styles from "./StatisticsTable.module.css";
 
 const StatisticsTable = () => {
   const categoriesData = useSelector(selectCategories) || [];
   const isLoading = useSelector(selectStatLoading);
+  const { incomeSummary, expenseSummary } = useSelector(selectSummary);
 
   const formatNumber = (num) => {
     if (!num && num !== 0) return "0.00";
@@ -24,12 +26,8 @@ const StatisticsTable = () => {
     Education: "#AFEEEE",
     Leisure: "#00FA9A",
     "Other expenses": "#00CED1",
+    Entertainment: "#E16E6E",
   };
-
-  const expenseSummary = categoriesData.reduce(
-    (sum, item) => sum + item.total,
-    0
-  );
 
   if (isLoading) {
     return <div className={styles.container}>Loading...</div>;
@@ -62,9 +60,15 @@ const StatisticsTable = () => {
 
       <div className={styles.tableSummary}>
         <div className={styles.summaryRow}>
-          <div className={styles.summaryLabel}>Total Expenses:</div>
+          <div className={styles.summaryLabel}>Expenses:</div>
           <div className={styles.expensesValue}>
             {formatNumber(expenseSummary)}
+          </div>
+        </div>
+        <div className={styles.summaryRow}>
+          <div className={styles.summaryLabel}>Income:</div>
+          <div className={styles.incomeValue}>
+            {formatNumber(incomeSummary)}
           </div>
         </div>
       </div>

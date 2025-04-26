@@ -16,16 +16,17 @@ const statsSlice = createSlice({
       .addCase(getTransSummary.fulfilled, (state, action) => {
         state.isStatisticsLoading = false;
 
-        const income = action.payload.find(
-          (item) => item.category === "Income"
+        const incomeItem = action.payload.find(
+          (item) => item.category === "Income" || !item.category
         );
+
         const expenses = action.payload.filter(
-          (item) => item.category !== "Income"
+          (item) => item.category && item.category !== "Income"
         );
 
         state.categories = expenses;
         state.summary = {
-          incomeSummary: income?.total || 0,
+          incomeSummary: incomeItem?.total || 0,
           expenseSummary: expenses.reduce((sum, item) => sum + item.total, 0),
         };
       })

@@ -1,6 +1,9 @@
 import Header from "../../components/Header/Header";
 import { useSelector, useDispatch } from "react-redux";
-import { selectIsLogOutModalOpen, selectIsProfileModalOpen } from "../../redux/modal/selectors";
+import {
+  selectIsLogOutModalOpen,
+  selectIsProfileModalOpen,
+} from "../../redux/modal/selectors";
 import { closeLogOutModal, closeProfileModal } from "../../redux/modal/slice";
 import LogOutModal from "../../components/LogOutModal/LogOutModal";
 import Navigation from "../../components/Navigation/Navigation";
@@ -16,7 +19,7 @@ const DashboardPage = () => {
   };
   const handleCloseProfile = () => {
     dispatch(closeProfileModal);
-  }
+  };
 
   return (
     <div>

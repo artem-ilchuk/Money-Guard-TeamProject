@@ -1,15 +1,17 @@
 import { useEffect, useState } from "react";
 import s from "./Header.module.css";
 import { IoExitOutline } from "react-icons/io5";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import useMedia from "../../hooks/UseMadia";
-import { openLogOutModal, openProfileModal } from "../../redux/modal/slice";
+import { openLogOutModal, openProfileModal, closeProfileModal } from "../../redux/modal/slice";
 import UserAvatar from "../UserAvatar/UserAvatar";
+import { selectIsProfileModalOpen } from "../../redux/modal/selectors";
 
 const Header = () => {
   const dispatch = useDispatch();
   const { isMobile } = useMedia();
   const [animateAvatar, setAnimateAvatar] = useState(false);
+  const isProfileModalOpen = useSelector(selectIsProfileModalOpen);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -19,7 +21,11 @@ const Header = () => {
   }, []);
 
   const handleEditProfileOpenModal = () => {
-    dispatch(openProfileModal());
+    if (isProfileModalOpen) {
+      dispatch(closeProfileModal());
+    } else {
+      dispatch(openProfileModal());
+    }
   };
 
   const handleLogoutOpenModal = () => {

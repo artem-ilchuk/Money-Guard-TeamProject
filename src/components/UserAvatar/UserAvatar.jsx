@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import React from "react";
 import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
 
-const UserAvatar = ({ size = 32, fontSize = 14, borderRadius = 8 }) => {
+const UserAvatar = ({ size = 32, fontSize = 14, borderRadius = 8, customAvatar = null }) => {
   const user = useSelector(selectUser);
   const loggedIn = useSelector(selectIsLoggedIn);
 
@@ -56,10 +56,12 @@ const UserAvatar = ({ size = 32, fontSize = 14, borderRadius = 8 }) => {
     return <div style={styles.anonimys}>Name</div>;
   }
 
+  const avatarSrc = customAvatar || user.avatar;
+
   return (
     <div style={styles.wrapper}>
-      {user.avatar ? (
-        <img src={user.avatar} alt="User avatar" style={styles.img} />
+      {avatarSrc ? (
+        <img src={avatarSrc} alt="User avatar" style={styles.img} />
       ) : (
         initial
       )}

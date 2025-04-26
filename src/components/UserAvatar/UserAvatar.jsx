@@ -1,8 +1,12 @@
 import { useSelector } from "react-redux";
-import React from "react";
 import { selectUser, selectIsLoggedIn } from "../../redux/auth/selectors";
 
-const UserAvatar = ({ size = 32, fontSize = 14, borderRadius = 8, customAvatar = null }) => {
+const UserAvatar = ({
+  size = 32,
+  fontSize = 14,
+  borderRadius = 8,
+  customAvatar = null,
+}) => {
   const user = useSelector(selectUser);
   const loggedIn = useSelector(selectIsLoggedIn);
 
@@ -25,14 +29,14 @@ const UserAvatar = ({ size = 32, fontSize = 14, borderRadius = 8, customAvatar =
 
   const styles = {
     wrapper: {
-      width: `${size}px`,
-      height: `${size}px`,
-      borderRadius: `${borderRadius}px`,
+      width: size,
+      height: size,
+      borderRadius: borderRadius,
       display: "flex",
       alignItems: "center",
       justifyContent: "center",
       fontFamily: "var(--font-family)",
-      fontSize: `${fontSize}px`,
+      fontSize: fontSize,
       fontWeight: "500",
       color: getRandomHexColor(),
       backgroundColor: getPastelColor(),
@@ -43,9 +47,9 @@ const UserAvatar = ({ size = 32, fontSize = 14, borderRadius = 8, customAvatar =
       width: "100%",
       height: "100%",
       objectFit: "cover",
-      borderRadius: `${borderRadius}px`,
+      borderRadius: borderRadius,
     },
-    anonimys: {
+    anonymous: {
       fontWeight: "400",
       fontSize: "16px",
       color: "var(--white-600)",
@@ -53,7 +57,7 @@ const UserAvatar = ({ size = 32, fontSize = 14, borderRadius = 8, customAvatar =
   };
 
   if (!loggedIn) {
-    return <div style={styles.anonimys}>Name</div>;
+    return <div style={styles.anonymous}>Name</div>;
   }
 
   const avatarSrc = customAvatar || user.avatar;

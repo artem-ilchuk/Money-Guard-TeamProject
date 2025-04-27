@@ -8,7 +8,8 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { format } from "date-fns";
 // import { selectCategories } from "../../redux/statistics/selectors";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import Select from "react-select";
 import { customStyles } from "./customStyles";
 import { addTransaction } from "../../redux/transactions/operations";
@@ -16,28 +17,33 @@ import { closeAddModal } from "../../redux/modal/slice";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { RiCloseLargeLine } from "react-icons/ri";
 
-function AddTransactionForm() {
-  //! const categories = useSelector(selectCategories);
-  const categories = [
-    { id: "1", name: "Main expenses" },
-    { id: "2", name: "Car" },
-    { id: "3", name: "Food" },
-    { id: "4", name: "Entertainment" },
-    { id: "5", name: "Other" },
-    { id: "6", name: "Income" },
-  ];
 
+function AddTransactionForm() {
   const dispatch = useDispatch();
+
+  const categories = [
+    { value: "Main expenses", label: "Main expenses" },
+    { value: "Products", label: "Products" },
+    { value: "Car", label: "Car" },
+    { value: "Self care", label: "Self care" },
+    { value: "Child care", label: "Child care" },
+    { value: "Household products", label: "Household products" },
+    { value: "Education", label: "Education" },
+    { value: "Leisure", label: "Leisure" },
+    { value: "Other expenses", label: "Other expenses" },
+    { value: "Entertaiment", label: "Entertaiment" },
+  ];
 
   const [isChecked, setIsChecked] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
 
+
   const datePickerRef = useRef(null);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    const mediaQuery = window.matchMedia("(max-width: 768px)");
     const updateIsMobile = (e) => setIsMobile(e.matches);
 
     updateIsMobile(mediaQuery);
@@ -45,36 +51,19 @@ function AddTransactionForm() {
     return () => mediaQuery.removeEventListener("change", updateIsMobile);
   }, []);
 
-  //! const categoriesForSelect = categories.map((category) => ({
-  //   value: category.id,
-  //   label: category.name,
-  // }));
-
-  const categoriesForSelect = [
-    { value: "1", label: "Main expenses" },
-    { value: "2", label: "Car" },
-    { value: "3", label: "Food" },
-    { value: "4", label: "Entertainment" },
-    { value: "5", label: "Other" },
-  ];
-
-  //! const selectDefaultValue = categoriesForSelect.find(
-  //   (item) => item.label === "Main expenses"
-  // );
-
-  const selectDefaultValue =
-    categoriesForSelect &&
-    categoriesForSelect.find((item) => item.label === "Main expenses");
-
   const schema = yup.object().shape({
-    amount: yup.number().typeError("Must be a number").required("Required"),
-    transactionDate: yup
+    sum: yup
+      .number()
+      .typeError("Must be a number")
+      .positive("Must be positive number")
+      .required("Required"),
+    date: yup
       .date()
-      .required("Required")
-      .default(() => new Date()),
-    switch: yup.boolean(),
-    category: yup.string().nullable(),
+      .max(new Date(), "Future date is not allowed")
+      .required("Required"),
     comment: yup.string().required("Required"),
+    category: yup.string().oneOf(categories.map((cat) => cat.value)),
+    type: yup.string().oneOf(["INCOME", "EXPENSE"]).required(),
   });
 
   const {
@@ -86,47 +75,42 @@ function AddTransactionForm() {
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      amount: "",
-      transactionDate: new Date(),
+      sum: "",
+      date: new Date(),
       comment: "",
-      category: null,
+      category: categories[0].value,
+      type: "EXPENSE",
     },
   });
 
-  const onSubmit = async (data) => {
-    if (!isChecked) {
-      const incomeCat = categories.find((el) => el.name === "Income");
-      data.categoryId = incomeCat?.id || "";
-      data.type = "INCOME";
-      data.amount = Math.abs(data.amount);
-    } else if (selectedOption) {
-      data.categoryId = selectedOption.value;
-      data.type = "EXPENSE";
-      data.amount = -Math.abs(data.amount);
-    } else {
-      const defaultCat = categories.find((el) => el.name === "Main expenses");
-      data.categoryId = defaultCat?.id || "";
-      data.type = "EXPENSE";
-      data.amount = -Math.abs(data.amount);
-    }
-
-    data.transactionDate = format(new Date(data.transactionDate), "yyyy-MM-dd");
-    delete data.switch;
-
-    try {
-      await dispatch(addTransaction(data)).unwrap();
-      dispatch(closeAddModal());
-    } catch (error) {
-      // error toast already handled in redux thunk
-    }
-  };
-
-  // Sync Select value to form state
   useEffect(() => {
     if (selectedOption) {
       setValue("category", selectedOption.value);
     }
   }, [selectedOption, setValue]);
+
+
+
+  const onSubmit = async (data) => {
+    const formattedDate = format(new Date(data.date), "dd-MM-yyyy"); // формат "22-12-2025"
+  
+    const formData = {
+      sum: Math.abs(data.sum), // завжди позитивне
+      date: formattedDate,
+      comment: data.comment,
+      category: data.category,
+      type: isChecked ? "-" : "+", // "-" якщо витрата, "+" якщо дохід
+    };
+  
+    // console.log(formData); // для перевірки
+  
+    try {
+      await dispatch(addTransaction(formData)).unwrap();
+      dispatch(closeAddModal());
+    } catch (error) {
+      // error toast вже повинен бути з бекенду
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
@@ -150,7 +134,6 @@ function AddTransactionForm() {
           </span>
           <label htmlFor="switch" className={s.switch}>
             <input
-              {...register("switch")}
               type="checkbox"
               id="switch"
               checked={isChecked}
@@ -187,9 +170,9 @@ function AddTransactionForm() {
               classNamePrefix="react-select"
               styles={customStyles}
               className={s.select_form}
-              defaultValue={selectDefaultValue}
+              value={selectedOption}
               onChange={setSelectedOption}
-              options={categoriesForSelect}
+              options={categories}
               placeholder="Select a category"
               onMenuOpen={() => setMenuIsOpen(true)}
               onMenuClose={() => setMenuIsOpen(false)}
@@ -214,14 +197,14 @@ function AddTransactionForm() {
         <div className={s.sum_data_wrap}>
           <div className={s.sum_wrap}>
             <input
-              {...register("amount")}
+              {...register("sum")}
               type="number"
               autoComplete="off"
               placeholder="0.00"
               className={s.sum}
             />
-            {errors.amount && (
-              <span className={s.comment_err}>{errors.amount.message}</span>
+            {errors.sum && (
+              <span className={s.comment_err}>{errors.sum.message}</span>
             )}
           </div>
 
@@ -230,7 +213,7 @@ function AddTransactionForm() {
             onClick={() => datePickerRef.current?.setFocus()}
           >
             <Controller
-              name="transactionDate"
+              name="date"
               control={control}
               render={({ field }) => (
                 <DatePicker

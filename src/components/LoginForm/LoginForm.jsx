@@ -20,8 +20,8 @@ const LoginForm = () => {
     try {
       const data = await dispatch(loginThunk(values)).unwrap();
       toast.success("Welcome, ${data.user.username}!");
-      navigate("/dashboard");
       resetForm();
+      navigate("/dashboard");
     } catch (error) {
       toast.error("Invalid email or password");
     } finally {
@@ -82,15 +82,15 @@ const LoginForm = () => {
             </div>
             <div className={s.buttonBox}>
               <button
-                type="submit"
-                className={s.button_log}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
-              </button>
+                    type="submit"
+                    className={s.button_log}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
+                  </button>
               <NavLink to="/register" className={s.button_reg}>
-                REGISTER
-              </NavLink>
+                  REGISTER
+                </NavLink>
             </div>
           </Form>
         )}

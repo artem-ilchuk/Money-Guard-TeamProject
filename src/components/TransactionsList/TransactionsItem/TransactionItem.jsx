@@ -1,5 +1,6 @@
 import { useDispatch } from "react-redux";
 import styles from "./TransactionItem.module.css";
+import { CiEdit } from "react-icons/ci";
 import { deleteTransaction } from "../../../redux/transactions/operations";
 
 const TransactionItem = ({ id, category, date, sum, type, comment }) => {
@@ -30,16 +31,21 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
         </li>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Sum</span>
-          <span className={styles.item}>{sum}</span>
+          <span className={styles.itemSum}>{sum}</span>
         </li>
-        <li className={styles.listItem}>
+        <li className={styles.deleteEdit}>
           <button
+            type="submit"
             onClick={() => {
               deletedOnKlick(id);
             }}
           >
-            Deleted
+            Delete
           </button>
+          <span className={styles.edit}>
+            <CiEdit />
+            <span className={styles.editSpan}>Edit</span>
+          </span>
         </li>
       </ul>
     </div>

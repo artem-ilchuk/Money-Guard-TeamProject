@@ -22,7 +22,7 @@ const TransactionList = () => {
   const error = useSelector(isTransError);
 
   return (
-    <div>
+    <div className={styles.mainContainer}>
       <ul className={styles.ListHeader}>
         <li className={styles.listHeaderItem}>Date</li>
         <li className={styles.listHeaderItem}>Type</li>
@@ -41,7 +41,7 @@ const TransactionList = () => {
                 date={item.date}
                 sum={item.sum}
                 type={item.type}
-                comment={item.type}
+                comment={item.comment}
               />
             </li>
           );

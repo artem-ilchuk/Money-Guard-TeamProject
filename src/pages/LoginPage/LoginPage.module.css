@@ -3,8 +3,7 @@
   height: 100%;
   background-color: black;
   background-image: url("../../assets/img/login-desktop.png");
-  /* url("../../assets/img/Gradient.png"); */
-  background-position: center center, center center;
-  background-size: cover, cover;
-  background-repeat: no-repeat, no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }

@@ -1,3 +1,8 @@
+.mainContainer {
+    background-color: linear-gradient(207deg, #341fa0 44.63%, #652392 88.57%);
+    ;
+}
+
 .ListHeader {
     display: none;
 }
@@ -11,6 +16,7 @@
         background-color: rgba(82, 59, 126, 0.6);
         border-radius: 8px;
         margin: 0;
+        width: 704px;
     }
 
     .listHeaderItem {

@@ -1,4 +1,5 @@
 import styles from "./TransactionItem.module.css";
+import { CiEdit } from "react-icons/ci";
 
 const TransactionItem = ({ id, category, date, sum, type, comment }) => {
   return (
@@ -22,11 +23,21 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
         </li>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Sum</span>
-          <span className={styles.item}>{sum}</span>
+          <span className={styles.itemSum}>{sum}</span>
         </li>
-        <li className={styles.listItem}>
-          <button type="button"></button>
-          <span className={styles.item}>Edit</span>
+        <li className={styles.deleteEdit}>
+          <button
+            type="submit"
+            onClick={() => {
+              deletedOnKlick(id);
+            }}
+          >
+            Delete
+          </button>
+          <span className={styles.edit}>
+            <CiEdit />
+            <span className={styles.editSpan}>Edit</span>
+          </span>
         </li>
       </ul>
     </div>

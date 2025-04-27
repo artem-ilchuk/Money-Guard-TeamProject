@@ -2,12 +2,23 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
+const CURRENCY_KEY = "currencyData";
+const ONE_HOUR = 60 * 60 * 1000;
+
 export const monoBankAPI = axios.create({
   baseURL: "https://api.monobank.ua/",
 });
 
-const CURRENCY_KEY = "currencyData";
-const ONE_HOUR = 60 * 60 * 1000;
+export const fetchCurrency = createAsyncThunk(
+  "currency/fetchAll",
+  async (_, thunkAPI) => {
+    const cached = localStorage.getItem(CURRENCY_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (Date.now() - parsed.date < ONE_HOUR) {
+        return parsed;
+      }
+    }
 
 export const fetchCurrencyRate = async () => {
   const { data } = await monoBankAPI.get("/bank/currency");

@@ -3,6 +3,7 @@ import s from "./Header.module.css";
 import { IoExitOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import useMedia from "../../hooks/UseMadia";
+
 import {
   openLogOutModal,
   openProfileModal,

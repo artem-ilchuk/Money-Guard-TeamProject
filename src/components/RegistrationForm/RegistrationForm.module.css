@@ -8,8 +8,15 @@
   min-width: 320px;
   max-width: 360px;
   padding: 23px 20px;
-  background-image: url(../../assets/img/bg_mobile_1x.jpg);
-  background-color: #101010;
+
+  backdrop-filter: blur(30px);
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: radial-gradient(rgba(255, 255, 255, 0.1)),
+    radial-gradient(
+      circle at center,
+      rgba(47, 21, 176, 0.73) 1px,
+      transparent 454px
+    );
 }
 
 .logoThumb {
@@ -79,6 +86,7 @@
 
 .regButton {
   width: 100%;
+  max-width: 300px;
   height: 50px;
   border: none;
   border-radius: 20px;
@@ -101,6 +109,7 @@
 
 .logButton {
   width: 100%;
+  max-width: 300px;
   height: 50px;
   border: none;
   border-radius: 20px;
@@ -113,13 +122,31 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 1s ease 0s;
 }
 
-.regButton:hover,
+.regButton:hover {
+  transform: scale(1.05);
+  background-image: linear-gradient(
+    to right,
+    #7000ff 0%,
+    #9e40ba 31%,
+    #ffc727 100%
+  );
+  background-size: 200%;
+  background-position: right center;
+}
+
 .logButton:hover {
-  transform: scale(1.03);
-  box-shadow: 0px 10px 20px rgba(0, 100, 100, 0.2);
+  transform: scale(1.05);
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 0%,
+    rgb(98, 63, 139) 31%,
+    rgb(255, 255, 255) 100%
+  );
+  background-size: 200%;
+  background-position: right center;
 }
 
 .errorThumb {
@@ -144,4 +171,31 @@
 
 .passwordStrengthBar {
   width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .form {
+    max-width: 533px;
+    width: 533px;
+    height: 624px;
+    border-radius: 8px;
+  }
+
+  .logoThumb {
+    gap: 10px;
+  }
+
+  .iconLogo {
+    width: 36px;
+    height: 36px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}
+@media screen and (min-width: 1280px) {
+  .form {
+    backdrop-filter: none;
+  }
 }

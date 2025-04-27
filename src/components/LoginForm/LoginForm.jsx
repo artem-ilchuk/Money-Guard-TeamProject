@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
+import { NavLink } from "react-router-dom";
 // import { toast } from "react-hot-toast";
 
 import { loginThunk } from "../../redux/auth/operations.js";
@@ -29,66 +30,72 @@ const LoginForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={loginSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form className={s.form}>
-          <div className={s.iconBox}>
-            <svg className={s.iconLogo}>
-              <use href={"/icons.svg#icon-logo"}></use>
-            </svg>
-            <h3 className={s.title}>Money Guard</h3>
-          </div>
-          <div className={s.inputs}>
-            <div className={s.label}>
-              <div className={s.iconWrapper}>
-                <FaEnvelope className={s.icon} />
-              </div>
-              <Field
-                className={s.field}
-                type="email"
-                name="email"
-                placeholder="E-mail"
-              />
-              <ErrorMessage name="email" component="div" className={s.error} />
-            </div>
-            <div className={s.label}>
-              <div className={s.iconWrapper}>
-                <FaLock className={s.icon} />
-              </div>
-              <Field
-                className={s.field}
-                type="password"
-                name="password"
-                placeholder="Password"
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={s.error}
-              />
+    <div className={s.wrapper}>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={loginSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className={s.form}>
+            <div className={s.iconBox}>
+              <svg className={s.iconLogo}>
+                <use href={"/icons.svg#icon-logo"}></use>
+              </svg>
+              <h3 className={s.title}>Money Guard</h3>
             </div>
 
-            <button
-              type="submit"
-              className={s.button_reg}
-              disabled={isSubmitting}
-            >
-              {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
-            </button>
-          </div>
+            <div className={s.inputs}>
+              <div className={s.label}>
+                <div className={s.iconWrapper}>
+                  <FaEnvelope className={s.icon} />
+                </div>
+                <Field
+                  className={s.field}
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className={s.error}
+                />
+              </div>
 
-          <Link className={s.link} to="/register">
-            <button type="button" className={s.button_log}>
-              REGISTER
-            </button>
-          </Link>
-        </Form>
-      )}
-    </Formik>
+              <div className={s.label}>
+                <div className={s.iconWrapper}>
+                  <FaLock className={s.icon} />
+                </div>
+                <Field
+                  className={s.field}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={s.error}
+                />
+              </div>
+            </div>
+            <div className={s.buttonBox}>
+              <button
+                    type="submit"
+                    className={s.button_log}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
+                  </button>
+              <NavLink to="/register" className={s.button_reg}>
+                  REGISTER
+                </NavLink>
+            </div>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

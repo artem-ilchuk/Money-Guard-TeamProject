@@ -15,8 +15,8 @@ const initialState = {
     email: null,
     balance: null,
     avatar: null,
-    preview: null,
   },
+  preview: null,
   token: null,
   isLoggedIn: false,
   isRefreshing: false,
@@ -41,9 +41,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(logoutThunk.fulfilled, () => {
-        return {
-          ...initialState,
-        };
+        return { ...initialState };
       })
       .addCase(getTotalBalanceThunk.fulfilled, (state, action) => {
         state.user.balance = action.payload;
@@ -70,31 +68,11 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isAuthLoading = false;
       })
-      .addCase(editUserName.pending, (state) => {
-        state.isRefreshing = false;
-        state.isAuthLoading = true;
-        state.isLoggedIn = true;
-      })
-      .addCase(editUserName.rejected, (state) => {
-        state.isRefreshing = false;
-        state.isAuthLoading = false;
-        state.isLoggedIn = true;
-      })
       .addCase(editUserAvatar.fulfilled, (state, action) => {
         state.user.avatar = action.payload.data.avatar;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.isAuthLoading = false;
-      })
-      .addCase(editUserAvatar.pending, (state) => {
-        state.isRefreshing = false;
-        state.isAuthLoading = true;
-        state.isLoggedIn = true;
-      })
-      .addCase(editUserAvatar.rejected, (state) => {
-        state.isRefreshing = false;
-        state.isAuthLoading = false;
-        state.isLoggedIn = true;
       })
       .addMatcher(
         isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled),

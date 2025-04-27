@@ -1,15 +1,15 @@
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { selectTotalBalance } from "../../redux/auth/selectors";
+import { getTotalBalanceThunk } from "../../redux/auth/operations";
 import styles from "./Balance.module.css";
-// import { useSelector, useDispatch } from "react-redux";
-// import { selectBalance } from "../../redux/auth/selectors";
-// import { getCurrentUser } from "../../redux/auth/operations";
-// import { useEffect } from "react";
 
-const Balance = ({ balance }) => {
-  // const dispatch = useDispatch();
-  // const balance = useSelector(selectBalance);
-  // useEffect(() => {
-  //   dispatch(getCurrentUser());
-  // }, [dispatch]);
+const Balance = () => {
+  const dispatch = useDispatch();
+  const balance = useSelector(selectTotalBalance);
+  useEffect(() => {
+    dispatch(getTotalBalanceThunk());
+  }, [dispatch]);
 
   const formatted =
     balance?.toLocaleString("uk-UA", {

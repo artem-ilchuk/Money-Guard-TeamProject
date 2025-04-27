@@ -1,33 +1,29 @@
 import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import Select from "react-select";
 import styles from "./StatisticsDashboard.module.css";
-import StatisticsTable from "../statisticsTable/StatisticsTable";
+import StatisticsTable from "../StatisticsTable/StatisticsTable";
 import StatisticsChart from "../Chart/Chart";
 import BallanceTab from "../Balance/Balance";
 import CurrencyTab from "../Currency/Currency";
-
-// import { useSelector } from "react-redux";
-// import { selectBalance } from "../../redux/auth/selectors";
-// import { selectCategoriesSummary, selectSummaryTotals } from "../../redux/statistics/selectors";
-// import { mockStatistics } from "../../mock/statistics";
+import { getTransSummary } from "../../redux/statistics/operations";
+import { selectSummary } from "../../redux/statistics/selectors";
 
 const StatisticsDashboard = () => {
-  const [selectedMonth, setSelectedMonth] = useState(null);
+  const dispatch = useDispatch();
+
+  const [selectedMonth, setSelectedMonth] = useState(
+    String(new Date().getMonth() + 1)
+  );
   const [selectedYear, setSelectedYear] = useState(
-    new Date().getFullYear().toString()
+    String(new Date().getFullYear())
   );
 
-  // const balance = useSelector(selectBalance);
-  // const categoriesSummary = useSelector(selectCategoriesSummary);
-  // const { incomeSummary, expenseSummary } = useSelector(selectSummaryTotals);
-
-  const incomeSummary = mockStatistics.incomeSummary;
-  const expenseSummary = mockStatistics.expenseSummary;
+  const { incomeSummary, expenseSummary } = useSelector(selectSummary);
   const balance = incomeSummary - expenseSummary;
 
   const monthOptions = [
-    { value: null, label: "All" },
     { value: "1", label: "January" },
     { value: "2", label: "February" },
     { value: "3", label: "March" },
@@ -43,12 +39,14 @@ const StatisticsDashboard = () => {
   ];
 
   const currentYear = new Date().getFullYear();
-  const yearOptions = Array.from({ length: 6 }, (_, i) => ({
-    value: String(currentYear - i),
-    label: String(currentYear - i),
-  }));
+  const yearOptions = Array.from({ length: 6 }, (_, i) => {
+    const year = String(currentYear - i);
+    return { value: year, label: year };
+  });
 
-  useEffect(() => {}, [selectedMonth, selectedYear]);
+  useEffect(() => {
+    dispatch(getTransSummary({ month: selectedMonth, year: selectedYear }));
+  }, [selectedMonth, selectedYear, dispatch]);
 
   const customSelectStyles = {
     control: (provided, state) => ({
@@ -109,18 +107,20 @@ const StatisticsDashboard = () => {
   return (
     <div className={styles.container}>
       <BallanceTab balance={balance} />
-      <CurrencyTab /> {}
+      <CurrencyTab />
+
       <div className={styles.statisticsChart}>
         <h1>Statistics</h1>
         <div className={styles.statisticsChartContainer}>
           <StatisticsChart />
         </div>
       </div>
+
       <div className={styles.filterAndTableContainer}>
         <Formik
           initialValues={{
-            month: monthOptions.find((o) => o.value === selectedMonth),
-            year: yearOptions.find((o) => o.value === selectedYear),
+            month: monthOptions.find((m) => m.value === selectedMonth),
+            year: yearOptions.find((y) => y.value === selectedYear),
           }}
           enableReinitialize
         >

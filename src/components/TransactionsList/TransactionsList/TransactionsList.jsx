@@ -31,7 +31,7 @@ const TransactionList = () => {
         <li className={styles.listHeaderItem}>Sum</li>
         <li className={styles.listHeaderItem}></li>
       </ul>
-      <ul>
+      <ul className={styles.scroll}>
         {transactions.map((item) => {
           return (
             <li key={item._id}>

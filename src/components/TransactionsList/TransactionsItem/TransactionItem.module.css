@@ -45,7 +45,6 @@ button {
 .edit {
     display: flex;
     align-items: center;
-    /* justify-content: flex-start; */
     flex-direction: row;
     gap: 4px;
     font-weight: 400;
@@ -63,13 +62,30 @@ button {
     padding: 12px 20px 12px 20px;
 }
 
+.transactionListContainer.incomeBorderColor {
+    border-left-color: #ffb627;
+}
+
+.incomeTextColor {
+    color: #ffb627;
+}
+
+.transactionListContainer.expenseBorderColor {
+    border-left-color: #ff868d;
+}
+
+.expenseTextColor {
+    color: #ff868d;
+}
+
+
+
 @media screen and (min-width: 361px) {
 
     .transactionListContainer {
         background-color: rgba(11, 88, 212, 0.282);
         width: 704px;
         height: fit-content;
-        max-height: 150px;
         border-radius: 0;
         border: 0;
         margin: 0;
@@ -81,6 +97,8 @@ button {
         justify-content: space-between;
         padding: 16px 20px 16px 20px;
         margin: 0;
+        overflow: auto;
+
     }
 
     .listItem {
@@ -89,15 +107,6 @@ button {
         border: 0;
         padding: 0;
     }
-
-    /* .transactionList:last-child {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        gap: 8px;
-    } */
-
 
     .headerTextMobile {
         display: none;
@@ -108,7 +117,6 @@ button {
     }
 
     .deleteEdit {
-        /* display: inline-block; */
         width: calc(100% /6);
         border: 0;
         padding: 0;
@@ -117,5 +125,18 @@ button {
         justify-content: center;
         flex-direction: row-reverse;
         gap: 8px;
+    }
+
+    .item {
+        word-wrap: break-word;
+        margin: 0px 4px 0 4px;
+
+    }
+}
+
+@media screen and (min-width: 769px) {
+
+    .transactionListContainer {
+        width: 715px;
     }
 }

@@ -49,7 +49,7 @@ const LogOutModal = ({ closeModal }) => {
   };
 
   return (
-    <div className={s.logOutModal} onClick={closeOnClickOutside}>
+    <div className={s.overlay} onClick={closeOnClickOutside}>
       <div className={s.modalContent}>
         <div className={s.iconBox}>
           <svg className={s.iconLogo}>

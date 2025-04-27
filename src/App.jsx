@@ -1,6 +1,6 @@
 import "./App.css";
-import { lazy, Suspense, useEffect } from "react";
-import { Route, Routes } from "react-router-dom";
+import { lazy, Suspense, useEffect, useState } from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { useDispatch, useSelector } from "react-redux";
@@ -25,65 +25,54 @@ function App() {
     dispatch(refreshUserThunk());
   }, [dispatch]);
 
-  return isRefreshing ? null : (
-    <>
-      <Preloader />
-      <Suspense fallback={<p>Loading page...</p>}>
-        <Routes>
-          <Route
-            path="/home"
-            element={
-              <RestrictedRoute>
-                {" "}
-                <HomeTab />
-              </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/dashboard"
-            element={
-              <RestrictedRoute>
-                <DashboardPage />
-              </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/currency"
-            element={
-              <RestrictedRoute>
-                <CurrencyTab />
-              </RestrictedRoute>
-            }
-          />
-          <Route
-            path="/statistics"
-            element={
-              <RestrictedRoute>
-                <StatisticsTab />
-              </RestrictedRoute>
-            }
-          />
+  const [isFirstLoad, setIsFirstLoad] = useState(false);
+  useEffect(() => {
+    const isFirstVisit = localStorage.getItem("isFirstVisit");
+    if (!isFirstVisit) {
+      setIsFirstLoad(true);
+      localStorage.setItem("isFirstVisit", "true");
+    }
+    dispatch(refreshUserThunk());
+  }, [dispatch]);
+// || isRefreshing
+  return isFirstLoad ? (
+    <Preloader />
+  ) : (
+    <Suspense fallback={<p>Loading page...</p>}>
+      <Routes>
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <RegistrationPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <PublicRoute>
+              <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/dashboard"
+          element={
+            <RestrictedRoute>
+              <DashboardPage />
+            </RestrictedRoute>
+          }
+        >
+          <Route index element={<Navigate to="home" replace />} />
+          <Route path="home" element={<HomeTab />} />
+          <Route path="statistic" element={<StatisticsTab />} />
+          <Route path="currency" element={<CurrencyTab />} />
+        </Route>
 
-          <Route
-            path="/register"
-            element={
-              <PublicRoute>
-                <RegistrationPage />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="/login"
-            element={
-              <PublicRoute>
-                <LoginPage />
-              </PublicRoute>
-            }
-          />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-      </Suspense>
-    </>
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+    </Suspense>
   );
 }
 

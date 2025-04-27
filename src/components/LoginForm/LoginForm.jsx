@@ -30,67 +30,72 @@ const LoginForm = () => {
   };
 
   return (
-    <Formik
-      initialValues={{ email: "", password: "" }}
-      validationSchema={loginSchema}
-      onSubmit={handleSubmit}
-    >
-      {({ isSubmitting }) => (
-        <Form className={s.form}>
-          <div className={s.iconBox}>
-            <svg className={s.iconLogo}>
-              <use href={"/icons.svg#icon-logo"}></use>
-            </svg>
-            <h3 className={s.title}>Money Guard</h3>
-          </div>
-
-          <div className={s.inputs}>
-            <div className={s.label}>
-              <div className={s.iconWrapper}>
-                <FaEnvelope className={s.icon} />
-              </div>
-              <Field
-                className={s.field}
-                type="email"
-                name="email"
-                placeholder="E-mail"
-              />
-              <ErrorMessage name="email" component="div" className={s.error} />
+    <div className={s.wrapper}>
+      <Formik
+        initialValues={{ email: "", password: "" }}
+        validationSchema={loginSchema}
+        onSubmit={handleSubmit}
+      >
+        {({ isSubmitting }) => (
+          <Form className={s.form}>
+            <div className={s.iconBox}>
+              <svg className={s.iconLogo}>
+                <use href={"/icons.svg#icon-logo"}></use>
+              </svg>
+              <h3 className={s.title}>Money Guard</h3>
             </div>
 
-            <div className={s.label}>
-              <div className={s.iconWrapper}>
-                <FaLock className={s.icon} />
+            <div className={s.inputs}>
+              <div className={s.label}>
+                <div className={s.iconWrapper}>
+                  <FaEnvelope className={s.icon} />
+                </div>
+                <Field
+                  className={s.field}
+                  type="email"
+                  name="email"
+                  placeholder="E-mail"
+                />
+                <ErrorMessage
+                  name="email"
+                  component="div"
+                  className={s.error}
+                />
               </div>
-              <Field
-                className={s.field}
-                type="password"
-                name="password"
-                placeholder="Password"
-              />
-              <ErrorMessage
-                name="password"
-                component="div"
-                className={s.error}
-              />
+
+              <div className={s.label}>
+                <div className={s.iconWrapper}>
+                  <FaLock className={s.icon} />
+                </div>
+                <Field
+                  className={s.field}
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                />
+                <ErrorMessage
+                  name="password"
+                  component="div"
+                  className={s.error}
+                />
+              </div>
             </div>
-            <div className={s.buttonThumb}>
+            <div className={s.buttonBox}>
               <button
-                type="submit"
-                className={s.button_log}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
-              </button>
+                    type="submit"
+                    className={s.button_log}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
+                  </button>
+              <NavLink to="/register" className={s.button_reg}>
+                  REGISTER
+                </NavLink>
             </div>
-
-            <NavLink to="/register" className={s.button_reg}>
-              REGISTER
-            </NavLink>
-          </div>
-        </Form>
-      )}
-    </Formik>
+          </Form>
+        )}
+      </Formik>
+    </div>
   );
 };
 

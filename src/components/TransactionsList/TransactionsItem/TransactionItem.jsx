@@ -1,7 +1,15 @@
+import { useDispatch } from "react-redux";
 import styles from "./TransactionItem.module.css";
 import { CiEdit } from "react-icons/ci";
+import { deleteTransaction } from "../../../redux/transactions/operations";
 
 const TransactionItem = ({ id, category, date, sum, type, comment }) => {
+  const dispatch = useDispatch();
+
+  const deletedOnKlick = (id) => {
+    dispatch(deleteTransaction(id));
+  };
+
   return (
     <div className={styles.transactionListContainer}>
       <ul className={styles.transactionList}>

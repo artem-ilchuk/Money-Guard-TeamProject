@@ -18,7 +18,7 @@ const Balance = () => {
 
   return (
     <div className={styles.container}>
-      <p className={styles.title}>Your Balance</p>
+      <p className={styles.title} style={{color: 'black'}}>Your Balance</p>
       <p className={styles.balance}>₴ {formatted}</p>
     </div>
   );

@@ -1,0 +1,8 @@
+.main_container {
+	background-image: url('../../assets/img/Gradient.png');
+	background-repeat: no-repeat;
+}
+
+.nav_container {
+	display: flex;
+}

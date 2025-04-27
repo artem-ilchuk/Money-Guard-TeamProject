@@ -12,19 +12,19 @@ const Navigation = () => {
     <section className={s.navigation}>
       <div className="container">
         <nav className={s.navElements}>
-          <NavLink to="/home" className={getNavLinkClass}>
+          <NavLink to="/dashboard/home" className={getNavLinkClass}>
             <div className={s.transactions}>
               <IoMdHome className={s.homeIcon} />
             </div>
             <p className={s.linkText}>Home</p>
           </NavLink>
-          <NavLink to="/statistics" className={getNavLinkClass}>
+          <NavLink to="/dashboard/statistic" className={getNavLinkClass}>
             <div className={s.statistics}>
               <TbTimeline className={s.statsIcon} />
             </div>
             <p className={s.linkText}>Statistics</p>
           </NavLink>
-          <NavLink to="/currency" className={getNavLinkClass}>
+          <NavLink to="/dashboard/currency" className={getNavLinkClass}>
             <div className={s.currency}>
               <BsCurrencyDollar className={s.currIcon} />
             </div>

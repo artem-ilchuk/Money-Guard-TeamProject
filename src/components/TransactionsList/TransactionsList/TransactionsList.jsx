@@ -17,7 +17,7 @@ const TransactionList = () => {
   }, [dispatch]);
 
   const transactions = useSelector(selectTransactions);
-  console.log(transactions);
+  // console.log(transactions);
   const loading = useSelector(isTransLoading);
   const error = useSelector(isTransError);
 

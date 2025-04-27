@@ -1,53 +1,32 @@
-import { useMediaQuery } from "react-responsive";
-import styles from "./Currency.module.css";
-// import { useSelector } from "react-redux";
-// import {
-//   selectCurrency,
-//   selectIsLoading,
-// } from "../../redux/";
-// import { fetchCurrency } from "../../redux/";
-// import { useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { useMediaQuery } from "react-responsive";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCurrencyData,
+  selectCurrencyLoading,
+} from "../../redux/currency/selectors";
+import { getCurrency } from "../../redux/currency/operations";
+import styles from "./Currency.module.css";
 import chartImage from "../../assets/chart.png";
-
-// Mock data (замість Redux)
-const mockCurrency = {
-  usd: { buy: 27.55, sell: 27.65 },
-  eur: { buy: 30.0, sell: 30.1 },
-  date: Date.now(),
-};
 
 const Currency = () => {
   const isTablet = useMediaQuery({ query: "(max-width: 1279px)" });
-
-  // const currencyData = useSelector(selectCurrency);
-  // const isLoading = useSelector(selectIsLoading);
-  // const dispatch = useDispatch();
-
-  // Mock data instead
-  const currencyData = mockCurrency;
-  const isLoading = false;
+  const dispatch = useDispatch();
+  const currencyData = useSelector(selectCurrencyData);
+  const isLoading = useSelector(selectCurrencyLoading);
 
   useEffect(() => {
-    // const shouldFetchData = () => {
-    //   if (!currencyData || !currencyData.date) return true;
-    //   const oneHourInMs = 60 * 60 * 1000;
-    //   const currentTime = Date.now();
-    //   const timeSinceLastFetch = currentTime - currencyData.date;
-    //   return timeSinceLastFetch >= oneHourInMs;
-    // };
-    // if (shouldFetchData()) {
-    //   async function fetchData() {
-    //     const result = await dispatch(fetchCurrency());
-    //   }
-    //   fetchData();
-    // }
-  }, []);
+    dispatch(getCurrency());
+  }, [dispatch]);
 
   const formatCurrency = (value) => {
-    if (!value) return "-";
+    if (value === undefined || value === null) return "-";
     return Number(value).toFixed(2);
   };
+
+  console.log("currencyData:", currencyData);
+  console.log("currencyData.usd:", currencyData?.usd);
+  console.log("currencyData.euro:", currencyData?.euro);
 
   return (
     <div className={styles.container}>
@@ -70,8 +49,8 @@ const Currency = () => {
             </tr>
             <tr>
               <td>EUR</td>
-              <td>{formatCurrency(currencyData?.eur?.buy)}</td>
-              <td>{formatCurrency(currencyData?.eur?.sell)}</td>
+              <td>{formatCurrency(currencyData?.euro?.buy)}</td>
+              <td>{formatCurrency(currencyData?.euro?.sell)}</td>
             </tr>
           </tbody>
         </table>
@@ -80,7 +59,7 @@ const Currency = () => {
       {!isTablet && (
         <div className={styles.currencyPeaks}>
           <p>{formatCurrency(currencyData?.usd?.buy)}</p>
-          <p>{formatCurrency(currencyData?.eur?.buy)}</p>
+          <p>{formatCurrency(currencyData?.euro?.buy)}</p>
         </div>
       )}
 

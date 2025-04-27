@@ -11,8 +11,18 @@ const ONE_HOUR = 60 * 60 * 1000;
 
 export const fetchCurrencyRate = async () => {
   const { data } = await monoBankAPI.get("/bank/currency");
-  const getCurrency = (codeA) =>
-    data.find((c) => c.currencyCodeA === codeA && c.currencyCodeB === 980);
+
+  const getCurrency = (codeA) => {
+    const currency = data.find(
+      (c) => c.currencyCodeA === codeA && c.currencyCodeB === 980
+    );
+    if (!currency) return null;
+    return {
+      buy: currency.rateBuy,
+      sell: currency.rateSell,
+    };
+  };
+
   return {
     usd: getCurrency(840),
     euro: getCurrency(978),

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Formik, Form } from "formik";
 import Select from "react-select";
 import styles from "./StatisticsDashboard.module.css";
-import StatisticsTable from "../statisticsTable/StatisticsTable";
+import StatisticsTable from "../StatisticsTable/StatisticsTable";
 import StatisticsChart from "../Chart/Chart";
 import BallanceTab from "../Balance/Balance";
 import CurrencyTab from "../Currency/Currency";

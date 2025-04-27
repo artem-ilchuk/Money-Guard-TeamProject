@@ -79,19 +79,18 @@ const LoginForm = () => {
                   className={s.error}
                 />
               </div>
-              <div className={s.buttonThumb}>
-                <button
-                  type="submit"
-                  className={s.button_log}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
-                </button>
-              </div>
-
+            </div>
+            <div className={s.buttonBox}>
+              <button
+                    type="submit"
+                    className={s.button_log}
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
+                  </button>
               <NavLink to="/register" className={s.button_reg}>
-                REGISTER
-              </NavLink>
+                  REGISTER
+                </NavLink>
             </div>
           </Form>
         )}

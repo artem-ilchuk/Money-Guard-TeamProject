@@ -26,14 +26,14 @@ function App() {
   }, [dispatch]);
 
   const [isFirstLoad, setIsFirstLoad] = useState(false);
-  useEffect(() => {
-    const isFirstVisit = localStorage.getItem("isFirstVisit");
-    if (!isFirstVisit) {
-      setIsFirstLoad(true);
-      localStorage.setItem("isFirstVisit", "true");
-    }
-    dispatch(refreshUserThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const isFirstVisit = localStorage.getItem("isFirstVisit");
+  //   if (!isFirstVisit) {
+  //     setIsFirstLoad(true);
+  //     localStorage.setItem("isFirstVisit", "true");
+  //   }
+  //   dispatch(refreshUserThunk());
+  // }, [dispatch]);
 // || isRefreshing
   return isFirstLoad ? (
     <Preloader />

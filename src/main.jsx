@@ -8,11 +8,12 @@ import { BrowserRouter } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { PersistGate } from "redux-persist/integration/react";
 import "modern-normalize/modern-normalize.css";
+import Preloader from "./components/Preloader/Preloader.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
-      <PersistGate loading={<div>Loading...</div>} persistor={persistor}>
+      <PersistGate loading={<Preloader />} persistor={persistor}>
         <BrowserRouter>
           <Toaster position="top-center" reverseOrder={false} />
           <App />

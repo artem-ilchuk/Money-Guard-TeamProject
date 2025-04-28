@@ -9,39 +9,39 @@ export const monoBankAPI = axios.create({
   baseURL: "https://api.monobank.ua/",
 });
 
-export const fetchCurrency = createAsyncThunk(
-  "currency/fetchAll",
-  async (_, thunkAPI) => {
-    const cached = localStorage.getItem(CURRENCY_KEY);
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (Date.now() - parsed.date < ONE_HOUR) {
-        return parsed;
-      }
-    }
+export const fetchCurrencyRate = async () => {
+  const { data } = await monoBankAPI.get("/bank/currency");
 
-    try {
-      const response = await axios.get(`${BASE_URL}/bank/currency`);
-      const usd = response.data.find(
-        (item) => item.currencyCodeA === 840 && item.currencyCodeB === 980
-      );
-      const eur = response.data.find(
-        (item) => item.currencyCodeA === 978 && item.currencyCodeB === 980
-      );
+  const getCurrency = (codeA) => {
+    const currency = data.find(
+      (c) => c.currencyCodeA === codeA && c.currencyCodeB === 980
+    );
+    if (!currency) return null;
+    return {
+      buy: currency.rateBuy,
+      sell: currency.rateSell,
+    };
+  };
 
-      const allData = {
-        date: Date.now(),
-        usd: { buy: usd.rateBuy.toFixed(2), sell: usd.rateSell.toFixed(2) },
-        euro: { buy: eur.rateBuy.toFixed(2), sell: eur.rateSell.toFixed(2) },
-      };
+  return {
+    usd: getCurrency(840),
+    euro: getCurrency(978),
+  };
+};
 
-      localStorage.setItem(CURRENCY_KEY, JSON.stringify(allData));
-      return allData;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+const getCurrencyFromStorage = () => {
+  const savedData = localStorage.getItem(CURRENCY_KEY);
+  if (!savedData) return null;
+  const { timestamp, rate } = JSON.parse(savedData);
+  return Date.now() - timestamp < ONE_HOUR ? rate : null;
+};
+
+const saveCurrencyToStorage = (rate) => {
+  localStorage.setItem(
+    CURRENCY_KEY,
+    JSON.stringify({ timestamp: Date.now(), rate })
+  );
+};
 
 export const getCurrency = createAsyncThunk(
   "currency/fetch",
@@ -55,10 +55,9 @@ export const getCurrency = createAsyncThunk(
       return updatedRate;
     } catch (error) {
       console.log(error);
-
-      // toast.error(
-      //   "Unfortunately, we didn't receive the updated currency rate. Please try again."
-      // );
+      toast.error(
+        "Unfortunately, we didn't receive the updated currency rate. Please try again."
+      );
       return thunkAPI.rejectWithValue(error.message);
     }
   }

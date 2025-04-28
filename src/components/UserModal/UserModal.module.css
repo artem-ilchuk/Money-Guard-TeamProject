@@ -17,6 +17,7 @@
 }
 
 .closeBtn {
+  all: unset;
   background-color: inherit;
   position: absolute;
   top: 20px;

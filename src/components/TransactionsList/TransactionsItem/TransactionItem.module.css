@@ -63,7 +63,7 @@ button {
     padding: 12px 20px 12px 20px;
 }
 
-@media screen and (min-width: 361px) {
+@media screen and (min-width: 768px) {
 
     .transactionListContainer {
         background-color: rgba(11, 88, 212, 0.282);

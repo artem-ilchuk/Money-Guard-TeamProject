@@ -35,9 +35,9 @@ const DashboardPage = () => {
       {isProfileModalOpen && <UserModal closeModal={handleCloseProfile} />}
       <div className={s.main_container}>
         <div className={s.nav_container}>
-          <div>
+          <div className={s.nav_balance}>
             <Navigation />
-            {(isTablet || isDesktop) && <Balance />}
+            {(isTablet || isDesktop) && (<Balance />)}
           </div>
           {(isTablet || isDesktop) && <Currency />}
         </div>

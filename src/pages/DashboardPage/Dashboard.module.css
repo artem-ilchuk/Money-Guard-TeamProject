@@ -1,8 +1,14 @@
 .main_container {
-	background-image: url('../../assets/img/Gradient.png');
+	background-image: url('../../assets/bg.svg');
 	background-repeat: no-repeat;
+	background-size: cover;
+
 }
 
-.nav_container {
-	display: flex;
+.nav_balance {
+	margin-bottom: 12px;
 }
+
+/* .nav_container {
+	display: flex;
+} */

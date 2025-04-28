@@ -1,5 +1,7 @@
 import s from "./AddTransactionForm.module.css";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useMemo } from "react";
+import { toast } from "react-hot-toast";
+
 import clsx from "clsx";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,31 +9,28 @@ import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { format } from "date-fns";
-// import { selectCategories } from "../../redux/statistics/selectors";
-// import { useSelector, useDispatch } from "react-redux";
-import { useDispatch } from "react-redux";
+import { selectCategories } from "../../redux/statistics/selectors";
+import { useSelector, useDispatch } from "react-redux";
 import Select from "react-select";
 import { customStyles } from "./customStyles";
 import { addTransaction } from "../../redux/transactions/operations";
 import { closeAddModal } from "../../redux/modal/slice";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { RiCloseLargeLine } from "react-icons/ri";
+import { getCategories } from "../../redux/statistics/operations";
 
 function AddTransactionForm() {
   const dispatch = useDispatch();
+  const categories = useSelector(selectCategories);
 
-  const categories = [
-    { value: "Main expenses", label: "Main expenses" },
-    { value: "Products", label: "Products" },
-    { value: "Car", label: "Car" },
-    { value: "Self care", label: "Self care" },
-    { value: "Child care", label: "Child care" },
-    { value: "Household products", label: "Household products" },
-    { value: "Education", label: "Education" },
-    { value: "Leisure", label: "Leisure" },
-    { value: "Other expenses", label: "Other expenses" },
-    { value: "Entertaiment", label: "Entertaiment" },
-  ];
+  const categoryOptions = useMemo(
+    () =>
+      categories.map((category) => ({
+        value: category,
+        label: category,
+      })),
+    [categories]
+  );
 
   const [isChecked, setIsChecked] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -41,6 +40,7 @@ function AddTransactionForm() {
   const datePickerRef = useRef(null);
 
   useEffect(() => {
+    dispatch(getCategories());
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     const updateIsMobile = (e) => setIsMobile(e.matches);
 
@@ -60,7 +60,7 @@ function AddTransactionForm() {
       .max(new Date(), "Future date is not allowed")
       .required("Required"),
     comment: yup.string().required("Required"),
-    category: yup.string().oneOf(categories.map((cat) => cat.value)),
+    category: yup.string().required("Required"),
     type: yup.string().oneOf(["INCOME", "EXPENSE"]).required(),
   });
 
@@ -76,10 +76,17 @@ function AddTransactionForm() {
       sum: "",
       date: new Date(),
       comment: "",
-      category: categories[0].value,
+      category: "",
       type: "EXPENSE",
     },
   });
+
+  useEffect(() => {
+    if (categoryOptions.length > 0 && isChecked) {
+      setSelectedOption(categoryOptions[0]);
+      setValue("category", categoryOptions[0].value);
+    }
+  }, [categoryOptions, isChecked, setValue]);
 
   useEffect(() => {
     if (selectedOption) {
@@ -88,23 +95,22 @@ function AddTransactionForm() {
   }, [selectedOption, setValue]);
 
   const onSubmit = async (data) => {
-    const formattedDate = format(new Date(data.date), "dd-MM-yyyy"); // формат "22-12-2025"
+    const formattedDate = format(new Date(data.date), "dd-MM-yyyy");
 
     const formData = {
-      sum: Math.abs(data.sum), // завжди позитивне
+      sum: Math.abs(data.sum),
       date: formattedDate,
       comment: data.comment,
       category: data.category,
-      type: isChecked ? "-" : "+", // "-" якщо витрата, "+" якщо дохід
+      type: isChecked ? "EXPENSE" : "INCOME",
     };
-
-    // console.log(formData); // для перевірки
 
     try {
       await dispatch(addTransaction(formData)).unwrap();
       dispatch(closeAddModal());
+      toast.success("Transaction added successfully!");
     } catch (error) {
-      // error toast вже повинен бути з бекенду
+      toast.error(error?.message || "Something went wrong. Please try again.");
     }
   };
 
@@ -168,7 +174,7 @@ function AddTransactionForm() {
               className={s.select_form}
               value={selectedOption}
               onChange={setSelectedOption}
-              options={categories}
+              options={categoryOptions}
               placeholder="Select a category"
               onMenuOpen={() => setMenuIsOpen(true)}
               onMenuClose={() => setMenuIsOpen(false)}

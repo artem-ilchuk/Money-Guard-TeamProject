@@ -2,6 +2,9 @@ import axios from "axios";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
+const CURRENCY_KEY = "currencyData";
+const ONE_HOUR = 60 * 60 * 1000;
+
 export const monoBankAPI = axios.create({
   baseURL: "https://api.monobank.ua/",
 });

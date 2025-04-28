@@ -50,9 +50,8 @@ export const deleteTransaction = createAsyncThunk(
   async (id, thunkAPI) => {
     try {
       await moneyGuardAPI.delete(`/home/${id}`);
-      const { data } = await moneyGuardAPI.get("/home");
       toast.success("Transaction deleted successfully!");
-      return data;
+      return id;
     } catch (error) {
       toast.error(`Failed to delete transaction: ${error.message}`);
       return thunkAPI.rejectWithValue(error.message);

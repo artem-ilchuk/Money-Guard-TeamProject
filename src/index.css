@@ -69,6 +69,13 @@ textarea {
   outline: none;
 }
 
+input:-webkit-autofill {
+  box-shadow: 0 0 0px 1000px transparent inset;
+  -webkit-text-fill-color: var(--white-400);
+  background-color: transparent !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
 body {
   font-family: var(--font-family);
   font-weight: 400;

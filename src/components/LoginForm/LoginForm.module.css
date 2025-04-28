@@ -1,17 +1,34 @@
-.form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* justify-content: center; */
-  margin: 0 auto;
-  height: 568px;
-  min-width: 320px;
-  max-width: 360px;
-  padding: 97px 20px;
+.wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../../assets/img/login-tablet.png");
+  background-color: #000000;
+  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.form {
+  
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 568px;
+  min-width: 320px;
+  max-width: 368px;
+  padding: 97px 20px 98px 20px;
+  backdrop-filter: blur(100px);
+box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+background-image: url("../../assets/img/mobile-bg-2x.jpg");
+  background-color: #101010;
   background-repeat: no-repeat;
-  background-image: url(../../assets/img/bg_mobile_1x.jpg);
+  background-size: cover;
+  background-position: center;
 }
 .iconBox {
   margin-bottom: 52px;
@@ -35,7 +52,7 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .label {
@@ -43,17 +60,22 @@
   flex-direction: row;
   align-items: center;
   width: 100%;
+  height: 35px;
   border-bottom: 1px solid #ccc;
+  position: relative;
 }
-
-.icon {
-  font-size: 20px;
-  color: #888;
+.iconWrapper {
   margin-right: 19.5px;
+  padding-bottom: 5px;
+  padding-left: 11px;
+  padding-top: 5px;
+}
+.icon {
+  color: #888;
 }
 .iconLogo {
-  width: 27px;
-  height: 26px;
+  width: 24px;
+  height: 24px;
 }
 .logoThumb {
   display: flex;
@@ -79,10 +101,32 @@
   font-size: 18px;
 }
 
+.passwordWrapper {
+  position: relative;
+  width: 100%;
+}
+
 .button_reg {
-  border-radius: 20px;
-  width: 300px;
+  width: 100%;
   height: 50px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
+  background: #fcfcfc;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--text-button);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 1s ease 0s;
+}
+.button_log {
+  width: 100%;
+  height: 50px;
+  border: none;
+  border-radius: 20px;
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
   background: linear-gradient(
     167deg,
@@ -90,39 +134,93 @@
     #9e40ba 61.46%,
     #7000ff 90.54%
   );
-  color: white;
-  border: none;
+
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
+  margin-bottom: 20px;
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.passwordWrapper {
-  position: relative;
-  width: 100%;
+.button_log:hover {
+  transform: scale(1.05);
+  background-image: linear-gradient(
+    to right,
+    #7000ff 0%,
+    #9e40ba 31%,
+    #ffc727 100%
+  );
+  background-size: 200%;
+  background-position: right center;
 }
 
-.toggleButton {
+.button_reg:hover{
+  transform: scale(1.05);
+  background-image: linear-gradient(
+    to right,
+    rgb(255, 255, 255) 0%,
+    rgb(98, 63, 139) 31%,
+    rgb(255, 255, 255) 100%
+  );
+  background-size: 200%;
+  background-position: right center;
+}
+
+.error {
+  color: red;
+  font-size: 12px;
   position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  padding: 0;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
+  top: 38px;
+  left: 10px;
 }
 
-.button_log {
-  border-radius: 20px;
-  width: 300px;
-  height: 50px;
-  box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
-  background: #fcfcfc;
-  border: none;
+@media screen and (min-width: 768px) {
+  .wrapper {
+    background-image: url("../../assets/img/login-tablet.png");
+  }
+
+  .form {
+    min-width: 533px;
+    height: 570px;
+    border-radius: 8px;
+    background: var(--form-color);
+    box-shadow: 0px 4px 60px 0px rgba(0, 0, 0, 0.25);
+    backdrop-filter: blur(50px);
+    padding: 80px 62px;
+  }
+
+  .inputs {
+    margin-bottom: 52px;
+  }
+  .iconLogo {
+    width: 36px;
+    height: 36px;
+  }
+  .buttonBox {
+    justify-items: center;
+  }
+  .button_log {
+    width: 300px;
+  }
+  .button_reg {
+    width: 300px;
+  }
+  .title {
+    font-size: 26px;
+  }
 }
 
-.button_log:hover,
-.button_reg:hover {
-  transform: scale(1.03);
-  box-shadow: 0px 10px 20px rgba(0, 100, 100, 0.2);
+@media screen and (min-width: 1280px) {
+  .wrapper {
+    background-image: url("../../assets/img/login-desktop.png");
+    background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  }
+
+  .form {
+    max-width: 533px;
+    height: 570px;
+    padding: 80px 62px;
+  }
 }

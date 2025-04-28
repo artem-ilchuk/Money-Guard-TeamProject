@@ -34,7 +34,9 @@ const transactionsSlice = createSlice({
         state.isTransLoading = false;
       })
       .addCase(deleteTransaction.fulfilled, (state, action) => {
-        state.transactions = action.payload;
+        state.transactions = state.transactions.filter(
+          (transaction) => transaction._id !== action.payload
+        );
         state.isTransLoading = false;
       })
       .addCase(logoutThunk.fulfilled, (state) => {

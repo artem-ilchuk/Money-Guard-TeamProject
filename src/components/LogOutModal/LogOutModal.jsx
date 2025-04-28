@@ -49,9 +49,8 @@ const LogOutModal = ({ closeModal }) => {
   };
 
   return (
-    <div className={s.logOutModal} onClick={closeOnClickOutside}>
+    <div className={s.overlay} onClick={closeOnClickOutside}>
       <div className={s.modalContent}>
-        <button className={s.closeBtn} onClick={closeModal}></button>
         <div className={s.iconBox}>
           <svg className={s.iconLogo}>
             <use href={"/icons.svg#icon-logo"}></use>

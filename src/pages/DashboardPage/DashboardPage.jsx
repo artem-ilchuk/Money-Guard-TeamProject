@@ -1,3 +1,4 @@
+import s from "./Dashboard.module.css";
 import Header from "../../components/Header/Header";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -23,12 +24,14 @@ const DashboardPage = () => {
   };
 
   return (
-    <div>
-      <Header />
-      {isLogOutModalOpen && <LogOutModal closeModal={handleCloseModal} />}
-      {isProfileModalOpen && <UserModal closeModal={handleCloseProfile} />}
-      <Navigation />
-      <Currency />
+    <div className={s.dashboard}>
+      <div className="container">
+        <Header />
+        {isLogOutModalOpen && <LogOutModal closeModal={handleCloseModal} />}
+        {isProfileModalOpen && <UserModal closeModal={handleCloseProfile} />}
+        <Navigation />
+        <Currency />
+      </div>
     </div>
   );
 };

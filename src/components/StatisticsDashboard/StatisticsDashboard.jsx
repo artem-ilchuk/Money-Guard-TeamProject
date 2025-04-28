@@ -106,8 +106,8 @@ const StatisticsDashboard = () => {
 
   return (
     <div className={styles.container}>
-      <BallanceTab balance={balance} />
-      <CurrencyTab />
+      {/* <BallanceTab balance={balance} /> */}
+      {/* <CurrencyTab /> */}
 
       <div className={styles.statisticsChart}>
         <h1>Statistics</h1>

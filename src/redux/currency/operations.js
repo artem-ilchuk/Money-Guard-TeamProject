@@ -54,9 +54,11 @@ export const getCurrency = createAsyncThunk(
       saveCurrencyToStorage(updatedRate);
       return updatedRate;
     } catch (error) {
-      toast.error(
-        "Unfortunately, we didn't receive the updated currency rate. Please try again."
-      );
+      console.log(error);
+
+      // toast.error(
+      //   "Unfortunately, we didn't receive the updated currency rate. Please try again."
+      // );
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -1,5 +1,3 @@
-
-
 export const customStyles = {
   option: (provided) => {
     return {
@@ -22,19 +20,19 @@ export const customStyles = {
   },
   control: (styles) => ({
     ...styles,
-  //   color: "var(--white, #FBFBFB)",
+    //   color: "var(--white, #FBFBFB)",
     fontFamily: "Poppins",
     fontSize: "16px",
     fontStyle: "normal",
     fontWeight: "400",
     lineHeight: " normal",
-  //   border: "1px solid rgba(255, 255, 255, 0.4)",
+    //   border: "1px solid rgba(255, 255, 255, 0.4)",
     borderRadius: "8px",
-  //   boxShadow: "none",
+    //   boxShadow: "none",
     backgroundColor: "rgba(74, 86, 226, 0.10)",
     border: 0,
     background: "transparent",
-    color: "var(--white-600)",
+    color: "transparent",
     boxShadow: "none",
     display: "flex",
     flexWrap: "nowrap",
@@ -58,7 +56,7 @@ export const customStyles = {
       },
     };
   },
-  menu: (provided, ) => {
+  menu: (provided) => {
     return {
       ...provided,
       background:
@@ -98,13 +96,13 @@ export const customStyles = {
     };
   },
   placeholder: (defaultStyles) => {
-      return {
-        ...defaultStyles,
-        fontFamily: 'var(--font-family)',
-        fontWeight: 400,
-        fontSize: '18px',
-        color: 'var(--white-600)',
-        // opacity: 1,
-      };
-    },
+    return {
+      ...defaultStyles,
+      fontFamily: "var(--font-family)",
+      fontWeight: 400,
+      fontSize: "18px",
+      color: "var(--white-600)",
+      opacity: 1,
+    };
+  },
 };

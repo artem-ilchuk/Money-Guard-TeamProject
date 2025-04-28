@@ -13,7 +13,7 @@ const ButtonAddTransactions = () => {
         type="button"
         onClick={() => {
           dispatch(openAddModal());
-      }}
+        }}
       >
         <BsPlus className={s.icon} />
       </button>

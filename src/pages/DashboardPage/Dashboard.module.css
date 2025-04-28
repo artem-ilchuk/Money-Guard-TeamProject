@@ -1,0 +1,34 @@
+.main_container {
+  background-color: #101010;
+  background-image: url(../../assets/img/bg_mobile_dashboard.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: calc(100vh - 60px);
+}
+
+.nav_balance {
+  margin-bottom: 12px;
+}
+
+.nav_container {
+  display: flex;
+}
+
+@media screen and (min-width: 768px) {
+  .main_container {
+    background-image: url(../../assets/img/bg_tablet_dashboard.png);
+    height: calc(100vh - 68px);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .main_container {
+    background-image: url(../../assets/img/bg_desktop_dashboard.png);
+    display: flex;
+    justify-content: space-between;
+  }
+  .nav_container {
+    display: block;
+    max-width: 480px;
+  }
+}

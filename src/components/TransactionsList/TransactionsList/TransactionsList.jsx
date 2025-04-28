@@ -17,21 +17,21 @@ const TransactionList = () => {
   }, [dispatch]);
 
   const transactions = useSelector(selectTransactions);
-  console.log(transactions);
+  // console.log(transactions);
   const loading = useSelector(isTransLoading);
   const error = useSelector(isTransError);
 
   return (
     <div className={styles.mainContainer}>
-      <ul className={styles.ListHeader}>
+      {/* <ul className={styles.ListHeader}>
         <li className={styles.listHeaderItem}>Date</li>
         <li className={styles.listHeaderItem}>Type</li>
         <li className={styles.listHeaderItem}>Category</li>
         <li className={styles.listHeaderItem}>Comment</li>
         <li className={styles.listHeaderItem}>Sum</li>
         <li className={styles.listHeaderItem}></li>
-      </ul>
-      <ul className={styles.scroll}>
+      </ul> */}
+      <ul className={styles.transactionsList}>
         {transactions.map((item) => {
           return (
             <li key={item._id}>

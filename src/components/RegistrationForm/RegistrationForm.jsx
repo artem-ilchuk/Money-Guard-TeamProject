@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
 import clsx from "clsx";
+import FormButton from "../FormButton/FormButton";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -39,7 +40,7 @@ const RegistrationForm = () => {
           <p className={css.title}>Money Guard</p>
         </div>
 
-        <div>
+        <div className={css.fieldThumb}>
           <div className={css.iconThumb}>
             <svg className={css.icon}>
               <use href={"/icons.svg#icon-user"}></use>
@@ -55,7 +56,7 @@ const RegistrationForm = () => {
           </div>
         </div>
 
-        <div>
+        <div className={css.fieldThumb}>
           <div className={css.iconThumb}>
             <svg className={css.icon}>
               <use href={"/icons.svg#icon-email"}></use>
@@ -72,7 +73,7 @@ const RegistrationForm = () => {
           </div>
         </div>
 
-        <div>
+        <div className={css.fieldThumb}>
           <div className={css.iconThumb}>
             <svg className={css.icon}>
               <use href={"/icons.svg#icon-lock"}></use>
@@ -89,7 +90,7 @@ const RegistrationForm = () => {
           </div>
         </div>
 
-        <div>
+        <div className={css.fieldThumb}>
           <div className={css.iconThumb}>
             <svg className={css.icon}>
               <use href={"/icons.svg#icon-lock"}></use>
@@ -108,6 +109,7 @@ const RegistrationForm = () => {
             <PasswordStrengthBar
               password={watch("password")}
               className={css.passwordStrengthBar}
+              scoreWordClassName={css.scoreWordClassName}
               minLength={8}
               minScore={1}
               barColors={["#ddd", "#FFB627", "#f6b44d", "#2b90ef", "#25c281"]}
@@ -117,10 +119,12 @@ const RegistrationForm = () => {
         </div>
 
         <div className={css.buttonThumb}>
-          <button type="submit" className={css.regButton}>
+          {/* <FormButton text="Register" type="submit" /> */}
+          <button type="submit" className={clsx(css.button, css.regButton)}>
             Register
           </button>
-          <NavLink to="/login" className={css.logButton}>
+          {/* <FormButton text="Log in" variant="whiteButton" /> */}
+          <NavLink to="/login" className={clsx(css.button, css.logButton)}>
             Log in
           </NavLink>
         </div>

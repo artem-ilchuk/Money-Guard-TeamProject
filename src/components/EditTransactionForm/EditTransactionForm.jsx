@@ -1,343 +1,273 @@
-import s from "./EditTransactionForm.module.css";
-import Select from "react-select";
-import { useEffect, useState, useRef } from "react";
-import clsx from "clsx";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
-import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import DatePicker from "react-datepicker";
+import Select from "react-select";
+import { useDispatch, useSelector } from "react-redux";
 import { format } from "date-fns";
-import { customStyles } from "./customStyles";
-import { selectCategories } from "../../redux/statistics/selectors";
-import { useSelector } from "react-redux";
 import { closeEditModal } from "../../redux/modal/slice";
+import { editTransaction } from "../../redux/transactions/operations";
 import { selectIsEditID } from "../../redux/modal/selectors";
 import { selectTransactions } from "../../redux/transactions/selectors";
-import { useDispatch } from "react-redux";
-import { editTransaction } from "../../redux/transactions/operations";
-import { RiCloseLargeLine } from "react-icons/ri";
+import s from "./EditTransactionForm.module.css";
+import { customStyles } from "./customStyles";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
+import { RiCloseLargeLine } from "react-icons/ri";
+import clsx from "clsx";
+import "react-datepicker/dist/react-datepicker.css";
 
-function EditTransactionForm() {
-  const categories = useSelector(selectCategories);
-  const transactions = useSelector(selectTransactions);
-  const [isChecked, setIsChecked] = useState(true);
-  const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
-  const [isMobile, setIsMobile] = useState(false);
+// Категорії
+const categories = [
+  "Main expenses",
+  "Products",
+  "Car",
+  "Self care",
+  "Child care",
+  "Household products",
+  "Education",
+  "Leisure",
+  "Other expenses",
+  "Entertaiment",
+];
+
+const categoriesOptions = categories.map((cat) => ({
+  value: cat,
+  label: cat,
+}));
+
+// Yup схема
+const schema = yup.object().shape({
+  date: yup.string().required("Date is required"),
+  type: yup.string().oneOf(["INCOME", "EXPENSE"]).required("Type is required"),
+  category: yup
+    .object()
+    .nullable()
+    .shape({
+      value: yup.string().oneOf(categories).required("Category is required"),
+      label: yup.string().required(),
+    })
+    .required("Category is required"),
+  comment: yup.string().nullable(),
+  sum: yup
+    .number()
+    .typeError("Sum must be a number")
+    .positive("Sum must be positive")
+    .required("Sum is required"),
+});
+
+export default function EditTransactionForm() {
   const dispatch = useDispatch();
-  const IdForEdit = useSelector(selectIsEditID);
-  const foundObject = transactions
-    ? transactions.find((item) => item.id === IdForEdit)
-    : undefined;
-  const [notFound, setNotFound] = useState(false);
-  const prevFoundObject = useRef(foundObject);
+  const transactionId = useSelector(selectIsEditID);
+  const transactions = useSelector(selectTransactions);
+  const transaction = transactions.find((item) => item.id === transactionId);
 
-  const currentDate = new Date();
-  const formattedDate = format(currentDate, "EEE MMM dd'T'HH:mm:ss'Z'");
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(max-width: 767px)");
-    const updateIsMobile = (e) => setIsMobile(e.matches);
-
-    updateIsMobile(mediaQuery);
-    mediaQuery.addEventListener("change", updateIsMobile);
-    return () => mediaQuery.removeEventListener("change", updateIsMobile);
-  }, []);
-
-  // Оголошуємо schema тут, до використання в useForm
-  const schema = yup.object().shape({
-    amount: yup.number().required("number invalid value"),
-    transactionDate: yup
-      .date()
-      .required("Date is required")
-      .default(() => new Date(formattedDate)),
-    switch: yup.boolean(),
-    category: yup.string(),
-    comment: yup.string().required("Comment is required"),
-  });
+  const [isMobile, setIsMobile] = useState(false);
+  const [menuIsOpen, setMenuIsOpen] = useState(false);
+  const [isChecked, setIsChecked] = useState(true); // true = EXPENSE, false = INCOME
 
   const {
+    control,
     handleSubmit,
     register,
-    control,
-    formState: { errors },
     reset,
+    setValue,
+    formState: { errors },
   } = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      amount: "",
-      transactionDate: new Date(),
+      date: "",
+      type: "EXPENSE",
+      category: null, // Default value is null, which works well with react-select
       comment: "",
+      sum: "",
     },
   });
 
+  // Підставляємо дані транзакції
   useEffect(() => {
-    if (foundObject) {
-      console.log(foundObject);
-
-      if (foundObject.type === "INCOME") {
-        setIsChecked(false);
-      } else if (foundObject.type === "EXPENSE") {
-        setIsChecked(true);
-      }
-      setNotFound(false);
-    } else if (IdForEdit) {
-      setNotFound(true);
-    } else {
-      setNotFound(false);
-    }
-    prevFoundObject.current = foundObject;
-  }, [foundObject, IdForEdit]);
-
-  useEffect(() => {
-    if (foundObject) {
+    if (transaction) {
       reset({
-        amount: Math.abs(foundObject.amount),
-        transactionDate: new Date(foundObject.transactionDate),
-        comment: foundObject.comment || "",
+        date: format(new Date(transaction.date), "yyyy-MM-dd"),
+        type: transaction.type,
+        category: {
+          value: transaction.category,
+          label: transaction.category,
+        },
+        comment: transaction.comment || "",
+        sum: Math.abs(transaction.sum),
       });
+      setIsChecked(transaction.type === "EXPENSE");
     }
-  }, [reset, foundObject]);
+  }, [transaction, reset]);
 
-  const amountDefaultValue = foundObject?.amount
-    ? Math.abs(foundObject.amount)
-    : "";
-  const startDateDefaultValue = foundObject?.transactionDate
-    ? new Date(foundObject.transactionDate)
-    : new Date();
-  const commentDefaultValue = foundObject?.comment || "";
+  useEffect(() => {
+    const mediaQuery = window.matchMedia("(max-width: 767px)");
+    setIsMobile(mediaQuery.matches);
+    const handler = (e) => setIsMobile(e.matches);
+    mediaQuery.addEventListener("change", handler);
+    return () => mediaQuery.removeEventListener("change", handler);
+  }, []);
 
-  const categoriesForSelect = categories.map((category) => ({
-    value: category.id,
-    label: category.name,
-  }));
-
-  const selectDefaultValue = foundObject?.categoryId
-    ? categoriesForSelect.find((item) => item.value === foundObject.categoryId)
-    : null;
-
-  const [selectedOption] = useState(null);
+  const toggleType = () => {
+    setIsChecked((prev) => !prev);
+    const newType = !isChecked ? "EXPENSE" : "INCOME";
+    setValue("type", newType);
+  };
 
   const onSubmit = (data) => {
-    if (!foundObject) {
-      return;
-    }
+    if (!transaction) return;
 
-    if (!isChecked) {
-      const categoryId = categories.filter((el) => el.name === "Income");
-      data.categoryId = categoryId[0].id;
-      data.type = "INCOME";
-    } else if (selectedOption) {
-      data.categoryId = selectedOption.value;
-      data.type = "EXPENSE";
-      data.amount = Math.abs(data.amount);
-    }
+    const updatedTransaction = {
+      ...data,
+      category: data.category ? data.category.value : "", // category value, if selected
+      sum: data.type === "EXPENSE" ? -Math.abs(data.sum) : Math.abs(data.sum),
+    };
 
-    data.type = foundObject.type;
-    const originalDate = new Date(data.transactionDate);
-    const formattedDateSubmit = format(originalDate, "yyyy-MM-dd");
-    data.transactionDate = formattedDateSubmit;
-
-    if (foundObject.type === "INCOME") {
-      data.categoryId = foundObject.categoryId;
-      data.amount = Math.abs(data.amount);
-    } else {
-      if (selectedOption) {
-        data.categoryId = selectedOption.value;
-      } else {
-        data.categoryId = foundObject.categoryId;
-      }
-      data.amount = Math.abs(data.amount) * -1;
-    }
-    delete data.switch;
-
-    dispatch(editTransaction({ id: IdForEdit, transaction: data }));
+    dispatch(editTransaction({ id: transactionId, transaction: updatedTransaction }));
     dispatch(closeEditModal());
   };
 
   return (
-    <>
-      <div className={s.formContainer}>
-        <button
-          type="button"
-          className={isMobile ? s.hiden : s.modalCloseBtn}
-          onClick={() => dispatch(closeAddModal())}
-        >
-          <RiCloseLargeLine
-            className={s.closeIcon}
-            style={{ width: "20px", height: "20px" }}
-          />
-        </button>
-        <h1 className={s.title}>Edit transaction</h1>
-        <div className={s.type}>
+    <div className={s.formContainer}>
+      <button
+        type="button"
+        className={isMobile ? s.hiden : s.modalCloseBtn}
+        onClick={() => dispatch(closeEditModal())}
+      >
+        <RiCloseLargeLine className={s.closeIcon} />
+      </button>
+
+      <h1 className={s.title}>Edit transaction</h1>
+
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={s.type} onClick={toggleType}>
           <div
-            className={`${s.type_income} ${s.type_text} ${
-              !isChecked ? s.income_active : ""
-            }`}
+            className={clsx(
+              s.type_income,
+              s.type_text,
+              !isChecked && s.income_active
+            )}
           >
             Income
           </div>
           <div className={s.type_svg}>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="10"
-              height="22"
-              viewBox="0 0 10 22"
-              fill="none"
-            >
-              <path
-                d="M8.80108 1.09786L1.19895 20.9021"
-                stroke="#E0E0E0"
-                strokeWidth="2"
-              />
+            <svg width="10" height="22" viewBox="0 0 10 22" fill="none">
+              <path d="M8.80108 1.09786L1.19895 20.9021" stroke="#E0E0E0" strokeWidth="2" />
             </svg>
           </div>
           <div
-            className={`${s.type_expense} ${s.type_text} ${
-              isChecked ? s.expense_active : ""
-            }`}
+            className={clsx(
+              s.type_expense,
+              s.type_text,
+              isChecked && s.expense_active
+            )}
           >
             Expense
           </div>
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {isChecked && selectDefaultValue?.label && (
-            <div className={s.comment}>
-              <Select
-                classNamePrefix="react-select"
-                styles={customStyles}
-                className={s.select_form}
-                defaultValue={selectDefaultValue}
-                onChange={setSelectedOption}
-                options={categoriesForSelect}
-                placeholder="Select a category"
-                onMenuOpen={() => setMenuIsOpen(true)}
-                onMenuClose={() => setMenuIsOpen(false)}
-                components={{
-                  DropdownIndicator: () =>
-                    menuIsOpen ? (
-                      <GoChevronUp
-                        className={s.iconSelect}
-                        style={{ fontSize: "20px", color: "white" }}
-                      />
-                    ) : (
-                      <GoChevronDown
-                        className={s.iconSelect}
-                        style={{ fontSize: "20px", color: "white" }}
-                      />
-                    ),
-                }}
-              />
-            </div>
-          )}
-          {notFound && (
-            <div className={s.commentUnderfined}>
-              No transaction information found.
-            </div>
-          )}
-
-          <div className={s.sum_data_wrap}>
-            <div className={s.sum_wrap}>
-              <input
-                {...register("amount")}
-                type="number"
-                autoComplete="off"
-                placeholder="0.00"
-                defaultValue={
-                  foundObject?.amount ? Math.abs(foundObject.amount) : ""
-                }
-                className={s.sum}
-              />
-              {errors.amount && (
-                <span className={s.comment_err}>{"Enter a number"}</span>
+        {isChecked && (
+          <div className={s.comment}>
+            <Controller
+              name="category"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  options={categoriesOptions}
+                  placeholder="Select a category"
+                  styles={customStyles}
+                  classNamePrefix="react-select"
+                  className={s.select_form}
+                  menuIsOpen={menuIsOpen}
+                  onMenuOpen={() => setMenuIsOpen(true)}
+                  onMenuClose={() => setMenuIsOpen(false)}
+                  components={{
+                    DropdownIndicator: () =>
+                      menuIsOpen ? (
+                        <GoChevronUp className={s.iconSelect} />
+                      ) : (
+                        <GoChevronDown className={s.iconSelect} />
+                      ),
+                  }}
+                />
               )}
-            </div>
-            <div
-              className={s.data_wrap}
-              onClick={() => setIsDatePickerOpen(true)}
-            >
-              <Controller
-                name="transactionDate"
-                className={s.date}
-                control={control}
-                render={({ field }) => (
-                  <>
-                    <DatePicker
-                      selected={
-                        field.value ||
-                        (foundObject?.transactionDate
-                          ? new Date(foundObject.transactionDate)
-                          : new Date())
-                      }
-                      onChange={(date) => {
-                        field.onChange(date);
-                        setIsDatePickerOpen(false);
-                      }}
-                      dateFormat="dd.MM.yyyy"
-                      open={isDatePickerOpen}
-                      onClickOutside={() => setIsDatePickerOpen(false)}
-                      className={s.customDatePicker}
-                      calendarClassName={s.calendarClassName}
-                      maxDate={new Date()}
-                      // disabled={notFound}
-                    />
-                  </>
-                )}
-              />
-              <div className={s.svg_wrap}>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                >
-                  <g clipPath="url(#clip0_60_133)">
-                    <path
-                      d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z"
-                      fill="#734AEF"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_60_133">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
-                </svg>
-              </div>
-            </div>
-          </div>
-          <div className={clsx(s.comment, s.comment_bottom)}>
-            <input
-              {...register("comment")}
-              type="text"
-              className={s.input}
-              placeholder="Comment"
-              defaultValue={foundObject?.comment || ""}
-              autoComplete="off"
             />
-            {errors.comment && (
-              <span className={s.comment_err}>{"Enter a comment"}</span>
+            {errors.category && (
+              <span className={s.comment_err}>{errors.category.message}</span>
             )}
           </div>
-          <div className={s.btn_wrap}>
-            <button className={clsx(s.btn, s.btn_add)} type="submit">
-              Save
-            </button>
-            <button
-              className={clsx(s.btn, s.btn_cancel)}
-              type="button"
-              onClick={() => dispatch(closeEditModal())}
-            >
-              Cancel
-            </button>
+        )}
+
+        <div className={s.sum_data_wrap}>
+          <div className={s.sum_wrap}>
+            <input
+              {...register("sum")}
+              type="number"
+              placeholder="0.00"
+              className={s.sum}
+              autoComplete="off"
+            />
+            {errors.sum && (
+              <span className={s.comment_err}>{errors.sum.message}</span>
+            )}
           </div>
-        </form>
-      </div>
-    </>
+
+          <div className={s.data_wrap}>
+            <Controller
+              name="date"
+              control={control}
+              render={({ field }) => (
+                <DatePicker
+                  selected={field.value ? new Date(field.value) : null}
+                  onChange={(date) =>
+                    field.onChange(format(date, "yyyy-MM-dd"))
+                  }
+                  dateFormat="dd.MM.yyyy"
+                  className={s.customDatePicker}
+                  calendarClassName={s.calendarClassName}
+                  maxDate={new Date()}
+                />
+              )}
+            />
+            <div className={s.svg_wrap}>
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 11H7V13H9V11ZM13 11H11V13H13V11ZM17 11H15V13H17V11ZM19 4H18V2H16V4H8V2H6V4H5C3.89 4 3.01 4.9 3.01 6L3 20C3 21.1 3.89 22 5 22H19C20.1 22 21 21.1 21 20V6C21 4.9 20.1 4 19 4ZM19 20H5V9H19V20Z"
+                  fill="#734AEF"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div className={clsx(s.comment, s.comment_bottom)}>
+          <input
+            {...register("comment")}
+            type="text"
+            placeholder="Comment"
+            className={s.input}
+            autoComplete="off"
+          />
+          {errors.comment && (
+            <span className={s.comment_err}>{errors.comment.message}</span>
+          )}
+        </div>
+
+        <div className={s.btn_wrap}>
+          <button type="submit" className={clsx(s.btn, s.btn_add)}>
+            Save
+          </button>
+          <button
+            type="button"
+            className={clsx(s.btn, s.btn_cancel)}
+            onClick={() => dispatch(closeEditModal())}
+          >
+            Cancel
+          </button>
+        </div>
+      </form>
+    </div>
   );
 }
-
-export default EditTransactionForm;

@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import styles from "./TransactionItem.module.css";
 import { CiEdit } from "react-icons/ci";
 import { deleteTransaction } from "../../../redux/transactions/operations";
+import clsx from "clsx";
 
 const TransactionItem = ({ id, category, date, sum, type, comment }) => {
   const dispatch = useDispatch();
@@ -11,7 +12,12 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
   };
 
   return (
-    <div className={styles.transactionListContainer}>
+    <div
+      className={clsx(
+        styles.transactionListContainer,
+        type == "+" && styles.incomeBorderColor
+      )}
+    >
       <ul className={styles.transactionList}>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Date</span>
@@ -31,7 +37,14 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
         </li>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Sum</span>
-          <span className={styles.itemSum}>{sum}</span>
+          <span
+            className={clsx(
+              type == "-" && styles.expenseTextColor,
+              type == "+" && styles.incomeTextColor
+            )}
+          >
+            {sum}
+          </span>
         </li>
         <li className={styles.deleteEdit}>
           <button

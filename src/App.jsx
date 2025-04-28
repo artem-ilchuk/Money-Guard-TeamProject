@@ -21,24 +21,29 @@ const StatisticsTab = lazy(() => import("./pages/StatisticsTab/StatisticsTab"));
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const [isFirstLoad, setIsFirstLoad] = useState(false);
+
   useEffect(() => {
     dispatch(refreshUserThunk());
-  }, [dispatch]);
 
-  const [isFirstLoad, setIsFirstLoad] = useState(false);
-  useEffect(() => {
     const isFirstVisit = localStorage.getItem("isFirstVisit");
+
     if (!isFirstVisit) {
       setIsFirstLoad(true);
-      localStorage.setItem("isFirstVisit", "true");
+      const timer = setTimeout(() => {
+        setIsFirstLoad(false);
+        localStorage.setItem("isFirstVisit", "true");
+      }, 2000);
+      return () => clearTimeout(timer);
     }
-    dispatch(refreshUserThunk());
   }, [dispatch]);
-// || isRefreshing
-  return isFirstLoad ? (
-    <Preloader />
-  ) : (
-    <Suspense fallback={<p>Loading page...</p>}>
+
+  if (isFirstLoad || isRefreshing) {
+    return <Preloader />;
+  }
+
+  return (
+    <Suspense fallback={<Preloader />}>
       <Routes>
         <Route
           path="/register"
@@ -69,7 +74,6 @@ function App() {
           <Route path="statistic" element={<StatisticsTab />} />
           <Route path="currency" element={<CurrencyTab />} />
         </Route>
-
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

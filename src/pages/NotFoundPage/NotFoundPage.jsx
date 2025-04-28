@@ -1,12 +1,19 @@
+import { Link } from "react-router-dom";
+import s from "./NotFoundPage.module.css";
+
 const NotFoundPage = () => {
   return (
-    <section>
-      <div className="pt-20 text-center text-5xl font-bold">
-        <p className="text-blue-900 mb-20">404</p>
-        <p className="mb-20">Oooops...Something went wrong</p>
-        <p>Page not found!</p>
+    <div className={s.container}>
+      <div className={s.wrapper}>
+        <p className={s.notFound}>404</p>
+        <p className={s.text}>Page not found!</p>
+        <button className={s.multiColorButton}>
+          <Link to="/dashboard/home" className={s.link}>
+            GO HOME
+          </Link>
+        </button>
       </div>
-    </section>
+    </div>
   );
 };
 

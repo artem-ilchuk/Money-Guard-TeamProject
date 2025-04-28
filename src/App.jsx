@@ -1,10 +1,17 @@
 import "./App.css";
 import { lazy, Suspense, useEffect, useState } from "react";
-import { Navigate, Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import PublicRoute from "./components/PublicRoute/PublicRoute";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsRefreshing } from "./redux/auth/selectors";
+import { selectIsLoggedIn } from "./redux/auth/selectors";
 import { refreshUserThunk } from "./redux/auth/operations";
 import Preloader from "./components/Preloader/Preloader";
 import useMedia from "./hooks/UseMadia";
@@ -17,12 +24,15 @@ const RegistrationPage = lazy(() =>
   import("./pages/RegistrationPage/RegistrationPage")
 );
 const CurrencyTab = lazy(() => import("./components/Currency/Currency"));
-const StatisticsTab = lazy(() => import("./components/StatisticsDashboard/StatisticsDashboard"));
+const StatisticsTab = lazy(() =>
+  import("./components/StatisticsDashboard/StatisticsDashboard")
+);
 
 function App() {
-	const dispatch = useDispatch();
-	const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const location = useLocation();
+  const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
   useEffect(() => {
     dispatch(refreshUserThunk());
@@ -36,22 +46,32 @@ function App() {
       localStorage.setItem("isFirstVisit", "true");
     }
     dispatch(refreshUserThunk());
-	}, [dispatch]);
+  }, [dispatch]);
 
-	const { isMobile, isTablet, isDesctop } = useMedia();
-	
-	useEffect(() => {
+  const { isMobile, isTablet, isDesctop } = useMedia();
+
+  useEffect(() => {
     if (!isMobile && location.pathname === "/dashboard/currency") {
       navigate("/dashboard/home", { replace: true });
     }
   }, [isMobile, location.pathname, navigate]);
-	
-// || isRefreshing
+
+  // || isRefreshing
   return isFirstLoad ? (
     <Preloader />
   ) : (
     <Suspense fallback={<p>Loading page...</p>}>
       <Routes>
+        <Route
+          path="/"
+          element={
+            isLoggedIn ? (
+              <Navigate to="/dashboard/home" replace />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          }
+        />
         <Route
           path="/register"
           element={

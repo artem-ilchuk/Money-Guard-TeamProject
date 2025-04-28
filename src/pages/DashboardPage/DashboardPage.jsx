@@ -33,16 +33,16 @@ const DashboardPage = () => {
       <Header />
       {isLogOutModalOpen && <LogOutModal closeModal={handleCloseModal} />}
       {isProfileModalOpen && <UserModal closeModal={handleCloseProfile} />}
-      <div className={s.main_container}>
-        <div className={s.nav_container}>
+      <section className={s.main_container}>
+        <div className={isTablet || isDesktop ? s.nav_container : undefined}>
           <div className={s.nav_balance}>
             <Navigation />
-            {(isTablet || isDesktop) && (<Balance />)}
+            {(isTablet || isDesktop) && <Balance />}
           </div>
           {(isTablet || isDesktop) && <Currency />}
         </div>
         <Outlet />
-      </div>
+      </section>
     </div>
   );
 };

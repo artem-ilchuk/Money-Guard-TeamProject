@@ -40,6 +40,9 @@
   font-weight: 400;
   font-size: 14px;
   color: var(--white);
+	height: calc(100vh - 750px);
+	overflow-y: auto;
+  overflow-x: hidden;
 }
 
 .tableRow {

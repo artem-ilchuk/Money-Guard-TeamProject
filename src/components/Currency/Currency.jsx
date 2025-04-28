@@ -15,6 +15,11 @@ const Currency = () => {
   const currencyData = useSelector(selectCurrencyData);
   const isLoading = useSelector(selectCurrencyLoading);
 
+  const usdRateBuy = currencyData?.usd?.buy;
+  const euroRateBuy = currencyData?.euro?.buy;
+  const usdRateSell = currencyData?.usd?.sell;
+  const euroRateSell = currencyData?.euro?.sell;
+
   useEffect(() => {
     dispatch(getCurrency());
   }, [dispatch]);
@@ -40,21 +45,13 @@ const Currency = () => {
           <tbody>
             <tr>
               <td>USD</td>
-              <td className={styles.rate}>
-                {formatCurrency(currencyData?.usd?.buy)}
-              </td>
-              <td className={styles.rate}>
-                {formatCurrency(currencyData?.usd?.sell)}
-              </td>
+              <td className={styles.rate}>{formatCurrency(usdRateBuy)}</td>
+              <td className={styles.rate}>{formatCurrency(usdRateSell)}</td>
             </tr>
             <tr>
               <td>EUR</td>
-              <td className={styles.rate}>
-                {formatCurrency(currencyData?.euro?.buy)}
-              </td>
-              <td className={styles.rate}>
-                {formatCurrency(currencyData?.euro?.sell)}
-              </td>
+              <td className={styles.rate}>{formatCurrency(euroRateBuy)}</td>
+              <td className={styles.rate}>{formatCurrency(euroRateSell)}</td>
             </tr>
           </tbody>
         </table>
@@ -62,8 +59,8 @@ const Currency = () => {
 
       {!isTablet && (
         <div className={styles.currencyPeaks}>
-          <p>{formatCurrency(currencyData?.usd?.buy)}</p>
-          <p>{formatCurrency(currencyData?.euro?.buy)}</p>
+          <p>{formatCurrency(usdRateBuy)}</p>
+          <p>{formatCurrency(euroRateBuy)}</p>
         </div>
       )}
 

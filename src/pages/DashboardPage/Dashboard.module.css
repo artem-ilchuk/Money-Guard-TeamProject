@@ -43,3 +43,9 @@
 .nav_container {
   display: flex;
 }
+
+@media screen and (min-width:768px) {
+	.main_container {
+		height: calc(100vh - 68px);
+}
+}

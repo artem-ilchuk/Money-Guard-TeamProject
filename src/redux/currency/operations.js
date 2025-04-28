@@ -43,6 +43,20 @@ const saveCurrencyToStorage = (rate) => {
   );
 };
 
+const getCurrencyFromStorage = () => {
+  const savedData = localStorage.getItem(CURRENCY_KEY);
+  if (!savedData) return null;
+  const { timestamp, rate } = JSON.parse(savedData);
+  return Date.now() - timestamp < ONE_HOUR ? rate : null;
+};
+
+const saveCurrencyToStorage = (rate) => {
+  localStorage.setItem(
+    CURRENCY_KEY,
+    JSON.stringify({ timestamp: Date.now(), rate })
+  );
+};
+
 export const getCurrency = createAsyncThunk(
   "currency/fetch",
   async (_, thunkAPI) => {

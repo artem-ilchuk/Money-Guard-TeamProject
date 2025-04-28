@@ -361,9 +361,12 @@ input[type="number"]:focus {
 
 .comment_err {
   position: absolute;
-  color: rgba(255, 255, 255, 0.4);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 10px;
+  color: #f00000;
   left: 0;
-  top: 34px;
+  top: 50px;
 }
 
 .btn {

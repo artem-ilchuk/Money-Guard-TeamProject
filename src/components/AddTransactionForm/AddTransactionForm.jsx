@@ -17,7 +17,6 @@ import { closeAddModal } from "../../redux/modal/slice";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { RiCloseLargeLine } from "react-icons/ri";
 
-
 function AddTransactionForm() {
   const dispatch = useDispatch();
 
@@ -38,7 +37,6 @@ function AddTransactionForm() {
   const [isMobile, setIsMobile] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-
 
   const datePickerRef = useRef(null);
 
@@ -89,11 +87,9 @@ function AddTransactionForm() {
     }
   }, [selectedOption, setValue]);
 
-
-
   const onSubmit = async (data) => {
     const formattedDate = format(new Date(data.date), "dd-MM-yyyy"); // формат "22-12-2025"
-  
+
     const formData = {
       sum: Math.abs(data.sum), // завжди позитивне
       date: formattedDate,
@@ -101,9 +97,9 @@ function AddTransactionForm() {
       category: data.category,
       type: isChecked ? "-" : "+", // "-" якщо витрата, "+" якщо дохід
     };
-  
+
     // console.log(formData); // для перевірки
-  
+
     try {
       await dispatch(addTransaction(formData)).unwrap();
       dispatch(closeAddModal());

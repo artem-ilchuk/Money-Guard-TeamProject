@@ -1,9 +1,8 @@
-
-import s from './ModalAddTransaction.module.css';
-import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { closeAddModal } from '../../redux/modal/slice';
-import AddTransactionForm from '../AddTransactionForm/AddTransactionForm';
+import s from "./ModalAddTransaction.module.css";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { closeAddModal } from "../../redux/modal/slice";
+import AddTransactionForm from "../AddTransactionForm/AddTransactionForm";
 
 const ModalAddTransaction = () => {
   const dispatch = useDispatch();
@@ -11,13 +10,13 @@ const ModalAddTransaction = () => {
   // Закриття по Escape
   useEffect(() => {
     const handleKeyDown = (e) => {
-      if (e.key === 'Escape') {
+      if (e.key === "Escape") {
         dispatch(closeAddModal());
       }
     };
 
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [dispatch]);
 
   // Закриття по backdrop

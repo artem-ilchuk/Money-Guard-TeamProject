@@ -14,7 +14,6 @@
 }
 
 .form {
-  
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -23,8 +22,8 @@
   max-width: 368px;
   padding: 97px 20px 98px 20px;
   backdrop-filter: blur(100px);
-box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-background-image: url("../../assets/img/mobile-bg-2x.jpg");
+  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
+  background-image: url("../../assets/img/mobile-bg-2x.jpg");
   background-color: #101010;
   background-repeat: no-repeat;
   background-size: cover;
@@ -154,7 +153,7 @@ background-image: url("../../assets/img/mobile-bg-2x.jpg");
   background-position: right center;
 }
 
-.button_reg:hover{
+.button_reg:hover {
   transform: scale(1.05);
   background-image: linear-gradient(
     to right,
@@ -214,8 +213,8 @@ background-image: url("../../assets/img/mobile-bg-2x.jpg");
   .wrapper {
     background-image: url("../../assets/img/login-desktop.png");
     background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
+    background-size: cover;
+    background-position: center;
   }
 
   .form {

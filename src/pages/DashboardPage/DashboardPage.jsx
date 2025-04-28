@@ -11,8 +11,8 @@ import UserModal from "../../components/UserModal/UserModal";
 import { Outlet } from "react-router-dom";
 import useMedia from "../../hooks/UseMadia";
 import Balance from "../../components/Balance/Balance";
-import Currency from '../../components/Currency/Currency'
-import s from './Dashboard.module.css'
+import Currency from "../../components/Currency/Currency";
+import s from "./Dashboard.module.css";
 
 const DashboardPage = () => {
   const isLogOutModalOpen = useSelector(selectIsLogOutModalOpen);
@@ -24,9 +24,9 @@ const DashboardPage = () => {
   };
   const handleCloseProfile = () => {
     dispatch(closeProfileModal());
-	};
-	
-	const { isMobile, isTablet, isDesktop } = useMedia();
+  };
+
+  const { isMobile, isTablet, isDesktop } = useMedia();
 
   return (
     <div>

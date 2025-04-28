@@ -40,8 +40,8 @@
   font-weight: 400;
   font-size: 14px;
   color: var(--white);
-	height: calc(100vh - 697px);
-	overflow-y: auto;
+  height: calc(100vh - 697px);
+  overflow-y: auto;
   overflow-x: hidden;
 }
 
@@ -107,10 +107,10 @@
   color: var(--yellow);
 }
 
-@media screen and (min-width:768px) {
-	.tableBody {
-	height: calc(100vh - 550px);
-	overflow-y: auto;
-  overflow-x: hidden;
-}
+@media screen and (min-width: 768px) {
+  .tableBody {
+    height: calc(100vh - 550px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
 }

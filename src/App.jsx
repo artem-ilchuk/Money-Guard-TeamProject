@@ -57,7 +57,7 @@ function App() {
   }, [isMobile, location.pathname, navigate]);
 
   // || isRefreshing
-  return isFirstLoad ? (
+  return isFirstLoad || isRefreshing ? (
     <Preloader />
   ) : (
     <Suspense fallback={<p>Loading page...</p>}>

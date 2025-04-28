@@ -9,9 +9,6 @@ export const monoBankAPI = axios.create({
   baseURL: "https://api.monobank.ua/",
 });
 
-const CURRENCY_KEY = "currencyData";
-const ONE_HOUR = 60 * 60 * 1000;
-
 export const fetchCurrencyRate = async () => {
   const { data } = await monoBankAPI.get("/bank/currency");
 

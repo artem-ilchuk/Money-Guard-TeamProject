@@ -1,12 +1,5 @@
 import { useEffect } from "react";
-import { useEffect } from "react";
 import { useMediaQuery } from "react-responsive";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  selectCurrencyData,
-  selectCurrencyLoading,
-} from "../../redux/currency/selectors";
-import { getCurrency } from "../../redux/currency/operations";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrencyData,
@@ -21,13 +14,8 @@ const Currency = () => {
   const dispatch = useDispatch();
   const currencyData = useSelector(selectCurrencyData);
   const isLoading = useSelector(selectCurrencyLoading);
-  const dispatch = useDispatch();
-  const currencyData = useSelector(selectCurrencyData);
-  const isLoading = useSelector(selectCurrencyLoading);
 
   useEffect(() => {
-    dispatch(getCurrency());
-  }, [dispatch]);
     dispatch(getCurrency());
   }, [dispatch]);
 
@@ -75,7 +63,6 @@ const Currency = () => {
       {!isTablet && (
         <div className={styles.currencyPeaks}>
           <p>{formatCurrency(currencyData?.usd?.buy)}</p>
-          <p>{formatCurrency(currencyData?.euro?.buy)}</p>
           <p>{formatCurrency(currencyData?.euro?.buy)}</p>
         </div>
       )}

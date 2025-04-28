@@ -43,20 +43,6 @@ const saveCurrencyToStorage = (rate) => {
   );
 };
 
-const getCurrencyFromStorage = () => {
-  const savedData = localStorage.getItem(CURRENCY_KEY);
-  if (!savedData) return null;
-  const { timestamp, rate } = JSON.parse(savedData);
-  return Date.now() - timestamp < ONE_HOUR ? rate : null;
-};
-
-const saveCurrencyToStorage = (rate) => {
-  localStorage.setItem(
-    CURRENCY_KEY,
-    JSON.stringify({ timestamp: Date.now(), rate })
-  );
-};
-
 export const getCurrency = createAsyncThunk(
   "currency/fetch",
   async (_, thunkAPI) => {
@@ -69,10 +55,9 @@ export const getCurrency = createAsyncThunk(
       return updatedRate;
     } catch (error) {
       console.log(error);
-
-      // toast.error(
-      //   "Unfortunately, we didn't receive the updated currency rate. Please try again."
-      // );
+      toast.error(
+        "Unfortunately, we didn't receive the updated currency rate. Please try again."
+      );
       return thunkAPI.rejectWithValue(error.message);
     }
   }

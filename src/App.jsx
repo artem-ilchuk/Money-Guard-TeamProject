@@ -34,21 +34,18 @@ function App() {
   const location = useLocation();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isRefreshing = useSelector(selectIsRefreshing);
-  const [isFirstLoad, setIsFirstLoad] = useState(false);
-
   useEffect(() => {
     dispatch(refreshUserThunk());
+  }, [dispatch]);
 
+  const [isFirstLoad, setIsFirstLoad] = useState(false);
+  useEffect(() => {
     const isFirstVisit = localStorage.getItem("isFirstVisit");
-
     if (!isFirstVisit) {
       setIsFirstLoad(true);
-      const timer = setTimeout(() => {
-        setIsFirstLoad(false);
-        localStorage.setItem("isFirstVisit", "true");
-      }, 2000);
-      return () => clearTimeout(timer);
+      localStorage.setItem("isFirstVisit", "true");
     }
+    dispatch(refreshUserThunk());
   }, [dispatch]);
 
   const { isMobile, isTablet, isDesctop } = useMedia();
@@ -104,6 +101,7 @@ function App() {
           <Route path="statistic" element={<StatisticsTab />} />
           {isMobile && <Route path="currency" element={<CurrencyTab />} />}
         </Route>
+
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Suspense>

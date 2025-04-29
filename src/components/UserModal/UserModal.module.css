@@ -44,10 +44,10 @@
   display: none;
 }
 .iconPlus {
-  fill: #000;
-  stroke: #000;
-  width: 13px;
-  height: 13px;
+  fill: #161616;
+  stroke: #161616;
+  width: 10px;
+  height: 10px;
 }
 .plusIcon {
   border: #ffc727;

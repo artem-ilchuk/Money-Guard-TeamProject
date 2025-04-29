@@ -1,12 +1,12 @@
 .transactionListContainer {
-  background-color: rgba(42, 67, 108, 0.282);
-  width: 280px;
-  height: 293px;
-  border-radius: 10px;
-  border-left-style: solid;
-  border-left-width: 5px;
-  border-left-color: #ff868d;
-  margin-bottom: 8px;
+    /* background-color: rgba(42, 67, 108, 0.282); */
+    width: 280px;
+    height: 293px;
+    border-radius: 10px;
+    border-left-style: solid;
+    border-left-width: 5px;
+    border-left-color: #ff868d;
+    margin-bottom: 8px;
 }
 
 .listItem {
@@ -88,14 +88,54 @@ button {
     border: 0;
     padding: 0;
   }
+}
 
-  /* .transactionList:last-child {
+@media screen and (min-width: 361px) {
+
+    .transactionListContainer {
+        /* background-color: rgba(11, 88, 212, 0.282); */
+        width: 704px;
+        height: fit-content;
+        border-radius: 0;
+        border: 0;
+        margin: 0;
+    }
+
+    .transactionList {
+        border-bottom: 2px solid;
+        display: flex;
+        justify-content: space-between;
+        padding: 16px 20px 16px 20px;
+        margin: 0;
+        overflow: auto;
+
+    }
+
+    .listItem {
+        display: inline-block;
+        width: calc(100% /6);
+        border: 0;
+        padding: 0;
+    }
+
+    .headerTextMobile {
+        display: none;
+    }
+
+    .editSpan {
+        display: none;
+    }
+
+    .deleteEdit {
+        width: calc(100% /6);
+        border: 0;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
         flex-direction: row;
         gap: 8px;
-    } */
+    }
 
   .headerTextMobile {
     display: none;

@@ -17,35 +17,40 @@ const TransactionList = () => {
   }, [dispatch]);
 
   const transactions = useSelector(selectTransactions);
-  // console.log(transactions);
+  console.log(transactions);
+  console.log(transactions.length);
   const loading = useSelector(isTransLoading);
   const error = useSelector(isTransError);
 
   return (
     <div className={styles.mainContainer}>
-      {/* <ul className={styles.ListHeader}>
+      <ul className={styles.ListHeader}>
         <li className={styles.listHeaderItem}>Date</li>
         <li className={styles.listHeaderItem}>Type</li>
         <li className={styles.listHeaderItem}>Category</li>
         <li className={styles.listHeaderItem}>Comment</li>
         <li className={styles.listHeaderItem}>Sum</li>
         <li className={styles.listHeaderItem}></li>
-      </ul> */}
-      <ul className={styles.transactionsList}>
-        {transactions.map((item) => {
-          return (
-            <li key={item._id}>
-              <TransactionItem
-                id={item._id}
-                category={item.category}
-                date={item.date}
-                sum={item.sum}
-                type={item.type}
-                comment={item.comment}
-              />
-            </li>
-          );
-        })}
+      </ul>
+      <ul className={styles.scroll}>
+        {transactions.length > 0 ? (
+          transactions.map((item) => {
+            return (
+              <li key={item._id}>
+                <TransactionItem
+                  id={item._id}
+                  category={item.category}
+                  date={item.date}
+                  sum={item.sum}
+                  type={item.type}
+                  comment={item.comment}
+                />
+              </li>
+            );
+          })
+        ) : (
+          <h3> No transactions</h3>
+        )}
       </ul>
     </div>
   );

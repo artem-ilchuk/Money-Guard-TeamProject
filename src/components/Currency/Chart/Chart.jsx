@@ -77,8 +77,6 @@ export default function CustomChart({ data }) {
             dot={<CustomDot />}
           />
         )}
-
-        <Tooltip />
       </AreaChart>
     </ResponsiveContainer>
   );

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
 import clsx from "clsx";
-import FormButton from "../FormButton/FormButton";
+import { useState } from "react";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
@@ -28,6 +28,18 @@ const RegistrationForm = () => {
     dispatch(registerThunk(data))
       .unwrap()
       .then(() => navigate("/dashboard"));
+  };
+
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+
+  const handlePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility);
+  };
+  const [confirmPasswordVisibility, setConfirmPasswordVisibility] =
+    useState(false);
+
+  const handleConfirmPasswordVisibility = () => {
+    setConfirmPasswordVisibility(!confirmPasswordVisibility);
   };
 
   return (
@@ -80,10 +92,20 @@ const RegistrationForm = () => {
             </svg>
             <input
               {...register("password")}
-              type="password"
+              type={passwordVisibility ? "text" : "password"}
               className={css.field}
               placeholder="Password"
             ></input>
+
+            {passwordVisibility ? (
+              <svg className={css.eyeButton} onClick={handlePasswordVisibility}>
+                <use href={"/icons.svg#icon-eye"}></use>
+              </svg>
+            ) : (
+              <svg className={css.eyeButton} onClick={handlePasswordVisibility}>
+                <use href={"/icons.svg#icon-eye-blocked"}></use>
+              </svg>
+            )}
           </div>
           <div className={css.errorThumb}>
             <div className={css.error}>{errors.password?.message}</div>
@@ -97,10 +119,25 @@ const RegistrationForm = () => {
             </svg>
             <input
               {...register("confirmPassword")}
-              type="password"
+              type={confirmPasswordVisibility ? "text" : "password"}
               className={css.field}
               placeholder="Confirm password"
             ></input>
+            {confirmPasswordVisibility ? (
+              <svg
+                className={css.eyeButton}
+                onClick={handleConfirmPasswordVisibility}
+              >
+                <use href={"/icons.svg#icon-eye"}></use>
+              </svg>
+            ) : (
+              <svg
+                className={css.eyeButton}
+                onClick={handleConfirmPasswordVisibility}
+              >
+                <use href={"/icons.svg#icon-eye-blocked"}></use>
+              </svg>
+            )}
           </div>
           <div className={clsx(css.errorThumb, css.marginErrorThumb)}>
             <div className={css.error}>{errors.confirmPassword?.message}</div>
@@ -119,11 +156,9 @@ const RegistrationForm = () => {
         </div>
 
         <div className={css.buttonThumb}>
-          {/* <FormButton text="Register" type="submit" /> */}
           <button type="submit" className={clsx(css.button, css.regButton)}>
             Register
           </button>
-          {/* <FormButton text="Log in" variant="whiteButton" /> */}
           <NavLink to="/login" className={clsx(css.button, css.logButton)}>
             Log in
           </NavLink>

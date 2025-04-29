@@ -24,7 +24,7 @@ const TransactionList = () => {
 
   return (
     <div className={styles.mainContainer}>
-      {/* <ul className={styles.ListHeader}>
+      <ul className={styles.ListHeader}>
         <li className={styles.listHeaderItem}>Date</li>
         <li className={styles.listHeaderItem}>Type</li>
         <li className={styles.listHeaderItem}>Category</li>

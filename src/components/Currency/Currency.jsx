@@ -20,7 +20,7 @@ const Currency = () => {
   }, [dispatch]);
 
   const formatCurrency = (value) => {
-    if (!value) return "-";
+    if (value === undefined || value === null) return "-";
     return Number(value).toFixed(2);
   };
 
@@ -40,13 +40,21 @@ const Currency = () => {
           <tbody>
             <tr>
               <td>USD</td>
-              <td>{formatCurrency(currencyData?.usd?.buy)}</td>
-              <td>{formatCurrency(currencyData?.usd?.sell)}</td>
+              <td className={styles.rate}>
+                {formatCurrency(currencyData?.usd?.buy)}
+              </td>
+              <td className={styles.rate}>
+                {formatCurrency(currencyData?.usd?.sell)}
+              </td>
             </tr>
             <tr>
               <td>EUR</td>
-              <td>{formatCurrency(currencyData?.euro?.buy)}</td>
-              <td>{formatCurrency(currencyData?.euro?.sell)}</td>
+              <td className={styles.rate}>
+                {formatCurrency(currencyData?.euro?.buy)}
+              </td>
+              <td className={styles.rate}>
+                {formatCurrency(currencyData?.euro?.sell)}
+              </td>
             </tr>
           </tbody>
         </table>

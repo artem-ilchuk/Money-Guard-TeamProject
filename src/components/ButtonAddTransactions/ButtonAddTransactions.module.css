@@ -1,29 +1,29 @@
 .btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  
-    background: linear-gradient(
-      90deg,
-      #ffc727 0%,
-      #9e40ba 61.46%,
-      #7000ff 90.54%
-    );
-  
-    border-radius: 100%;
-    padding: 12px;
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-  }
-  
-  .btn:hover,
-  .btn:focus {
-    outline: 4px auto -webkit-focus-ring-color;
-    transition: all 1s ease 0s;
-  }
-  
-  /* .btn:hover,
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: linear-gradient(
+    90deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+
+  border-radius: 100%;
+  padding: 12px;
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.btn:hover,
+.btn:focus {
+  outline: 4px auto -webkit-focus-ring-color;
+  transition: all 1s ease 0s;
+}
+
+/* .btn:hover,
   .btn:focus {
     transform: scale(1.05);
     background: linear-gradient(
@@ -34,20 +34,20 @@
     );
     transition: all 1s ease 0s;
   } */
-  
-  .icon {
-    width: 20px;
-    height: 20px;
-    fill: #fff;
+
+.icon {
+  width: 20px;
+  height: 20px;
+  fill: #fff;
+}
+
+@media screen and (min-width: 768px) {
+  .btn {
+    right: 40px;
+    bottom: 40px;
   }
-  
-  @media screen and (min-width: 768px) {
-    .btn {
-      right: 40px;
-      bottom: 40px;
-    }
-  
-    /* .wrap {
+
+  /* .wrap {
       position: absolute;
       bottom: 0;
       left: 50%;
@@ -56,5 +56,4 @@
       max-width: 1280px;
       transform: translateX(-50%);
     } */
-  }
-  
+}

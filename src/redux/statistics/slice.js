@@ -1,5 +1,5 @@
 import { createSlice, isAnyOf } from "@reduxjs/toolkit";
-import { getTransSummary } from "./operations";
+import { getTransSummary, getCategories } from "./operations";
 
 const initialState = {
   categories: [],
@@ -29,6 +29,9 @@ const statsSlice = createSlice({
           incomeSummary: incomeItem?.total || 0,
           expenseSummary: expenses.reduce((sum, item) => sum + item.total, 0),
         };
+      })
+      .addCase(getCategories.fulfilled, (state, action) => {
+        state.categories = action.payload;
       })
       .addMatcher(isAnyOf(getTransSummary.pending), (state) => {
         state.isStatisticsLoading = true;

@@ -4,6 +4,7 @@
   flex-direction: column;
   background-color: #17158a00;
   max-height: 214px;
+  padding-top: 24px;
 }
 
 .currencyPeaks {
@@ -22,8 +23,25 @@
   font-size: 16px;
   color: #fff;
   text-align: left;
-  padding-left: 20px;
   height: 50px;
+}
+
+.currencyTable th:first-child,
+.currencyTable td:first-child {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.currencyTable th:nth-child(2),
+.currencyTable td:nth-child(2) {
+  text-align: center;
+  padding-right: 30px;
+}
+
+.currencyTable th:last-child,
+.currencyTable td:last-child {
+  text-align: right;
+  padding-right: 20px;
 }
 
 .currencyTable tr {
@@ -32,7 +50,6 @@
 
 .currencyTable td {
   text-align: left;
-  padding-left: 20px;
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 16px;
@@ -51,18 +68,6 @@
 }
 
 @media (max-width: 767px) {
-  .currencyTable th,
-  .currencyTable td {
-    padding-left: 10px;
-    padding-right: 10px;
-    font-size: 14px;
-  }
-
-  .currencyTable th:last-child,
-  .currencyTable td:last-child {
-    padding-right: 10px;
-  }
-
   .loading {
     font-size: 14px;
     text-align: center;

@@ -1,12 +1,10 @@
 .mainContainer {
-    background-color: linear-gradient(207deg, #341fa0 44.63%, #652392 88.57%);
-    ;
+  background-color: linear-gradient(207deg, #341fa0 44.63%, #652392 88.57%);
 }
 
 .ListHeader {
-    display: none;
+  display: none;
 }
-
 
 @media screen and (min-width: 361px) {
 

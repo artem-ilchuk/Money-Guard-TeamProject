@@ -44,7 +44,7 @@ const authSlice = createSlice({
         return { ...initialState };
       })
       .addCase(getTotalBalanceThunk.fulfilled, (state, action) => {
-        state.user.balance = action.payload.balance;
+        state.user.balance = action.payload;
       })
       .addCase(refreshUserThunk.fulfilled, (state, action) => {
         state.user = action.payload.data;

@@ -8,7 +8,6 @@
   min-width: 320px;
   max-width: 360px;
   padding: 23px 20px;
-
   backdrop-filter: blur(30px);
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
   background: radial-gradient(rgba(255, 255, 255, 0.1)),
@@ -67,9 +66,11 @@
   outline: none;
   border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   padding-left: 56px;
+  padding-right: 40px;
   padding-bottom: 6px;
   color: var(--white-600);
 }
+
 .field:-webkit-autofill,
 .field:-webkit-autofill:hover,
 .field:-webkit-autofill:focus {
@@ -77,6 +78,15 @@
   transition: background-color 50000s ease-in-out 0s;
   -webkit-text-fill-color: var(--white-600);
   caret-color: var(--white-600);
+}
+
+.eyeButton {
+  position: absolute;
+  right: 10px;
+  fill: rgba(255, 255, 255, 0.4);
+  width: 24px;
+  height: 24px;
+  margin-bottom: 8px;
 }
 
 .buttonThumb {
@@ -165,6 +175,7 @@
   width: 100%;
   margin: 6px 0px 0px;
 }
+
 .scoreWordClassName {
   position: absolute;
   right: 0;

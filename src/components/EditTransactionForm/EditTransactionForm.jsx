@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,6 +10,8 @@ import { closeEditModal } from "../../redux/modal/slice";
 import { editTransaction } from "../../redux/transactions/operations";
 import { selectIsEditID } from "../../redux/modal/selectors";
 import { selectTransactions } from "../../redux/transactions/selectors";
+import { selectCategories } from "../../redux/statistics/selectors";
+import { getCategories } from "../../redux/statistics/operations";
 import s from "./EditTransactionForm.module.css";
 import { customStyles } from "./customStyles";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
@@ -17,54 +19,53 @@ import { RiCloseLargeLine } from "react-icons/ri";
 import clsx from "clsx";
 import "react-datepicker/dist/react-datepicker.css";
 
-// Категорії
-const categories = [
-  "Main expenses",
-  "Products",
-  "Car",
-  "Self care",
-  "Child care",
-  "Household products",
-  "Education",
-  "Leisure",
-  "Other expenses",
-  "Entertaiment",
-];
-
-const categoriesOptions = categories.map((cat) => ({
-  value: cat,
-  label: cat,
-}));
-
-// Yup схема
-const schema = yup.object().shape({
-  date: yup.string().required("Date is required"),
-  type: yup.string().oneOf(["INCOME", "EXPENSE"]).required("Type is required"),
-  category: yup
-    .object()
-    .nullable()
-    .shape({
-      value: yup.string().oneOf(categories).required("Category is required"),
-      label: yup.string().required(),
-    })
-    .required("Category is required"),
-  comment: yup.string().nullable(),
-  sum: yup
-    .number()
-    .typeError("Sum must be a number")
-    .positive("Sum must be positive")
-    .required("Sum is required"),
-});
-
 export default function EditTransactionForm() {
   const dispatch = useDispatch();
   const transactionId = useSelector(selectIsEditID);
   const transactions = useSelector(selectTransactions);
   const transaction = transactions.find((item) => item.id === transactionId);
+  const categories = useSelector(selectCategories);
+
+  const categoryOptions = useMemo(
+    () => categories.map((cat) => ({ value: cat, label: cat })),
+    [categories]
+  );
 
   const [isMobile, setIsMobile] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-  const [isChecked, setIsChecked] = useState(true); // true = EXPENSE, false = INCOME
+
+  useEffect(() => {
+    dispatch(getCategories());
+  }, [dispatch]);
+
+  const schema = useMemo(() => {
+    const categoryValues = categories;
+    return yup.object().shape({
+      date: yup.string().required("Date is required"),
+      type: yup
+        .string()
+        .oneOf(["INCOME", "EXPENSE"])
+        .required("Type is required"),
+      category: yup
+        .object()
+        .nullable()
+        .shape({
+          value: yup
+            .string()
+            .oneOf(categoryValues)
+            .required("Category is required"),
+          label: yup.string().required(),
+        })
+        .required("Category is required"),
+      comment: yup.string().nullable(),
+      sum: yup
+        .number()
+        .typeError("Sum must be a number")
+        .positive("Sum must be positive")
+        .required("Sum is required"),
+    });
+  }, [categories]);
 
   const {
     control,
@@ -78,13 +79,12 @@ export default function EditTransactionForm() {
     defaultValues: {
       date: "",
       type: "EXPENSE",
-      category: null, // Default value is null, which works well with react-select
+      category: null,
       comment: "",
       sum: "",
     },
   });
 
-  // Підставляємо дані транзакції
   useEffect(() => {
     if (transaction) {
       reset({
@@ -97,6 +97,7 @@ export default function EditTransactionForm() {
         comment: transaction.comment || "",
         sum: Math.abs(transaction.sum),
       });
+
       setIsChecked(transaction.type === "EXPENSE");
     }
   }, [transaction, reset]);
@@ -120,11 +121,13 @@ export default function EditTransactionForm() {
 
     const updatedTransaction = {
       ...data,
-      category: data.category ? data.category.value : "", // category value, if selected
+      category: data.category?.value || "",
       sum: data.type === "EXPENSE" ? -Math.abs(data.sum) : Math.abs(data.sum),
     };
 
-    dispatch(editTransaction({ id: transactionId, transaction: updatedTransaction }));
+    dispatch(
+      editTransaction({ id: transactionId, transaction: updatedTransaction })
+    );
     dispatch(closeEditModal());
   };
 
@@ -153,7 +156,11 @@ export default function EditTransactionForm() {
           </div>
           <div className={s.type_svg}>
             <svg width="10" height="22" viewBox="0 0 10 22" fill="none">
-              <path d="M8.80108 1.09786L1.19895 20.9021" stroke="#E0E0E0" strokeWidth="2" />
+              <path
+                d="M8.80108 1.09786L1.19895 20.9021"
+                stroke="#E0E0E0"
+                strokeWidth="2"
+              />
             </svg>
           </div>
           <div
@@ -175,7 +182,8 @@ export default function EditTransactionForm() {
               render={({ field }) => (
                 <Select
                   {...field}
-                  options={categoriesOptions}
+                  value={field.value}
+                  options={categoryOptions}
                   placeholder="Select a category"
                   styles={customStyles}
                   classNamePrefix="react-select"

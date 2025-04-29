@@ -12,6 +12,10 @@
   z-index: 150;
   overflow: auto;
   justify-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .iconBox {

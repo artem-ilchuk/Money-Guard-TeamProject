@@ -1,16 +1,15 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { NavLink } from "react-router-dom";
-// import { toast } from "react-hot-toast";
 
 import { loginThunk } from "../../redux/auth/operations.js";
 import { loginSchema } from "../../schemas/schemas.js";
 
 import s from "./LoginForm.module.css";
-
 import { FaEnvelope, FaLock } from "react-icons/fa";
+import { useState } from "react";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -27,6 +26,12 @@ const LoginForm = () => {
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const [passwordVisibility, setPasswordVisibility] = useState(false);
+
+  const handlePasswordVisibility = () => {
+    setPasswordVisibility(!passwordVisibility);
   };
 
   return (
@@ -69,10 +74,19 @@ const LoginForm = () => {
                 </div>
                 <Field
                   className={s.field}
-                  type="password"
+                  type={passwordVisibility ? "text" : "password"}
                   name="password"
                   placeholder="Password"
                 />
+                {passwordVisibility ? (
+              <svg className={s.eyeButton} onClick={handlePasswordVisibility}>
+                <use href={"/icons.svg#icon-eye"}></use>
+              </svg>
+            ) : (
+              <svg className={s.eyeButton} onClick={handlePasswordVisibility}>
+                <use href={"/icons.svg#icon-eye-blocked"}></use>
+              </svg>
+            )}
                 <ErrorMessage
                   name="password"
                   component="div"

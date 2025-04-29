@@ -36,7 +36,9 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
         </li>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Type</span>
-          <span className={styles.item}>{type}</span>
+          <span className={styles.item}>
+            {type == ("+" || "INCOME") ? "+" : "-"}
+          </span>
         </li>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Category</span>

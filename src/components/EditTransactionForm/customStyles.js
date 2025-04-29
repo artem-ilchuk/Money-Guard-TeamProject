@@ -32,7 +32,7 @@ export const customStyles = {
     backgroundColor: "rgba(74, 86, 226, 0.10)",
     border: 0,
     background: "transparent",
-    color: "transparent",
+    color: "var(--white-600)",
     boxShadow: "none",
     display: "flex",
     flexWrap: "nowrap",

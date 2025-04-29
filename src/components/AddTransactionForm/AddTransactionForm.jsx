@@ -1,7 +1,6 @@
 import s from "./AddTransactionForm.module.css";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { toast } from "react-hot-toast";
-
 import clsx from "clsx";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -18,11 +17,9 @@ import { closeAddModal } from "../../redux/modal/slice";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { getCategories } from "../../redux/statistics/operations";
-
 function AddTransactionForm() {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
-
   const categoryOptions = useMemo(
     () =>
       categories.map((category) => ({
@@ -31,24 +28,19 @@ function AddTransactionForm() {
       })),
     [categories]
   );
-
   const [isChecked, setIsChecked] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
-
   const datePickerRef = useRef(null);
-
   useEffect(() => {
     dispatch(getCategories());
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     const updateIsMobile = (e) => setIsMobile(e.matches);
-
     updateIsMobile(mediaQuery);
     mediaQuery.addEventListener("change", updateIsMobile);
     return () => mediaQuery.removeEventListener("change", updateIsMobile);
   }, []);
-
   const schema = yup.object().shape({
     sum: yup
       .number()
@@ -63,7 +55,6 @@ function AddTransactionForm() {
     category: yup.string().required("Required"),
     type: yup.string().oneOf(["INCOME", "EXPENSE"]).required(),
   });
-
   const {
     handleSubmit,
     register,
@@ -80,31 +71,32 @@ function AddTransactionForm() {
       type: "EXPENSE",
     },
   });
-
   useEffect(() => {
     if (categoryOptions.length > 0 && isChecked) {
       setSelectedOption(categoryOptions[0]);
       setValue("category", categoryOptions[0].value);
     }
   }, [categoryOptions, isChecked, setValue]);
-
   useEffect(() => {
     if (selectedOption) {
       setValue("category", selectedOption.value);
     }
   }, [selectedOption, setValue]);
-
+  useEffect(() => {
+    if (!isChecked) {
+      setValue("category", "Income");
+    }
+  }, [isChecked, setValue]);
   const onSubmit = async (data) => {
     const formattedDate = format(new Date(data.date), "dd-MM-yyyy");
-
     const formData = {
       sum: Math.abs(data.sum),
       date: formattedDate,
       comment: data.comment,
-      category: data.category,
+      // category: data.category,
+      category: isChecked ? data.category : "Income",
       type: isChecked ? "EXPENSE" : "INCOME",
     };
-
     try {
       await dispatch(addTransaction(formData)).unwrap();
       dispatch(closeAddModal());
@@ -113,7 +105,6 @@ function AddTransactionForm() {
       toast.error(error?.message || "Something went wrong. Please try again.");
     }
   };
-
   return (
     <form onSubmit={handleSubmit(onSubmit)} className={s.form}>
       <div className={s.formContainer}>
@@ -127,9 +118,7 @@ function AddTransactionForm() {
             style={{ width: "20px", height: "20px" }}
           />
         </button>
-
         <h1 className={s.title}>Add transaction</h1>
-
         <div className={s.switch__wrapper}>
           <span className={clsx(s.span_text, !isChecked && s.income_active)}>
             Income
@@ -165,7 +154,6 @@ function AddTransactionForm() {
             Expense
           </span>
         </div>
-
         {isChecked && (
           <div className={s.comment}>
             <Select
@@ -195,7 +183,6 @@ function AddTransactionForm() {
             />
           </div>
         )}
-
         <div className={s.sum_data_wrap}>
           <div className={s.sum_wrap}>
             <input
@@ -209,7 +196,6 @@ function AddTransactionForm() {
               <span className={s.comment_err}>{errors.sum.message}</span>
             )}
           </div>
-
           <div
             className={s.data_wrap}
             onClick={() => datePickerRef.current?.setFocus()}
@@ -239,7 +225,6 @@ function AddTransactionForm() {
             </div>
           </div>
         </div>
-
         <div className={clsx(s.comment_bottom)}>
           <input
             {...register("comment")}
@@ -252,7 +237,6 @@ function AddTransactionForm() {
             <span className={s.comment_err}>{errors.comment.message}</span>
           )}
         </div>
-
         <button className={clsx(s.btn, s.btn_add)} type="submit">
           Add
         </button>
@@ -267,5 +251,4 @@ function AddTransactionForm() {
     </form>
   );
 }
-
 export default AddTransactionForm;

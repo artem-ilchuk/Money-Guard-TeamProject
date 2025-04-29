@@ -42,7 +42,7 @@ const TransactionList = () => {
             return (
               <li key={item._id}>
                 <TransactionItem
-                  id={item._id}
+                   id={item._id}
                   category={item.category}
                   date={item.date}
                   sum={item.sum}

@@ -11,8 +11,8 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
     dispatch(deleteTransaction(id));
   };
 
-  const handleEditModalOpen = () => {
-    dispatch(openEditModal());
+  const handleEditModalOpen = (id) => {
+    dispatch(openEditModal(id));
   };
 
   return (

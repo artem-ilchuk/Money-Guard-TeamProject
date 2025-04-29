@@ -18,6 +18,7 @@ const TransactionList = () => {
 
   const transactions = useSelector(selectTransactions);
   console.log(transactions);
+  console.log(transactions.length);
   const loading = useSelector(isTransLoading);
   const error = useSelector(isTransError);
 
@@ -32,20 +33,24 @@ const TransactionList = () => {
         <li className={styles.listHeaderItem}></li>
       </ul>
       <ul className={styles.scroll}>
-        {transactions.map((item) => {
-          return (
-            <li key={item._id}>
-              <TransactionItem
-                id={item._id}
-                category={item.category}
-                date={item.date}
-                sum={item.sum}
-                type={item.type}
-                comment={item.comment}
-              />
-            </li>
-          );
-        })}
+        {transactions.length > 0 ? (
+          transactions.map((item) => {
+            return (
+              <li key={item._id}>
+                <TransactionItem
+                  id={item._id}
+                  category={item.category}
+                  date={item.date}
+                  sum={item.sum}
+                  type={item.type}
+                  comment={item.comment}
+                />
+              </li>
+            );
+          })
+        ) : (
+          <h3> No transactions</h3>
+        )}
       </ul>
     </div>
   );

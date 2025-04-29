@@ -7,6 +7,7 @@
     display: none;
 }
 
+
 @media screen and (min-width: 361px) {
 
     .ListHeader {
@@ -24,9 +25,13 @@
     }
 
     .scroll {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
         width: 704px;
-        height: 312px;
-        overflow-y: scroll;
+        max-height: 312px;
+        overflow-y: auto;
     }
 }
 
@@ -35,7 +40,7 @@
     .scroll {
         width: 715px;
         height: 308px;
-        overflow-y: scroll;
+        overflow-y: auto;
     }
 
     .ListHeader {

@@ -1,5 +1,5 @@
 .transactionListContainer {
-    background-color: rgba(42, 67, 108, 0.282);
+    /* background-color: rgba(42, 67, 108, 0.282); */
     width: 280px;
     height: 293px;
     border-radius: 10px;
@@ -83,7 +83,7 @@ button {
 @media screen and (min-width: 361px) {
 
     .transactionListContainer {
-        background-color: rgba(11, 88, 212, 0.282);
+        /* background-color: rgba(11, 88, 212, 0.282); */
         width: 704px;
         height: fit-content;
         border-radius: 0;

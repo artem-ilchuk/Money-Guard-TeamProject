@@ -5,6 +5,7 @@ import {
   selectSummary,
 } from "../../redux/statistics/selectors";
 import styles from "./StatisticsTable.module.css";
+import Loader from "../Loader/Loader";
 
 const StatisticsTable = () => {
   const categoriesData = useSelector(selectCategories) || [];
@@ -30,7 +31,7 @@ const StatisticsTable = () => {
   };
 
   if (isLoading) {
-    return <div className={styles.container}>Loading...</div>;
+    return <Loader />;
   }
 
   return (

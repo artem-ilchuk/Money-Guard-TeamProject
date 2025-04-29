@@ -8,6 +8,7 @@ import {
 import styles from "./TransactionList.module.css";
 import { fetchTransactions } from "../../../redux/transactions/operations";
 import TransactionItem from "../TransactionsItem/TransactionItem";
+import Loader from "../../Loader/Loader";
 
 const TransactionList = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const TransactionList = () => {
         <li className={styles.listHeaderItem}>Sum</li>
         <li className={styles.listHeaderItem}></li>
       </ul>
+      {loading && <Loader />}
       <ul className={styles.scroll}>
         {transactions.length > 0 ? (
           transactions.map((item) => {

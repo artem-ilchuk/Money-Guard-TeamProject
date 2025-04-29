@@ -1,5 +1,5 @@
 import useMedia from "../../../hooks/UseMadia";
-import { Tooltip, ResponsiveContainer, Area, AreaChart } from "recharts";
+import { ResponsiveContainer, Area, AreaChart } from "recharts";
 
 const CustomDot = ({ cx, cy, index }) => {
   if (index !== 1 && index !== 3) return null;
@@ -26,17 +26,11 @@ const CustomLabel = ({ x, y, value, index }) => {
   );
 };
 
-export default function CustomChart({ data }) {
-  const {isDesktop} = useMedia();
-  const enhancedData = data.map((d) => ({
-    ...d,
-    adjusted: d.value - 5,
-  }));
-
+function Chart({ data, height, showLabel }) {
   return (
-    <ResponsiveContainer width="100%" height={200}>
+    <ResponsiveContainer width="100%" minHeight={height}>
       <AreaChart
-        data={enhancedData}
+        data={data}
         margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
       >
         <defs>
@@ -56,30 +50,32 @@ export default function CustomChart({ data }) {
           fill="url(#gradient)"
           isAnimationActive={false}
         />
-
-        {isDesktop ? (
-          <Area
-            type="monotone"
-            dataKey="value"
-            stroke="#FF868D"
-            strokeWidth={1}
-            fill="none"
-            dot={<CustomDot />}
-            label={<CustomLabel />}
-            isAnimationActive={false}
-          />
-        ) : (
-          <Area
-            type="monotone"
-            dataKey="value"
-            stroke="#FF868D"
-            strokeWidth={1}
-            fill="none"
-            dot={<CustomDot />}
-            isAnimationActive={false}
-          />
-        )}
+        <Area
+          type="monotone"
+          dataKey="value"
+          stroke="#FF868D"
+          strokeWidth={1}
+          fill="none"
+          dot={<CustomDot />}
+          label={showLabel ? <CustomLabel /> : null}
+          isAnimationActive={false}
+        />
       </AreaChart>
     </ResponsiveContainer>
   );
+}
+
+export default function CustomChart({ data }) {
+  const { isMobile, isTablet, isDesktop } = useMedia();
+
+  const enhancedData = data.map((d) => ({
+    ...d,
+    adjusted: d.value - 5,
+  }));
+
+  if (isDesktop) return <Chart data={enhancedData} height={183} showLabel={true} />;
+  if (isTablet) return <Chart data={enhancedData} height={90} showLabel={true} />;
+  if (isMobile) return <Chart data={enhancedData} height={80} showLabel={false} />;
+
+  return null;
 }

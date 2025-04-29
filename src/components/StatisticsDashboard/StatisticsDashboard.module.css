@@ -124,6 +124,7 @@
   .container {
     display: flex;
     flex-direction: row;
+    gap: 32px;
   }
   .statisticsFiltersContainer {
     display: flex;

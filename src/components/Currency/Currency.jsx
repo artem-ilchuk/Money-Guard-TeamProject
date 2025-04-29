@@ -7,7 +7,7 @@ import {
 } from "../../redux/currency/selectors";
 import { getCurrency } from "../../redux/currency/operations";
 import styles from "./Currency.module.css";
-import chartImage from "../../assets/chart.png";
+import CustomChart from "./Chart/Chart";
 
 const Currency = () => {
   const isTablet = useMediaQuery({ query: "(max-width: 1279px)" });
@@ -28,6 +28,14 @@ const Currency = () => {
     if (value === undefined || value === null) return "-";
     return Number(value).toFixed(2);
   };
+
+const data = [
+  { value: formatCurrency(usdRateBuy) - 15 },
+  { value: formatCurrency(usdRateBuy) },
+  { value: formatCurrency(euroRateBuy) - 20 },
+  { value: formatCurrency(euroRateBuy) },
+  { value: formatCurrency(euroRateBuy) - 15 },
+];
 
   return (
     <div className={styles.container}>
@@ -56,16 +64,8 @@ const Currency = () => {
           </tbody>
         </table>
       )}
-
-      {!isTablet && (
-        <div className={styles.currencyPeaks}>
-          <p>{formatCurrency(usdRateBuy)}</p>
-          <p>{formatCurrency(euroRateBuy)}</p>
-        </div>
-      )}
-
-      <div className={styles.currencyTableGraph}>
-        <img src={chartImage} alt="volume" />
+      <div>
+        <CustomChart data={data}/>
       </div>
     </div>
   );

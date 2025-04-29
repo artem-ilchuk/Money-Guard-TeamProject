@@ -9,9 +9,8 @@ import s from "./Balance.module.css";
 
 const Balance = () => {
   const dispatch = useDispatch();
-  const balance = useSelector(selectTotalBalance);
+  const balance = useSelector(selectTotalBalance) ?? 0;
   const currencyData = useSelector(selectCurrencyData);
-
   const { isMobile } = useMedia();
 
   const usdRateBuy = currencyData?.usd?.buy;
@@ -23,18 +22,26 @@ const Balance = () => {
     dispatch(getTotalBalanceThunk());
   }, [dispatch]);
 
-  const formattedUAH =
-    balance?.toLocaleString("uk-UA", {
-      minimumFractionDigits: 2,
-    }) ?? "0.00";
+  const formattedUAH = balance.toLocaleString("uk-UA", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
 
-  const balanceInUSD = usdRateBuy ? (balance / usdRateBuy).toFixed(2) : "-";
-  const balanceInEUR = euroRateBuy ? (balance / euroRateBuy).toFixed(2) : "-";
+  const balanceInUSD =
+    typeof usdRateBuy === "number" && usdRateBuy > 0
+      ? (balance / usdRateBuy).toFixed(2)
+      : "0.00";
+
+  const balanceInEUR =
+    typeof euroRateBuy === "number" && euroRateBuy > 0
+      ? (balance / euroRateBuy).toFixed(2)
+      : "0.00";
 
   const getDisplayedBalance = () => {
     if (selectedCurrency === "UAH") return `₴ ${formattedUAH}`;
     if (selectedCurrency === "USD") return `$ ${balanceInUSD}`;
     if (selectedCurrency === "EUR") return `€ ${balanceInEUR}`;
+    return "₴ 0.00";
   };
 
   let touchStartX = 0;

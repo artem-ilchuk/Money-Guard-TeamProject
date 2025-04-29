@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
-import {
-  selectCategories,
-  selectSummary,
-} from "../../redux/statistics/selectors";
+import { selectCategories } from "../../redux/statistics/selectors";
+import { selectTotalBalance } from "../../redux/auth/selectors";
 import styles from "./Chart.module.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
@@ -11,10 +9,7 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = () => {
   const categoriesData = useSelector(selectCategories) || [];
-  const { incomeSummary = 0, expenseSummary = 0 } =
-    useSelector(selectSummary) || {};
-
-  const balance = incomeSummary - expenseSummary;
+  const balance = useSelector(selectTotalBalance) ?? 0;
 
   const categoryColors = {
     "Main expenses": "#FFD700",

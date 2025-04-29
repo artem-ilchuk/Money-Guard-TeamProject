@@ -11,18 +11,25 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
     dispatch(deleteTransaction(id));
   };
 
-const handleEditModalOpen = () => {
-  dispatch(openEditModal());
-}
+  const handleEditModalOpen = () => {
+    dispatch(openEditModal());
+  };
 
   return (
     <div
       className={clsx(
         styles.transactionListContainer,
-        type == "+" && styles.incomeBorderColor
+        type == "+" && styles.incomeBorderColor,
+        type == "INCOME" && styles.incomeBorderColor
       )}
     >
-      <ul className={styles.transactionList}>
+      <ul
+        className={clsx(
+          styles.transactionList,
+          type == "+" && styles.incomeBorderColor,
+          type == "INCOME" && styles.incomeBorderColor
+        )}
+      >
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Date</span>
           <span className={styles.item}>{date}</span>
@@ -43,7 +50,9 @@ const handleEditModalOpen = () => {
           <span className={styles.headerTextMobile}>Sum</span>
           <span
             className={clsx(
+              type == "EXPENSE" && styles.expenseTextColor,
               type == "-" && styles.expenseTextColor,
+              type == "INCOME" && styles.incomeTextColor,
               type == "+" && styles.incomeTextColor
             )}
           >

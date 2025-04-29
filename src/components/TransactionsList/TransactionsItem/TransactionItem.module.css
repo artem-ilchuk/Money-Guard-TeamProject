@@ -1,17 +1,19 @@
 .transactionListContainer {
-    /* background-color: rgba(42, 67, 108, 0.282); */
-    /* width: 280px; */
-    height: 293px;
-    margin-bottom: 8px;
+  /* background-color: rgba(42, 67, 108, 0.282); */
+  /* width: 280px; */
+  height: 293px;
+  margin-bottom: 8px;
 }
+
 .transactionList {
   padding: 0 20px;
   border-radius: 10px;
-    border-left-style: solid;
-    border-left-width: 5px;
-    border-left-color: #ff868d;
-    background-color: var(--form-color);
+  border-left-style: solid;
+  border-left-width: 5px;
+  border-left-color: #ff868d;
+  background-color: var(--form-color);
 }
+
 .listItem {
   display: flex;
   justify-content: space-between;
@@ -25,15 +27,15 @@
 
 .headerTextMobile {
   font-weight: 600;
-font-size: 16px;
-color: var(--white);
+  font-size: 16px;
+  color: var(--white);
 }
 
 .item {
   font-weight: 400;
-font-size: 16px;
-text-align: right;
-color: var(--white);
+  font-size: 16px;
+  text-align: right;
+  color: var(--white);
 }
 
 button {
@@ -42,12 +44,10 @@ button {
   border: none;
   border-radius: 20px;
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
-  background: linear-gradient(
-    167deg,
-    #ffc727 0%,
-    #9e40ba 61.46%,
-    #7000ff 90.54%
-  );
+  background: linear-gradient(167deg,
+      #ffc727 0%,
+      #9e40ba 61.46%,
+      #7000ff 90.54%);
 
   letter-spacing: 0.1em;
   color: var(--white);
@@ -78,17 +78,23 @@ button {
   justify-content: space-between;
   padding: 12px 0;
 }
+
 .expenseTextColor {
   font-weight: 600;
   font-size: 14px;
   text-align: right;
   color: var(--dashboard-text);
 }
+
 .incomeTextColor {
   font-weight: 600;
   font-size: 14px;
   text-align: right;
   color: var(--yellow);
+}
+
+.incomeBorderColor {
+  border-left-color: var(--yellow);
 }
 
 /* @media screen and (min-width: 768px) {
@@ -119,68 +125,70 @@ button {
 
 @media screen and (min-width: 768px) {
 
-    .transactionListContainer {
-       
-      width: 100%;
-        height: fit-content;
-        border-radius: 0;
-        border: 0;
-        margin: 0;
-    }
+  .transactionListContainer {
 
-    .transactionList {
-      background: inherit; 
-      border-left: none;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-        border-radius: 0;
-        display: flex;
-        gap: 15px;
-        align-items: center;
-        padding: 13px 20px;
-        margin: 0;
-        overflow: auto;
+    width: 100%;
+    height: fit-content;
+    border-radius: 0;
+    border: 0;
+    margin: 0;
+  }
 
-    }
+  .transactionList {
+    background: inherit;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0;
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    padding: 13px 20px;
+    margin: 0;
+    overflow: auto;
 
-    .listItem {
-        display: flex;
-        width: calc(100% /6);
-        border: 0;
-        padding: 0;
-        justify-content: flex-start;
-    }
-    .listItem:nth-child(2) {
-      flex:1;
-    }
-    .listItem:nth-last-child(2) {
-      justify-content: flex-end;
-      margin-right: 25px;
-      flex: 1;
-    }
+  }
 
-    .item {
-      font-size: 14px;
-      text-align: left;
-    }
+  .listItem {
+    display: flex;
+    width: calc(100% /6);
+    border: 0;
+    padding: 0;
+    justify-content: flex-start;
+  }
 
-    .headerTextMobile {
-        display: none;
-    }
+  .listItem:nth-child(2) {
+    flex: 1;
+  }
 
-    .editSpan {
-        display: none;
-    }
+  .listItem:nth-last-child(2) {
+    justify-content: flex-end;
+    margin-right: 25px;
+    flex: 1;
+  }
 
-    .deleteEdit {
-        width: calc(100% /6);
-        border: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: row;
-        gap: 8px;
-    }
+  .item {
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .headerTextMobile {
+    display: none;
+  }
+
+  .editSpan {
+    display: none;
+  }
+
+  .deleteEdit {
+    width: calc(100% /6);
+    border: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    gap: 8px;
+  }
 
   .headerTextMobile {
     display: none;

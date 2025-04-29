@@ -1,3 +1,24 @@
 .nav_balance {
   margin-bottom: 32px;
 }
+.buttonAdd {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
+  width: 44px;
+  height: 44px;
+  border-radius: 100%;
+}
+
+.iconPlus {
+  width: 20px;
+  height: 20px;
+  stroke: var(--white);
+}
+
+@media screen and (min-width:768px) {
+  .buttonAdd {
+    right: 40px;
+  bottom: 40px;
+  }
+}

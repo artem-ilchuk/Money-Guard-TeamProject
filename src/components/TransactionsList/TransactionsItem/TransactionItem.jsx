@@ -1,15 +1,19 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./TransactionItem.module.css";
 import { CiEdit } from "react-icons/ci";
 import { deleteTransaction } from "../../../redux/transactions/operations";
 import clsx from "clsx";
+import { openEditModal } from "../../../redux/modal/slice";
 
 const TransactionItem = ({ id, category, date, sum, type, comment }) => {
   const dispatch = useDispatch();
-
   const deletedOnKlick = (id) => {
     dispatch(deleteTransaction(id));
   };
+
+const handleEditModalOpen = () => {
+  dispatch(openEditModal());
+}
 
   return (
     <div
@@ -55,7 +59,7 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
           >
             Delete
           </button>
-          <span className={styles.edit}>
+          <span className={styles.edit} onClick={handleEditModalOpen}>
             <CiEdit />
             <span className={styles.editSpan}>Edit</span>
           </span>

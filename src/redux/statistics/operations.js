@@ -18,3 +18,15 @@ export const getTransSummary = createAsyncThunk(
     }
   }
 );
+
+export const getCategories = createAsyncThunk(
+  "transactions/categories",
+  async (_, thunkApi) => {
+    try {
+      const { data } = await moneyGuardAPI.get(`/categories`);
+      return data.data;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
+    }
+  }
+);

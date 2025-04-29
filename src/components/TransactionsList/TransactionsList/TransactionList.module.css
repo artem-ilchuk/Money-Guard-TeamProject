@@ -5,12 +5,16 @@
 .ListHeader {
   display: none;
 }
+.scroll {
+    width: 360px;
+    height: 100vh;
+    overflow-y: auto;
+}
 
-@media screen and (min-width: 361px) {
+@media screen and (min-width: 768px) {
 
     .ListHeader {
         display: flex;
-        justify-content: space-between;
         padding: 12px 20px 12px 20px;
         background-color: rgba(82, 59, 126, 0.6);
         border-radius: 8px;
@@ -19,15 +23,31 @@
     }
 
     .listHeaderItem {
-        width: calc(100% / 6);
-    }
-
-    .scroll {
         display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 704px;
+        justify-content: flex-start;
+        font-weight: 600;
+font-size: 16px;
+color: var(--white);
+    }
+    .listHeaderItem:nth-child(1) {
+        width: 40px;
+        margin-right: 70px;
+    }
+    .listHeaderItem:nth-child(2) {
+        width: 40px;
+        margin-right: 55px;
+    }
+    .listHeaderItem:nth-child(3) {
+        width: 77px;
+        margin-right: 50px;
+    }
+    .listHeaderItem:nth-child(4) {
+        width: 83px;
+        margin-right: 70px;
+    }
+    
+    .scroll {
+      width: 704px;
         max-height: 312px;
         overflow-y: auto;
     }

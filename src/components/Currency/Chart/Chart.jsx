@@ -66,6 +66,7 @@ export default function CustomChart({ data }) {
             fill="none"
             dot={<CustomDot />}
             label={<CustomLabel />}
+            isAnimationActive={false}
           />
         ) : (
           <Area
@@ -75,6 +76,7 @@ export default function CustomChart({ data }) {
             strokeWidth={1}
             fill="none"
             dot={<CustomDot />}
+            isAnimationActive={false}
           />
         )}
       </AreaChart>

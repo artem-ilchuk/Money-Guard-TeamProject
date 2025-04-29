@@ -1,23 +1,39 @@
 .transactionListContainer {
     /* background-color: rgba(42, 67, 108, 0.282); */
-    width: 280px;
+    /* width: 280px; */
     height: 293px;
-    border-radius: 10px;
+    margin-bottom: 8px;
+}
+.transactionList {
+  padding: 0 20px;
+  border-radius: 10px;
     border-left-style: solid;
     border-left-width: 5px;
     border-left-color: #ff868d;
-    margin-bottom: 8px;
+    background-color: var(--form-color);
 }
-
 .listItem {
   display: flex;
   justify-content: space-between;
-  padding: 12px 20px 12px 20px;
-  border-bottom: 2px solid #e6e4e8;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .listItem:last-child {
   border: 0;
+}
+
+.headerTextMobile {
+  font-weight: 600;
+font-size: 16px;
+color: var(--white);
+}
+
+.item {
+  font-weight: 400;
+font-size: 16px;
+text-align: right;
+color: var(--white);
 }
 
 button {
@@ -58,13 +74,24 @@ button {
 
 .deleteEdit {
   border: 0;
-  padding: 0;
   display: flex;
   justify-content: space-between;
-  padding: 12px 20px 12px 20px;
+  padding: 12px 0;
+}
+.expenseTextColor {
+  font-weight: 600;
+  font-size: 14px;
+  text-align: right;
+  color: var(--dashboard-text);
+}
+.incomeTextColor {
+  font-weight: 600;
+  font-size: 14px;
+  text-align: right;
+  color: var(--yellow);
 }
 
-@media screen and (min-width: 768px) {
+/* @media screen and (min-width: 768px) {
   .transactionListContainer {
     background-color: rgba(11, 88, 212, 0.282);
     width: 704px;
@@ -88,13 +115,13 @@ button {
     border: 0;
     padding: 0;
   }
-}
+} */
 
-@media screen and (min-width: 361px) {
+@media screen and (min-width: 768px) {
 
     .transactionListContainer {
-        /* background-color: rgba(11, 88, 212, 0.282); */
-        width: 704px;
+       
+      width: 100%;
         height: fit-content;
         border-radius: 0;
         border: 0;
@@ -102,20 +129,38 @@ button {
     }
 
     .transactionList {
-        border-bottom: 2px solid;
+      background: inherit; 
+      border-left: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 0;
         display: flex;
-        justify-content: space-between;
-        padding: 16px 20px 16px 20px;
+        gap: 15px;
+        align-items: center;
+        padding: 13px 20px;
         margin: 0;
         overflow: auto;
 
     }
 
     .listItem {
-        display: inline-block;
+        display: flex;
         width: calc(100% /6);
         border: 0;
         padding: 0;
+        justify-content: flex-start;
+    }
+    .listItem:nth-child(2) {
+      flex:1;
+    }
+    .listItem:nth-last-child(2) {
+      justify-content: flex-end;
+      margin-right: 25px;
+      flex: 1;
+    }
+
+    .item {
+      font-size: 14px;
+      text-align: left;
     }
 
     .headerTextMobile {
@@ -146,7 +191,7 @@ button {
   }
 
   .deleteEdit {
-    /* display: inline-block; */
+    display: inline-block;
     width: calc(100% / 6);
     border: 0;
     padding: 0;

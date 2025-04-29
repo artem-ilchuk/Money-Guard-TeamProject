@@ -1,12 +1,13 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin: 40px 20px;
+  padding-top: 40px;
 }
 
 .statisticsChart {
   width: 100%;
   background-color: transparent;
+  padding-bottom: 32px;
 }
 
 .statisticsChart h1 {
@@ -15,6 +16,7 @@
   font-size: 30px;
   text-align: left;
   color: var(--white);
+  padding-bottom: 8px;
 }
 
 .statisticsChartContainer {

@@ -3,7 +3,8 @@
   background-image: url(../../assets/img/bg_mobile_dashboard.png);
   background-repeat: no-repeat;
   background-size: cover;
-  height: calc(100vh - 60px);
+  background-attachment: fixed;
+  min-height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;

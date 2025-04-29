@@ -4,10 +4,10 @@
   flex-direction: column;
   background-color: transparent;
   border-radius: 8px;
-
   color: white;
   font-family: sans-serif;
   box-sizing: border-box;
+  padding-bottom: 45px;
 }
 
 .tableHeader {

@@ -35,8 +35,15 @@
 }
 
 .multiColorButton {
-  color: rgba(251, 251, 251, 1);
-  background-image: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--white);
   border-radius: 20px;
   width: 280px;
   height: 50px;
@@ -65,16 +72,6 @@
 .multiColorButton:active {
   transform: scale(1.08);
   font-size: 19px;
-}
-
-.link {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 18px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  text-align: center;
-  color: var(--white);
 }
 
 @media screen and (min-width: 768px) {

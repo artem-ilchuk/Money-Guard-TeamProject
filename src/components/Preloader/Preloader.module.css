@@ -1,5 +1,5 @@
 .preloader {
-  background: #2a2d32;
+  background: linear-gradient(180deg, #1c1132, #100922);
   left: 0;
   position: fixed;
   width: 100%;
@@ -47,21 +47,45 @@
 }
 
 .letter {
+  position: relative;
   opacity: 0;
   display: inline-block;
   font-size: inherit;
   animation: fadeIn 0.6s forwards;
   transform-origin: center bottom;
-  text-shadow: 0 0 5px rgba(115, 74, 239, 0.8), 0 0 10px rgba(115, 74, 239, 0.6),
-    0 0 15px rgba(115, 74, 239, 1);
+
+  background: linear-gradient(
+    90deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
-.studio {
-  color: #734aef;
-  text-shadow: 0 0 5px rgba(115, 74, 239, 0.8), 0 0 10px rgba(115, 74, 239, 0.6),
-    0 0 15px rgba(115, 74, 239, 1);
-}
+.letter::after {
+  content: attr(data-char);
+  position: absolute;
+  top: 0;
+  left: 0;
+  filter: blur(6px);
+  opacity: 0.8;
+  pointer-events: none;
 
+  background: linear-gradient(
+    90deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
 @keyframes fadeIn {
   0% {
     opacity: 0;

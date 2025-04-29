@@ -11,8 +11,8 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
     dispatch(deleteTransaction(id));
   };
 
-  const handleEditModalOpen = () => {
-    dispatch(openEditModal());
+  const handleEditModalOpen = (id) => {
+    dispatch(openEditModal(id));
   };
 
   return (
@@ -36,7 +36,7 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
         </li>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Type</span>
-          <span className={styles.item}>{type}</span>
+          <span className={styles.item}>{type === "INCOME" || type === "+" ? "+" : "-"}</span>
         </li>
         <li className={styles.listItem}>
           <span className={styles.headerTextMobile}>Category</span>

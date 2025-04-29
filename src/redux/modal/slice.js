@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-
 const initialState = {
   transactions: {
     transactionDate: " ",
@@ -14,7 +13,6 @@ const initialState = {
   isLogOutModalOpen: false,
   isEditId: " ",
 };
-
 const modalsSlice = createSlice({
   name: "modals",
   initialState,
@@ -22,8 +20,9 @@ const modalsSlice = createSlice({
     operateTransactionData: (state, action) => {
       state.transactions = action.payload;
     },
-    openEditModal: (state) => {
+    openEditModal: (state, action) => {
       state.isEditModalOpen = true;
+      state.isEditId = action.payload;
     },
     closeEditModal: (state) => {
       state.isEditModalOpen = false;
@@ -53,7 +52,6 @@ const modalsSlice = createSlice({
     },
   },
 });
-
 export const {
   operateTransactionData,
   openEditModal,
@@ -66,5 +64,4 @@ export const {
   openLogOutModal,
   closeLogOutModal,
 } = modalsSlice.actions;
-
 export const modalsReducer = modalsSlice.reducer;

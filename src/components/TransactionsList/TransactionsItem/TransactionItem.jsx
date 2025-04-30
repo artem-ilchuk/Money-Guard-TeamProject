@@ -70,7 +70,7 @@ const TransactionItem = ({ id, category, date, sum, type, comment }) => {
           >
             Delete
           </button>
-          <span className={styles.edit} onClick={handleEditModalOpen}>
+          <span className={styles.edit} onClick={() => handleEditModalOpen(id)}>
             <CiEdit />
             <span className={styles.editSpan}>Edit</span>
           </span>

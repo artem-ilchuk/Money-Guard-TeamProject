@@ -35,7 +35,7 @@
   .main_container {
     background-image: url(../../assets/img/bg_desktop_dashboard.png);
     display: flex;
-    justify-content: space-between;
+
 		align-items: start;
 		flex-direction: row;
   }
@@ -46,4 +46,10 @@
 		height: 100%;
 		border-right: 1px solid #D9D9D9;
   }
+	.outlet_container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 100%;
+	}
 }

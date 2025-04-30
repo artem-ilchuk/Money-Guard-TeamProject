@@ -57,7 +57,9 @@ const DashboardPage = () => {
           </div>
           {(isTablet || isDesktop) && <Currency />}
         </div>
-        <Outlet />
+        <div className={s.outlet_container}>
+					<Outlet />
+				</div>
       </section>
     </div>
   );

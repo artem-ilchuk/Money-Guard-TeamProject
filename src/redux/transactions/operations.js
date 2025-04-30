@@ -29,8 +29,9 @@ export const addTransaction = createAsyncThunk(
 
 export const editTransaction = createAsyncThunk(
   "transactions/editTransaction",
-  async ({ id, date, type, category, comment, sum }, thunkAPI) => {
+  async ({ id, transaction }, thunkAPI) => {
     try {
+      const { date, type, category, comment, sum } = transaction;
       const { data } = await moneyGuardAPI.patch(`/transactions/${id}`, {
         date,
         type,
@@ -38,6 +39,8 @@ export const editTransaction = createAsyncThunk(
         comment,
         sum,
       });
+      thunkAPI.dispatch(getTotalBalanceThunk());
+      
       return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

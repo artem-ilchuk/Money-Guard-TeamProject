@@ -1,11 +1,30 @@
-.backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
+.modal {
+  position: absolute;
+  z-index: 150;
   width: 100%;
   height: 100vh;
-  backdrop-filter: blur(7px);
-  /* background: rgba(34, 13, 91, 0.23); */
-  background: rgba(34, 13, 91, 0.5);
-  z-index: 10;
+  overflow: auto;
+}
+
+@media screen and (min-width:768px) {
+  .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    backdrop-filter: blur(7px);
+    /* background: rgba(34, 13, 91, 0.23); */
+    background: rgba(34, 13, 91, 0.5);
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .modal {
+    z-index: 150;
+    overflow: auto;
+    width: 540px;
+    height: 511px;
+  }
 }

@@ -9,13 +9,13 @@ import styles from "./TransactionList.module.css";
 import { fetchTransactions } from "../../../redux/transactions/operations";
 import TransactionItem from "../TransactionsItem/TransactionItem";
 import Loader from "../../Loader/Loader";
-import { selectIsEditModalOpen } from "../../../redux/modal/selectors";
-import ModalEditTransaction from "../../ModalEditTransaction/ModalEditTransaction";
+
+
 
 
 const TransactionList = () => {
   const dispatch = useDispatch();
-  const isEditModalOpen = useSelector(selectIsEditModalOpen);
+  
 
   useEffect(() => {
     dispatch(fetchTransactions());
@@ -56,7 +56,6 @@ const TransactionList = () => {
           <h3> No transactions</h3>
         )}
       </ul>
-      {isEditModalOpen && <ModalEditTransaction />}
     </div>
   );
 };

@@ -110,7 +110,7 @@ function AddTransactionForm() {
       <div className={s.formContainer}>
         <button
           type="button"
-          className={isMobile ? s.hiden : s.modalCloseBtn}
+          className={s.modalCloseBtn}
           onClick={() => dispatch(closeAddModal())}
         >
           <RiCloseLargeLine

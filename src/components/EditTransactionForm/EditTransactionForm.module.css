@@ -5,6 +5,7 @@
   gap: 12px;
   margin-bottom: 60px;
 }
+
 .hiden {
   position: absolute;
   width: 1px;
@@ -17,13 +18,16 @@
   clip: rect(0 0 0 0);
   overflow: hidden;
 }
+
 .formContainer {
-  margin-top: 0;
   position: absolute;
+  margin-top: 60px;
   left: 50%;
   transform: translate(-50%);
-  max-width: 320px;
+  width: 100%;
+  max-width: 360px;
   background-image: url(./compresspng/mobBG2-min.png);
+
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -32,8 +36,10 @@
   /* backdrop-filter: blur(100px);
   box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
   background: var(--form-color); */
+
   padding: 24px 20px 30px;
 }
+
 .title {
   margin-top: 0; /* Або менше значення */
   margin-bottom: 40px; /* Залиште нижній маргін, якщо потрібно */
@@ -43,19 +49,23 @@
   text-align: center;
   color: white;
 }
+
 .type_text {
-  color: #E0E0E0;
+  color: #e0e0e0;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
+
 .income_active {
-  color: #FFB627;
+  color: #ffb627;
 }
+
 .expense_active {
-  color: #FF868D;
+  color: #ff868d;
 }
+
 .switch__wrapper {
   display: flex;
   gap: 20px;
@@ -63,6 +73,7 @@
   align-items: center;
   margin-bottom: 42px;
 }
+
 .switch {
   background-color: black;
   width: 80px;
@@ -70,11 +81,13 @@
   position: relative;
   background-color: transparent;
 }
+
 .switch__input {
   width: 0;
   height: 0;
   opacity: 0;
 }
+
 .switch__slider {
   position: absolute;
   cursor: pointer;
@@ -85,6 +98,7 @@
   right: 0;
   background-color: rgba(255, 255, 255, 1);
 }
+
 .switch__slider svg {
   content: "";
   position: absolute;
@@ -93,10 +107,12 @@
   top: -11px;
   transition: 0.4s;
 }
+
 .switch__input:checked + .switch__slider svg {
   content: "";
   transform: translateX(44px);
 }
+
 .span_text {
   color: rgba(255, 255, 255, 0.6);
   font-size: 16px;
@@ -104,10 +120,12 @@
   font-weight: 600;
   line-height: normal;
 }
+
 .income_active,
 .expense_active {
   transition: color 0.4s;
 }
+
 .sum_data_wrap {
   display: flex;
   justify-content: center;
@@ -116,18 +134,22 @@
   margin-bottom: 48px;
   cursor: pointer;
 }
+
 .customDatePicker {
   /* position: absolute;
   left: 100px; */
   cursor: pointer;
 }
+
 .sum_wrap {
   position: relative;
   width: 181px;
+
   input {
     padding: 0;
     width: 100%;
   }
+
   &::after {
     content: "";
     position: absolute;
@@ -150,19 +172,23 @@
   line-height: normal;
   overflow: none;
 }
+
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
+
 input[type="number"],
 input[type="number"]:hover,
 input[type="number"]:focus {
   appearance: none;
   -moz-appearance: textfield;
 }
+
 .sum:focus {
   caret-color: rgba(255, 255, 255, 0.6);
 }
+
 .sum::placeholder {
   color: rgba(255, 255, 255, 0.6);
   text-align: center;
@@ -171,12 +197,14 @@ input[type="number"]:focus {
   font-weight: 600;
   line-height: normal;
 }
+
 .data_wrap {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 181px;
+
   &::after {
     content: "";
     position: absolute;
@@ -186,10 +214,11 @@ input[type="number"]:focus {
     height: 1px;
     background-color: rgba(255, 255, 255, 0.4);
   }
+
   input {
     padding: 0;
     width: 93px;
-    color: #FBFBFB;
+    color: #fbfbfb;
     font-family: Poppins;
     font-size: 18px;
     font-style: normal;
@@ -206,6 +235,7 @@ input[type="number"]:focus {
   align-items: center;
   justify-content: center;
 }
+
 .comment {
   max-width: 394px;
   position: relative;
@@ -224,9 +254,11 @@ input[type="number"]:focus {
   .input::placeholder {
     color: rgba(255, 255, 255, 0.6);
   }
+
   .input:focus {
     caret-color: rgba(255, 255, 255, 0.6);
   }
+
   &::after {
     content: "";
     position: absolute;
@@ -237,22 +269,26 @@ input[type="number"]:focus {
     background-color: rgba(255, 255, 255, 0.4);
   }
 }
+
 .commentUnderfined {
-  color: #F00000;
+  color: #f00000;
   padding-bottom: 30px;
 }
+
 .comment_err {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 10px;
-  color: #F00000;
+  color: #f00000;
 }
+
 .btn_wrap {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
+
 .btn {
   width: 300px;
   height: 50px;
@@ -260,12 +296,13 @@ input[type="number"]:focus {
   box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
   transition: all 0.4s ease;
 }
+
 .btn_add {
   background: linear-gradient(
     97deg,
-    #FFC727 -16.42%,
-    #9E40BA 97.04%,
-    #7000FF 150.71%
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
   color: #fff;
   text-align: center;
@@ -279,39 +316,46 @@ input[type="number"]:focus {
   margin: 0 auto;
   margin-bottom: 30px;
   cursor: pointer;
+
   color: rgba(251, 251, 251, 1);
   background-image: none;
   background: linear-gradient(
     96.76deg,
-    #FFC727 -16.42%,
-    #9E40BA 97.04%,
-    #7000FF 150.71%
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
   transition: all 1s ease 0s;
 }
+
 .btn_add:hover,
 .btn_add:focus {
   transform: translateY(-1px);
   box-shadow: 1px 9px 20px 0px rgba(0, 0, 0, 0.3);
+
   transform: scale(1.05);
   background-image: linear-gradient(
     to right,
-    #7000FF 0%,
-    #9E40BA 31%,
-    #FFC727 100%
+    #7000ff 0%,
+    #9e40ba 31%,
+    #ffc727 100%
   );
   background-size: 200%;
   background-position: right center;
 }
+
 .btn_add:active {
   transform: translateY(2px);
   box-shadow: 1px 5px 10px 0px rgba(0, 0, 0, 0.4);
+
   transform: scale(1.08);
   font-size: 19px;
 }
+
 .btn_cancel {
-  background: #FBFBFB;
-  color: #623F8B;
+  background: #fbfbfb;
+
+  color: #623f8b;
   text-align: center;
   font-size: 18px;
   font-style: normal;
@@ -322,13 +366,16 @@ input[type="number"]:focus {
   display: block;
   margin: 0 auto;
   cursor: pointer;
-  color: #623F8B;
-  background: #FCFCFC;
+
+  color: #623f8b;
+  background: #fcfcfc;
 }
+
 .btn_cancel:hover,
 .btn_cancel:focus {
   transform: translateY(-1px);
   box-shadow: 1px 9px 20px 0px rgba(0, 0, 0, 0.3);
+
   transform: scale(1.05);
   background-image: linear-gradient(
     to right,
@@ -340,45 +387,57 @@ input[type="number"]:focus {
   background-position: right center;
   transition: all 1s ease 0s;
 }
+
 .btn_cancel:active {
   transform: translateY(2px);
   box-shadow: 1px 9px 20px 0px rgba(0, 0, 0, 0.4);
+
   transform: scale(1.08);
   font-size: 19px;
 }
+
 .select {
   background-color: linear-gradient(
     97deg,
-    #FFC727 -16.42%,
-    #9E40BA 97.04%,
-    #7000FF 150.71%
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
 }
+
 .custom-select {
   width: 200px;
 }
+
 .custom-select .control {
   border: 1px solid #ccc;
 }
+
 .custom-select .option {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
+
 .custom-select .option:hover {
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
 }
+
 .date {
   padding-right: 70px;
 }
+
 @media screen and (max-width: 767.98px) {
   .form {
     width: 100%;
   }
+
   .switch__wrapper {
     margin-bottom: 30px;
   }
+
   .select_form {
     width: 100%;
   }
+
   .sum_data_wrap {
     margin: 0 auto;
     display: flex;
@@ -393,6 +452,7 @@ input[type="number"]:focus {
     width: 280px;
     padding: 0 20px;
   }
+
   .sum {
     padding: 20px;
     text-align: left;
@@ -400,20 +460,24 @@ input[type="number"]:focus {
   .sum::placeholder {
     text-align: left;
   }
+
   .data_wrap {
     width: 280px;
     display: flex;
     justify-content: space-between;
     padding: 0 20px;
   }
+
   .customDatePicker {
     width: 100%;
   }
+
   .comment {
     max-width: 280px;
     margin: 0 auto;
     margin-bottom: 36px;
     padding: 0 20px;
+
     &::after {
       bottom: 0px;
     }
@@ -423,6 +487,7 @@ input[type="number"]:focus {
     margin: 0 auto;
     margin-bottom: 92px;
     padding: 0 20px;
+
     &::after {
       bottom: -52px;
     }
@@ -430,6 +495,7 @@ input[type="number"]:focus {
       width: 100%;
     }
   }
+
   .btn {
     width: 280px;
   }
@@ -441,20 +507,24 @@ input[type="number"]:focus {
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
+
 @media screen and (min-width: 768px) {
   .title {
     font-size: 30px;
   }
   .modalCloseBtn {
+    all: unset;
     background-color: transparent;
     display: flex;
     align-items: center;
     justify-content: center;
     padding-inline-end: 0px;
     padding-inline-start: 0px;
+
     position: absolute;
     top: 20px;
     right: 20px;
+
     margin-left: auto;
     padding: 0;
     cursor: pointer;
@@ -466,6 +536,7 @@ input[type="number"]:focus {
     transform: translateY(-1px);
     box-shadow: 1px 9px 20px 0px rgba(0, 0, 0, 0.3);
   }
+
   .closeIcon {
     width: 18px;
     height: 18px;
@@ -478,7 +549,9 @@ input[type="number"]:focus {
     left: 50%;
     transform: translate(-50%, -50%);
     transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
     max-width: 540px;
+
     border-radius: 8px;
     padding: 40px 73px;
     background-image: url(./compresspng/tablet-min.png);

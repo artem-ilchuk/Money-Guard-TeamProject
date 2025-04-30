@@ -110,7 +110,7 @@ function AddTransactionForm() {
       <div className={s.formContainer}>
         <button
           type="button"
-          className={isMobile ? s.hiden : s.modalCloseBtn}
+          className={s.modalCloseBtn}
           onClick={() => dispatch(closeAddModal())}
         >
           <RiCloseLargeLine
@@ -184,18 +184,18 @@ function AddTransactionForm() {
           </div>
         )}
         <div className={s.sum_data_wrap}>
-          <div className={s.sum_wrap}>
-            <input
-              {...register("sum")}
-              type="number"
-              autoComplete="off"
-              placeholder="0.00"
-              className={s.sum}
-            />
-            {errors.sum && (
-              <span className={s.comment_err}>{errors.sum.message}</span>
-            )}
-          </div>
+            <div className={s.sum_wrap}>
+              <input
+                {...register("sum")}
+                type="number"
+                autoComplete="off"
+                placeholder="0.00"
+                className={s.sum}
+              />
+              {errors.sum && (
+                <span className={s.comment_err}>{errors.sum.message}</span>
+              )}
+            </div>
           <div
             className={s.data_wrap}
             onClick={() => datePickerRef.current?.setFocus()}

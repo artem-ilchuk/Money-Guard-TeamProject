@@ -14,10 +14,14 @@ import Balance from "../../components/Balance/Balance";
 import Currency from "../../components/Currency/Currency";
 import s from "./Dashboard.module.css";
 import { useLocation } from "react-router-dom";
+import { selectIsAddModalOpen, selectIsEditModalOpen } from "../../redux/modal/selectors";
+import ModalAddTransaction from "../../components/ModalAddTransaction/ModalAddTransaction";
+import ModalEditTransaction from "../../components/ModalEditTransaction/ModalEditTransaction";
 
 const DashboardPage = () => {
   const isLogOutModalOpen = useSelector(selectIsLogOutModalOpen);
   const isProfileModalOpen = useSelector(selectIsProfileModalOpen);
+  const isEditModalOpen = useSelector(selectIsEditModalOpen);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -28,6 +32,7 @@ const DashboardPage = () => {
   };
 
 	const { isMobile, isTablet, isDesktop } = useMedia();
+  const isAddModalOpen = useSelector(selectIsAddModalOpen);
 	
 	const location = useLocation();
   const isHome = location.pathname === "/dashboard/home";
@@ -38,6 +43,8 @@ const DashboardPage = () => {
       <Header />
       {isLogOutModalOpen && <LogOutModal closeModal={handleCloseModal} />}
       {isProfileModalOpen && <UserModal closeModal={handleCloseProfile} />}
+      {isAddModalOpen && <ModalAddTransaction />}
+      {isEditModalOpen && <ModalEditTransaction />}
       <section className={s.main_container}>
         <div className={isTablet || isDesktop ? s.nav_container : undefined}>
           <div
@@ -50,7 +57,9 @@ const DashboardPage = () => {
           </div>
           {(isTablet || isDesktop) && <Currency />}
         </div>
-        <Outlet />
+        <div className={s.outlet_container}>
+					<Outlet />
+				</div>
       </section>
     </div>
   );

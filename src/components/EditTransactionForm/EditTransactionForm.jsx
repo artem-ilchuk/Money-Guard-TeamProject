@@ -5,7 +5,7 @@ import * as yup from "yup";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import { useDispatch, useSelector } from "react-redux";
-import { format } from "date-fns";
+import { parse, format } from "date-fns";
 import { closeEditModal } from "../../redux/modal/slice";
 import { editTransaction } from "../../redux/transactions/operations";
 import { selectIsEditID } from "../../redux/modal/selectors";
@@ -87,22 +87,53 @@ export default function EditTransactionForm() {
   });
   useEffect(() => {
     if (transaction && categoryOptions.length > 0) {
-      const parsedDate = new Date(transaction.date);
-      const isValidDate = !isNaN(parsedDate.getTime());
-      // Находим категорию, которая соответствует категории в транзакции
+      // Лог: выводим дату транзакции
+      console.log("Дата транзакции:", transaction.date);
+
+      // Парсим дату
+      const parsedDate = parse(transaction.date, "dd-MM-yyyy", new Date());
+
+      // Лог: выводим результат парсинга
+      console.log("Результат парсинга:", parsedDate);
+
+      // Проверяем, является ли дата валидной
+      const isValidDate = !isNaN(parsedDate) && parsedDate instanceof Date;
+
+      // Лог: выводим статус валидности даты
+      console.log("Дата валидна:", isValidDate);
+
+      // Находим категорию, соответствующую транзакции
       const matchedCategory = categoryOptions.find(
         (opt) => opt.value === transaction.category
       );
+
+      // Лог: выводим найденную категорию
+      console.log("Найденная категория:", matchedCategory);
+
+      // Переопределяем состояние с новыми данными
       reset({
-        date: isValidDate ? format(parsedDate, "yyyy-MM-dd") : "",
+        date: isValidDate ? format(parsedDate, "dd-MM-yyyy") : "", // Если дата валидна, форматируем, иначе передаем пустую строку
         type: transaction.type,
-        category: matchedCategory || null, // Здесь мы используем объект с value и label
+        category: matchedCategory || null, // Используем объект категории, если он найден
         comment: transaction.comment || "",
         sum: Math.abs(transaction.sum),
       });
+
+      // Лог: выводим состояние после reset
+      console.log("Состояние после reset:", {
+        date: isValidDate ? format(parsedDate, "dd-MM-yyyy") : "",
+        type: transaction.type,
+        category: matchedCategory || null,
+        comment: transaction.comment || "",
+        sum: Math.abs(transaction.sum),
+      });
+
+      // Лог: проверяем состояние isChecked
       setIsChecked(transaction.type === "EXPENSE");
+      console.log("isChecked:", transaction.type === "EXPENSE");
     }
   }, [transaction, categoryOptions, reset]);
+
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
     setIsMobile(mediaQuery.matches);
@@ -120,7 +151,7 @@ export default function EditTransactionForm() {
     const updatedTransaction = {
       ...data,
       category: data.category?.value || "",
-      sum: data.type === "EXPENSE" ? -Math.abs(data.sum) : Math.abs(data.sum),
+      sum: Math.abs(data.sum),
     };
     dispatch(
       editTransaction({ id: transactionId, transaction: updatedTransaction })
@@ -222,11 +253,15 @@ export default function EditTransactionForm() {
               control={control}
               render={({ field }) => (
                 <DatePicker
-                  selected={field.value ? new Date(field.value) : null}
+                  selected={
+                    field.value
+                      ? parse(field.value, "dd-MM-yyyy", new Date())
+                      : null
+                  } // Парсим значение, если оно есть
                   onChange={(date) =>
-                    field.onChange(format(date, "yyyy-MM-dd"))
-                  }
-                  dateFormat="dd.MM.yyyy"
+                    field.onChange(format(date, "dd-MM-yyyy"))
+                  } // Форматируем дату при изменении
+                  dateFormat="dd-MM-yyyy" // Устанавливаем отображение даты в формате dd-MM-yyyy
                   className={s.customDatePicker}
                   calendarClassName={s.calendarClassName}
                   maxDate={new Date()}

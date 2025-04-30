@@ -4,12 +4,10 @@ import useMedia from "../../hooks/UseMadia";
 import s from "./Home.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { openAddModal } from "../../redux/modal/slice";
-import { selectIsAddModalOpen } from "../../redux/modal/selectors";
-import ModalAddTransaction from "../ModalAddTransaction/ModalAddTransaction";
+
 
 const HomeTab = () => {
   const dispatch = useDispatch();
-  const isAddModalOpen = useSelector(selectIsAddModalOpen);
   const { isMobile, isTablet, isDesctop } = useMedia();
   const handleOpenAddModal = () => {
     dispatch(openAddModal());
@@ -19,7 +17,6 @@ const HomeTab = () => {
       <div className={s.nav_balance}>{isMobile && <Balance />}</div>
       <TransactionList />
       <button className={s.buttonAdd} onClick={handleOpenAddModal}><svg className={s.iconPlus}><use href={"/icons.svg#icon-plus"}></use></svg></button>
-      {isAddModalOpen && <ModalAddTransaction />}
     </div>
   );
 };

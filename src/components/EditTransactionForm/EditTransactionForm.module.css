@@ -217,7 +217,7 @@ input[type="number"]:focus {
 
   input {
     padding: 0;
-    width: 93px;
+    /* width: 93px; */
     color: #fbfbfb;
     font-family: Poppins;
     font-size: 18px;

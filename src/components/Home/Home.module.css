@@ -1,8 +1,9 @@
 .nav_balance {
-  margin-bottom: 32px;
+  margin-bottom: 34px;
 }
+
 .buttonAdd {
-  position: absolute;
+  position: fixed;
   right: 20px;
   bottom: 20px;
   width: 44px;

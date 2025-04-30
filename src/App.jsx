@@ -56,7 +56,6 @@ function App() {
     }
   }, [isMobile, location.pathname, navigate]);
 
-  // || isRefreshing
   return isFirstLoad || isRefreshing ? (
     <Preloader />
   ) : (

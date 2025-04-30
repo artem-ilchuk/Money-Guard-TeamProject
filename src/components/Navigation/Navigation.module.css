@@ -124,6 +124,9 @@
 }
 
 @media screen and (min-width: 1280px) {
+	.navigation {
+		margin-bottom: 28px;
+	}
   .navElements {
     padding: 40px 0 0 32px;
     gap: 12px;

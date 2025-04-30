@@ -52,10 +52,11 @@
 .form {
   position: absolute;
   left: 50%;
-  transform: translate(-50%);
-
+	top: 50%;
+  transform: translate(-50%, -50%);
   max-width: 320px;
 }
+
 .headerMob {
   display: flex;
   align-items: center;
@@ -188,6 +189,10 @@
   left: -17px;
   top: -11px;
   transition: 0.4s;
+
+	& g {
+		filter: drop-shadow(4px 4px 10px rgba(0, 0, 0, 0.4));
+	}
 }
 
 .switch__input:checked + .switch__slider svg {

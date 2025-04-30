@@ -23,3 +23,15 @@
   bottom: 40px;
   }
 }
+
+@media screen and (min-width: 1280px) {
+  .container {
+    padding-right: 16px;
+    padding-top: 46px;
+  }
+  .nav_balance {
+    margin-bottom: 0;
+  }
+}
+  
+  

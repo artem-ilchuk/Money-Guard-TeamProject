@@ -1,7 +1,8 @@
 .mainContainer {
   /* background-color: linear-gradient(207deg, #341fa0 44.63%, #652392 88.57%); */
-	height: calc(100vh - 289px);
+	height: calc(100vh - 180px);
 	margin-bottom: 25px;
+    padding: 0 20px;
 }
 
 .ListHeader {
@@ -19,6 +20,7 @@
   /* background-color: linear-gradient(207deg, #341fa0 44.63%, #652392 88.57%); */
 	height: calc(100vh - 400px);
 	margin-bottom: 25px;
+    padding: 0;
 }
 
     .ListHeader {
@@ -59,4 +61,17 @@ color: var(--white);
         max-height: 80%;
         overflow-y: auto;
     }
+}
+
+@media screen and (min-width: 1280px) {
+
+	.mainContainer {
+	width: 715px;
+}
+.scroll {
+    width: 715px;
+}
+.ListHeader {
+    width: 715px;
+}
 }

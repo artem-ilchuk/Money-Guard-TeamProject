@@ -15,7 +15,7 @@ const HomeTab = () => {
     dispatch(openAddModal());
   }
   return (
-    <div>
+    <div className={s.container}>
       <div className={s.nav_balance}>{isMobile && <Balance />}</div>
       <TransactionList />
       <button className={s.buttonAdd} onClick={handleOpenAddModal}><svg className={s.iconPlus}><use href={"/icons.svg#icon-plus"}></use></svg></button>

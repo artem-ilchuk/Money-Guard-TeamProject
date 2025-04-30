@@ -179,7 +179,7 @@ export default function EditTransactionForm() {
             Income
           </div>
           <div className={s.type_svg}>
-            <svg width="15" height="15" viewBox="0 0 10 22" fill="none">
+            <svg width="10" height="22" viewBox="0 0 10 22" fill="none">
               <path
                 d="M8.80108 1.09786L1.19895 20.9021"
                 stroke="#E0E0E0"
@@ -260,7 +260,7 @@ export default function EditTransactionForm() {
                   onChange={(date) =>
                     field.onChange(format(date, "dd-MM-yyyy"))
                   } // Форматируем дату при изменении
-                  dateFormat="dd-MM-yyyy" // Устанавливаем отображение даты в формате dd-MM-yyyy
+                  dateFormat="dd.MM.yyyy" // Устанавливаем отображение даты в формате dd-MM-yyyy
                   className={s.customDatePicker}
                   calendarClassName={s.calendarClassName}
                   maxDate={new Date()}

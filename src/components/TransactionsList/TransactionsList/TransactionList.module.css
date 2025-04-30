@@ -1,6 +1,6 @@
 .mainContainer {
   /* background-color: linear-gradient(207deg, #341fa0 44.63%, #652392 88.57%); */
-	height: calc(100vh - 180px);
+	height: calc(100vh - 289px);
 	margin-bottom: 25px;
     padding: 0 20px;
 }
@@ -9,7 +9,6 @@
   display: none;
 }
 .scroll {
-    width: 350px;
     height: 100%;
     overflow-y: auto;
 }
@@ -65,8 +64,8 @@ color: var(--white);
 
 @media screen and (min-width: 1280px) {
 
-	.mainContainer {
-	width: 715px;
+.mainContainer {
+	height: 85vh;
 }
 .scroll {
     width: 715px;

@@ -1,9 +1,9 @@
+import "react-datepicker/dist/react-datepicker.css";
 import s from "./AddTransactionForm.module.css";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { toast } from "react-hot-toast";
 import clsx from "clsx";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { useForm, Controller } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -17,6 +17,8 @@ import { closeAddModal } from "../../redux/modal/slice";
 import { GoChevronDown, GoChevronUp } from "react-icons/go";
 import { RiCloseLargeLine } from "react-icons/ri";
 import { getCategories } from "../../redux/statistics/operations";
+
+
 function AddTransactionForm() {
   const dispatch = useDispatch();
   const categories = useSelector(selectCategories);
@@ -184,18 +186,18 @@ function AddTransactionForm() {
           </div>
         )}
         <div className={s.sum_data_wrap}>
-          <div className={s.sum_wrap}>
-            <input
-              {...register("sum")}
-              type="number"
-              autoComplete="off"
-              placeholder="0.00"
-              className={s.sum}
-            />
-            {errors.sum && (
-              <span className={s.comment_err}>{errors.sum.message}</span>
-            )}
-          </div>
+            <div className={s.sum_wrap}>
+              <input
+                {...register("sum")}
+                type="number"
+                autoComplete="off"
+                placeholder="0.00"
+                className={s.sum}
+              />
+              {errors.sum && (
+                <span className={s.comment_err}>{errors.sum.message}</span>
+              )}
+            </div>
           <div
             className={s.data_wrap}
             onClick={() => datePickerRef.current?.setFocus()}
@@ -210,7 +212,6 @@ function AddTransactionForm() {
                   onChange={(date) => field.onChange(date)}
                   dateFormat="dd.MM.yyyy"
                   className={s.customDatePicker}
-                  calendarClassName={s.calendarClassName}
                   maxDate={new Date()}
                 />
               )}

@@ -3,16 +3,13 @@
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  height: 100vh;
-  /* margin: 0; */
-  /* backdrop-filter: blur(100px);
-  box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
-  background: var(--form-color); */
+  min-height: 100vh;
+  width: 100%;
   padding: 24px 20px 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  
 }
 .title {
   font-family: var(--font-family);
@@ -27,7 +24,7 @@
   gap: 20px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 42px;
+  margin-bottom: 40px;
 }
 .switch {
   background-color: black;
@@ -85,91 +82,70 @@
   color: #FF868D;
 }
 .sum_data_wrap {
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 32px;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
+  flex-direction: column;
+    
 }
 .sum_wrap {
-  position: relative;
-  width: 181px;
-  input {
-    padding: 0;
-    width: 100%;
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.4);
-  }
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  outline: none;
+  color: rgba(255, 255, 255);
+  font-size: 18px;
+  font-weight: 600;
 }
 .sum {
   background-color: transparent;
+  height: 35px;
+  width: 100%;
   border: none;
   outline: none;
-  text-align: center;
-  color: rgba(255, 255, 255);
+  padding: 8px 20px;
+  color: var(--white-600);
   font-size: 18px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   overflow: none;
 }
-input[type="number"]::-webkit-outer-spin-button,
-input[type="number"]::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-}
-input[type="number"],
-input[type="number"]:hover,
-input[type="number"]:focus {
-  appearance: none;
-  -moz-appearance: textfield;
-}
 .sum:focus {
   caret-color: rgba(255, 255, 255, 0.6);
 }
 .sum::placeholder {
-  color: rgba(255, 255, 255, 0.6);
-  text-align: center;
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
-.data_wrap {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 181px;
-  cursor: pointer;
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.4);
-  }
-  input {
-    padding: 0;
-    width: 93px;
-    color: #FBFBFB;
-    font-family: Poppins;
+  color: var(--white-600);
     font-size: 18px;
     font-style: normal;
-    font-weight: 400;
-    line-height: normal;
+}
+.data_wrap {
+  width: 100%;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  outline: none;
+  color: rgba(255, 255, 255);
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+    justify-content: space-between;
+    position: relative;
+    cursor: pointer;
+  input {
     background-color: transparent;
-    outline: none;
-    border: none;
-    margin-right: 32px;
+  height: 35px;
+  border: none;
+  outline: none;
+  padding: 8px 20px;
+  color: var(--white-600);
+  font-size: 18px;
+  font-style: normal;
+  line-height: normal;
+  overflow: none;
+  width: 100%;
   }
 }
 .customDatePicker {
@@ -179,11 +155,15 @@ input[type="number"]:focus {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: absolute;
+  right: 16px;
+  bottom: 8px;
+
 }
 .comment {
-  max-width: 394px;
+  width: 100%;
   position: relative;
-  margin-bottom: 48px;
+  margin-bottom: 40px;
   .input {
     width: 100%;
     background-color: transparent;
@@ -220,8 +200,49 @@ input[type="number"]:focus {
   left: 0;
   top: 50px;
 }
+.comment_bottom {
+  width: 100%;
+
+  margin-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  background-color: transparent;
+  outline: none;
+  color: rgba(255, 255, 255);
+  font-size: 18px;
+  font-weight: 600;
+  .input {
+    width: 100%;
+    height: 79px;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--white-600);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+  .input::placeholder {
+    position: absolute;
+    left: 16px;
+    top: 0;
+    color: rgba(255, 255, 255, 0.6);
+  }
+  .input:focus {
+    caret-color: rgba(255, 255, 255, 0.6);
+  }
+}
+.comment_err {
+  position: absolute;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 10px;
+  color: #F00000;
+  left: 0;
+  top: 50px;
+}
 .btn {
-  width: 300px;
+  width: 100%;
   height: 50px;
   border-radius: 20px;
   box-shadow: 1px 9px 15px 0px rgba(0, 0, 0, 0.2);
@@ -243,7 +264,7 @@ input[type="number"]:focus {
   letter-spacing: 1.8px;
   text-transform: uppercase;
   display: block;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   cursor: pointer;
   color: rgba(251, 251, 251, 1);
   background-image: none;
@@ -276,6 +297,7 @@ input[type="number"]:focus {
   font-size: 19px;
 }
 .btn_cancel {
+  width: 100%;
   background: #FBFBFB;
   color: #623F8B;
   text-align: center;
@@ -331,119 +353,25 @@ input[type="number"]:focus {
 .custom-select .option:hover {
   background-color: #E0E0E0;
 }
-.comment_bottom {
-  max-width: 394px;
-  position: relative;
-  margin-bottom: 48px;
-  padding: 0 8px;
-  .input {
-    width: 100%;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  .input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
-  }
-  .input:focus {
-    caret-color: rgba(255, 255, 255, 0.6);
-  }
-  &::after {
-    content: "";
-    position: absolute;
-    bottom: -8px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: rgba(255, 255, 255, 0.4);
-  }
+.modalCloseBtn {
+  display: none;
 }
-@media screen and (max-width: 767.98px) {
-  .switch__wrapper {
-    margin-bottom: 30px;
-  }
-  .select_form {
-    width: 100%;
-  }
-  .sum_data_wrap {
-    /* margin: 0 auto; */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 48px;
-    width: 100%;
-    margin-bottom: 48px;
-  }
-  .sum_wrap {
-    width: 280px;
-    padding: 0 20px;
-  }
-  .sum {
-    padding: 20px;
-    text-align: left;
-  }
-  .sum::placeholder {
-    text-align: left;
-  }
-  .data_wrap {
-    width: 280px;
-    display: flex;
-    justify-content: space-between;
-    padding: 0 20px;
-  }
-  .customDatePicker {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .comment {
-    width: 100%;
-    margin: 0 auto;
-    margin-bottom: 36px;
-    &::after {
-      bottom: 0px;
-    }
-  }
-  .comment_bottom {
-    width: 100%;
-    margin-bottom: 92px;
-    padding: 0 20px;
-    &::after {
-      bottom: -52px;
-    }
-    .input {
-      width: 100%;
-    }
-  }
+@media screen and (min-width: 370px) {
   .btn {
-    width: 280px;
-  }
-  .calendarClassName {
-    position: absolute;
-    left: 50px;
-  }
-  .modalCloseBtn {
-    display: none;
+    width: 300px;
   }
 }
+
 @media screen and (min-width: 768px) {
-  /* .form {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-    max-width: 540px;
-  } */
+  .form {
+    height: auto;
+  }
   .formContainer {
+    min-height: unset;
+    height: auto;
     border-radius: 8px;
     width: 540px;
-    height: 511px;
-    padding: 40px 73px;
+    padding: 40px 80px;
     background-image: url(./compresspng/tablet-min.png);
     background-size: cover;
     background-position: center;
@@ -474,8 +402,23 @@ input[type="number"]:focus {
   .closeIcon {
     width: 18px;
     height: 18px;
-    /* stroke-width: 1px; */
     stroke: var(--white);
     fill: white;
   }
+  .title {
+font-size: 30px;
+  }
+  .sum_data_wrap {
+    flex-direction: row;
+  }
+  .sum::placeholder {
+    text-align: center;
+  }
+
+.comment_bottom {
+  .input {
+    height: 35px;
+  }
+}
+
 }

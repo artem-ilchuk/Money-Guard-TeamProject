@@ -44,17 +44,17 @@
   color: white;
 }
 .type_text {
-  color: #E0E0E0;
+  color: #e0e0e0;
   font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
 }
 .income_active {
-  color: #FFB627;
+  color: #ffb627;
 }
 .expense_active {
-  color: #FF868D;
+  color: #ff868d;
 }
 .switch__wrapper {
   display: flex;
@@ -189,7 +189,7 @@ input[type="number"]:focus {
   input {
     padding: 0;
     width: 93px;
-    color: #FBFBFB;
+    color: #fbfbfb;
     font-family: Poppins;
     font-size: 18px;
     font-style: normal;
@@ -238,14 +238,14 @@ input[type="number"]:focus {
   }
 }
 .commentUnderfined {
-  color: #F00000;
+  color: #f00000;
   padding-bottom: 30px;
 }
 .comment_err {
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 10px;
-  color: #F00000;
+  color: #f00000;
 }
 .btn_wrap {
   display: flex;
@@ -263,9 +263,9 @@ input[type="number"]:focus {
 .btn_add {
   background: linear-gradient(
     97deg,
-    #FFC727 -16.42%,
-    #9E40BA 97.04%,
-    #7000FF 150.71%
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
   color: #fff;
   text-align: center;
@@ -283,9 +283,9 @@ input[type="number"]:focus {
   background-image: none;
   background: linear-gradient(
     96.76deg,
-    #FFC727 -16.42%,
-    #9E40BA 97.04%,
-    #7000FF 150.71%
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
   transition: all 1s ease 0s;
 }
@@ -296,9 +296,9 @@ input[type="number"]:focus {
   transform: scale(1.05);
   background-image: linear-gradient(
     to right,
-    #7000FF 0%,
-    #9E40BA 31%,
-    #FFC727 100%
+    #7000ff 0%,
+    #9e40ba 31%,
+    #ffc727 100%
   );
   background-size: 200%;
   background-position: right center;
@@ -310,8 +310,8 @@ input[type="number"]:focus {
   font-size: 19px;
 }
 .btn_cancel {
-  background: #FBFBFB;
-  color: #623F8B;
+  background: #fbfbfb;
+  color: #623f8b;
   text-align: center;
   font-size: 18px;
   font-style: normal;
@@ -322,8 +322,8 @@ input[type="number"]:focus {
   display: block;
   margin: 0 auto;
   cursor: pointer;
-  color: #623F8B;
-  background: #FCFCFC;
+  color: #623f8b;
+  background: #fcfcfc;
 }
 .btn_cancel:hover,
 .btn_cancel:focus {
@@ -349,9 +349,9 @@ input[type="number"]:focus {
 .select {
   background-color: linear-gradient(
     97deg,
-    #FFC727 -16.42%,
-    #9E40BA 97.04%,
-    #7000FF 150.71%
+    #ffc727 -16.42%,
+    #9e40ba 97.04%,
+    #7000ff 150.71%
   );
 }
 .custom-select {
@@ -361,10 +361,10 @@ input[type="number"]:focus {
   border: 1px solid #ccc;
 }
 .custom-select .option {
-  background-color: #F0F0F0;
+  background-color: #f0f0f0;
 }
 .custom-select .option:hover {
-  background-color: #E0E0E0;
+  background-color: #e0e0e0;
 }
 .date {
   padding-right: 70px;
@@ -446,21 +446,14 @@ input[type="number"]:focus {
     font-size: 30px;
   }
   .modalCloseBtn {
-    background-color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding-inline-end: 0px;
-    padding-inline-start: 0px;
+    all: unset;
+    background-color: inherit;
     position: absolute;
     top: 20px;
     right: 20px;
-    margin-left: auto;
-    padding: 0;
     cursor: pointer;
-    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-      border 250ms cubic-bezier(0.4, 0, 0.2, 1);
   }
+
   .modalCloseBtn:hover,
   .modalCloseBtn:focus {
     transform: translateY(-1px);

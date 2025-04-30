@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -19,26 +19,28 @@ import { RiCloseLargeLine } from "react-icons/ri";
 import clsx from "clsx";
 import "react-datepicker/dist/react-datepicker.css";
 
+
 export default function EditTransactionForm() {
   const dispatch = useDispatch();
   const transactionId = useSelector(selectIsEditID);
   const transactions = useSelector(selectTransactions);
-  const transaction = transactions.find((item) => item.id === transactionId);
+  const transaction = transactions.find((item) => item._id === transactionId);
   const categories = useSelector(selectCategories);
-
   const categoryOptions = useMemo(
-    () => categories.map((cat) => ({ value: cat, label: cat })),
+    () =>
+      categories.map((category) => ({
+        value: category,
+        label: category,
+      })),
     [categories]
   );
-
   const [isMobile, setIsMobile] = useState(false);
   const [isChecked, setIsChecked] = useState(true);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
-
+  const datePickerRef = useRef(null);
   useEffect(() => {
     dispatch(getCategories());
   }, [dispatch]);
-
   const schema = useMemo(() => {
     const categoryValues = categories;
     return yup.object().shape({
@@ -66,7 +68,6 @@ export default function EditTransactionForm() {
         .required("Sum is required"),
     });
   }, [categories]);
-
   const {
     control,
     handleSubmit,
@@ -84,24 +85,24 @@ export default function EditTransactionForm() {
       sum: "",
     },
   });
-
   useEffect(() => {
-    if (transaction) {
+    if (transaction && categoryOptions.length > 0) {
+      const parsedDate = new Date(transaction.date);
+      const isValidDate = !isNaN(parsedDate.getTime());
+      // Находим категорию, которая соответствует категории в транзакции
+      const matchedCategory = categoryOptions.find(
+        (opt) => opt.value === transaction.category
+      );
       reset({
-        date: format(new Date(transaction.date), "yyyy-MM-dd"),
+        date: isValidDate ? format(parsedDate, "yyyy-MM-dd") : "",
         type: transaction.type,
-        category: {
-          value: transaction.category,
-          label: transaction.category,
-        },
+        category: matchedCategory || null, // Здесь мы используем объект с value и label
         comment: transaction.comment || "",
         sum: Math.abs(transaction.sum),
       });
-
       setIsChecked(transaction.type === "EXPENSE");
     }
-  }, [transaction, reset]);
-
+  }, [transaction, categoryOptions, reset]);
   useEffect(() => {
     const mediaQuery = window.matchMedia("(max-width: 767px)");
     setIsMobile(mediaQuery.matches);
@@ -109,28 +110,23 @@ export default function EditTransactionForm() {
     mediaQuery.addEventListener("change", handler);
     return () => mediaQuery.removeEventListener("change", handler);
   }, []);
-
   const toggleType = () => {
     setIsChecked((prev) => !prev);
     const newType = !isChecked ? "EXPENSE" : "INCOME";
     setValue("type", newType);
   };
-
   const onSubmit = (data) => {
     if (!transaction) return;
-
     const updatedTransaction = {
       ...data,
       category: data.category?.value || "",
       sum: data.type === "EXPENSE" ? -Math.abs(data.sum) : Math.abs(data.sum),
     };
-
     dispatch(
       editTransaction({ id: transactionId, transaction: updatedTransaction })
     );
     dispatch(closeEditModal());
   };
-
   return (
     <div className={s.formContainer}>
       <button
@@ -140,9 +136,7 @@ export default function EditTransactionForm() {
       >
         <RiCloseLargeLine className={s.closeIcon} />
       </button>
-
       <h1 className={s.title}>Edit transaction</h1>
-
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className={s.type} onClick={toggleType}>
           <div
@@ -173,7 +167,6 @@ export default function EditTransactionForm() {
             Expense
           </div>
         </div>
-
         {isChecked && (
           <div className={s.comment}>
             <Controller
@@ -207,7 +200,6 @@ export default function EditTransactionForm() {
             )}
           </div>
         )}
-
         <div className={s.sum_data_wrap}>
           <div className={s.sum_wrap}>
             <input
@@ -221,8 +213,10 @@ export default function EditTransactionForm() {
               <span className={s.comment_err}>{errors.sum.message}</span>
             )}
           </div>
-
-          <div className={s.data_wrap}>
+          <div
+            className={s.data_wrap}
+            onClick={() => datePickerRef.current?.setFocus()}
+          >
             <Controller
               name="date"
               control={control}
@@ -249,7 +243,6 @@ export default function EditTransactionForm() {
             </div>
           </div>
         </div>
-
         <div className={clsx(s.comment, s.comment_bottom)}>
           <input
             {...register("comment")}
@@ -262,7 +255,6 @@ export default function EditTransactionForm() {
             <span className={s.comment_err}>{errors.comment.message}</span>
           )}
         </div>
-
         <div className={s.btn_wrap}>
           <button type="submit" className={clsx(s.btn, s.btn_add)}>
             Save

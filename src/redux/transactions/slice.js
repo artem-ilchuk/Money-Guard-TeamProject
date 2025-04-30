@@ -5,15 +5,12 @@ import {
   addTransaction,
   editTransaction,
 } from "../transactions/operations";
-
 import { logoutThunk } from "../auth/operations";
-
 const initialState = {
   transactions: [],
   isTransLoading: false,
   isTransError: null,
 };
-
 const transactionsSlice = createSlice({
   name: "transactions",
   initialState,
@@ -24,12 +21,14 @@ const transactionsSlice = createSlice({
         state.isTransLoading = false;
       })
       .addCase(addTransaction.fulfilled, (state, action) => {
-        state.transactions.push(action.payload);
+        state.transactions.push(action.payload.data.transaction);
         state.isTransLoading = false;
       })
       .addCase(editTransaction.fulfilled, (state, action) => {
         state.transactions = state.transactions.map((transaction) =>
-          transaction._id === action.payload._id ? action.payload : transaction
+          transaction._id === action.payload.data._id
+            ? action.payload.data
+            : transaction
         );
         state.isTransLoading = false;
       })
@@ -69,5 +68,4 @@ const transactionsSlice = createSlice({
       );
   },
 });
-
 export const transReducer = transactionsSlice.reducer;

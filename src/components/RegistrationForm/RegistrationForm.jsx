@@ -1,17 +1,21 @@
 import css from "./RegistrationForm.module.css";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { registerThunk } from "../../redux/auth/operations";
 import { registerSchema } from "../../schemas/schemas";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PasswordStrengthBar from "react-password-strength-bar-with-style-item";
 import clsx from "clsx";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { selectIsRegistering } from "../../redux/auth/selectors";
+import Loader from "../Loader/Loader";
 
 const RegistrationForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const isRegistering = useSelector(selectIsRegistering);
 
   const {
     register,
@@ -156,12 +160,18 @@ const RegistrationForm = () => {
         </div>
 
         <div className={css.buttonThumb}>
-          <button type="submit" className={clsx(css.button, css.regButton)}>
-            Register
-          </button>
-          <NavLink to="/login" className={clsx(css.button, css.logButton)}>
-            Log in
-          </NavLink>
+          {isRegistering ? (
+            <Loader />
+          ) : (
+            <>
+              <button type="submit" className={clsx(css.button, css.regButton)}>
+                Register
+              </button>
+              <NavLink to="/login" className={clsx(css.button, css.logButton)}>
+                Log in
+              </NavLink>
+            </>
+          )}
         </div>
       </form>
     </>

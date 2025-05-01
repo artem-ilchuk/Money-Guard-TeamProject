@@ -10,6 +10,8 @@ import { loginSchema } from "../../schemas/schemas.js";
 import s from "./LoginForm.module.css";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useState } from "react";
+import Loader from "../Loader/Loader.jsx";
+
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -102,17 +104,19 @@ const LoginForm = () => {
                 </div>
               </div>
               <div className={s.buttonBox}>
-                <button
-                  type="submit"
-                  className={s.button_log}
-                  disabled={isSubmitting}
-                >
-                  {isSubmitting ? <div className={s.loader}></div> : "LOG IN"}
-                </button>
-                <NavLink to="/register" className={s.button_reg}>
-                  REGISTER
-                </NavLink>
-              </div>
+              {isSubmitting ? (
+                <Loader />
+              ) : (
+                <>
+                  <button type="submit" className={s.button_log}>
+                    LOG IN
+                  </button>
+                  <NavLink to="/register" className={s.button_reg}>
+                    REGISTER
+                  </NavLink>
+                </>
+              )}
+            </div>
             </Form>
             <button
             type="button"

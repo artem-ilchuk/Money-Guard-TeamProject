@@ -1,7 +1,7 @@
 export const customStyles = {
   option: (provided) => ({
     ...provided,
-    padding: "0px",
+    // padding: "0px",
     background: "transparent",
     border: "none",
     outline: "none",

@@ -223,8 +223,13 @@ font-size: 18px;
     padding: 80px 62px;
   }
 
+  .forgotBtn {
+    right:70px;
+  bottom: 230px;
+  }
+
   .inputs {
-    margin-bottom: 52px;
+    margin-bottom: 62px;
   }
   .iconLogo {
     width: 36px;

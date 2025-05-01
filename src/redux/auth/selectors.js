@@ -5,5 +5,3 @@ export const selectIsAuthLoading = (state) => state.auth.isAuthLoading;
 export const selectIsAuthError = (state) => state.auth.isAuthError;
 export const selectTotalBalance = (state) => state.auth.user.balance;
 export const selectAvatarPreview = (state) => state.avatar.preview;
-export const passwordChanged = (state) => state.passwordChanged;
-export const resetEmailSent = (state) => state.resetEmailSent;

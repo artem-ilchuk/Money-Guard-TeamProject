@@ -82,10 +82,10 @@ const StatisticsDashboard = () => {
     option: (provided, state) => ({
       ...provided,
       padding: "12px 20px",
-      color: "var(--white)",
       fontSize: "16px",
       fontFamily: "var(--font-family)",
       fontWeight: 400,
+      color: state.isFocused ? "#ff868d" : "var(--white)",
       backgroundColor: state.isFocused
         ? "rgba(255, 255, 255, 0.1)"
         : "transparent",

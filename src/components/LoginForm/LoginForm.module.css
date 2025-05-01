@@ -68,7 +68,7 @@
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .label {
@@ -222,10 +222,7 @@ font-size: 18px;
     backdrop-filter: blur(50px);
     padding: 80px 62px;
   }
-.forgotBtn {
-  right:60px;
-  bottom: 230px;
-}
+
   .inputs {
     margin-bottom: 52px;
   }

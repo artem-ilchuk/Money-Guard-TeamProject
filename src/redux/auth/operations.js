@@ -3,7 +3,7 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 export const moneyGuardAPI = axios.create({
-  baseURL: "https://money-guard-team-project-nine.vercel.app",
+  baseURL: "https://server-money-guard-teamproject.onrender.com"
 });
 
 export const setAuthHeader = (token) => {

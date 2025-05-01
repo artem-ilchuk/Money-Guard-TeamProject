@@ -227,7 +227,7 @@ function AddTransactionForm() {
           </div>
         </div>
         <div className={clsx(s.comment_bottom)}>
-          <input
+          <textarea
             {...register("comment")}
             type="text"
             className={s.input}

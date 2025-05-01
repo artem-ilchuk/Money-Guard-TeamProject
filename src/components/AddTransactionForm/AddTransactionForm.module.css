@@ -242,6 +242,9 @@ border: none!important;
   font-size: 18px;
   font-weight: 600;
   .input {
+    resize: none;
+    padding-left: 20px;
+    padding-top: 2px;
     width: 100%;
     height: 79px;
     background-color: transparent;
@@ -254,9 +257,6 @@ border: none!important;
     line-height: normal;
   }
   .input::placeholder {
-    position: absolute;
-    left: 16px;
-    top: 0;
     color: rgba(255, 255, 255, 0.6);
   }
   .input:focus {

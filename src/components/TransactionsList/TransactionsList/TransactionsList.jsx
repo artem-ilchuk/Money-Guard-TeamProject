@@ -53,7 +53,7 @@ const TransactionList = () => {
             );
           })
         ) : (
-          <h3> No transactions</h3>
+          <h3 className={styles.message}> No transactions</h3>
         )}
       </ul>
     </div>

@@ -47,26 +47,12 @@
   font-size: 19px;
   color: #fbfbfb;
 }
-.formik {
-  position: relative;
-}
-.forgotBtn {
-  position: absolute;
-  right:20px;
-  bottom: 230px;
-  border: none;
-  background-color: transparent;
-  color: var(--white-600);
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  text-decoration: underline;
-}
+
 .inputs {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  margin-bottom: 60px;
+  margin-bottom: 40px;
 }
 
 .label {
@@ -220,10 +206,7 @@ font-size: 18px;
     backdrop-filter: blur(50px);
     padding: 80px 62px;
   }
-.forgotBtn {
-  right:60px;
-  bottom: 230px;
-}
+
   .inputs {
     margin-bottom: 52px;
   }

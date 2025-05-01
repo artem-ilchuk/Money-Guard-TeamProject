@@ -25,8 +25,8 @@ function AddTransactionForm() {
   const categoryOptions = useMemo(
     () =>
       categories.map((category) => ({
-        value: category,
-        label: category,
+        value: typeof category === "string" ? category : category.name,
+      label: typeof category === "string" ? category : category.name,
       })),
     [categories]
   );

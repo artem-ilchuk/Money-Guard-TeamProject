@@ -6,6 +6,7 @@ import { getTotalBalanceThunk } from "../../redux/auth/operations";
 import useMedia from "../../hooks/UseMadia";
 import clsx from "clsx";
 import s from "./Balance.module.css";
+import { getCurrency } from "../../redux/currency/operations";
 
 const Balance = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,11 @@ const Balance = () => {
   const [selectedCurrency, setSelectedCurrency] = useState("UAH");
 
   useEffect(() => {
-    dispatch(getTotalBalanceThunk());
+		dispatch(getTotalBalanceThunk());
+		
+		if (!currencyData?.usd || !currencyData?.euro) {
+      dispatch(getCurrency());
+    }
   }, [dispatch]);
 
   const formattedUAH = balance.toLocaleString("uk-UA", {

@@ -30,7 +30,7 @@ function AddTransactionForm() {
       })),
     [categories]
   );
-  const [isChecked, setIsChecked] = useState(false);
+  const [isChecked, setIsChecked] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
   const [menuIsOpen, setMenuIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);

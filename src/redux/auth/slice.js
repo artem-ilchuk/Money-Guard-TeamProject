@@ -7,6 +7,8 @@ import {
   editUserName,
   editUserAvatar,
   getTotalBalanceThunk,
+  changePassword,
+  resetPassword
 } from "./operations";
 
 const initialState = {
@@ -36,6 +38,11 @@ const authSlice = createSlice({
     },
     clearAvatarPreview: (state) => {
       state.preview = null;
+    },
+    resetPasswordState(state) {
+      state.error = null;
+      state.passwordChanged = false;
+      state.resetEmailSent = false;
     },
   },
   extraReducers: (builder) => {
@@ -74,6 +81,34 @@ const authSlice = createSlice({
         state.isRefreshing = false;
         state.isAuthLoading = false;
       })
+      .addCase(resetPassword.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.resetEmailSent = false;
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.isLoading = false;
+        state.resetEmailSent = true;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+
+      // смена пароля
+      .addCase(changePassword.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.passwordChanged = false;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.isLoading = false;
+        state.passwordChanged = true;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
       .addMatcher(
         isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled),
         (state, action) => {
@@ -103,5 +138,5 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { updateBalance, setAvatarPreview, clearAvatarPreview } =
+export const { updateBalance, setAvatarPreview, clearAvatarPreview, resetPasswordState } =
   authSlice.actions;

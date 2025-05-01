@@ -25,7 +25,6 @@
   left: 50%;
   transform: translate(-50%);
   width: 100%;
-  max-width: 360px;
   background-image: url(./compresspng/mobBG2-min.png);
 
   background-size: cover;
@@ -510,6 +509,9 @@ input[type="number"]:focus {
 }
 
 @media screen and (min-width: 768px) {
+  .formContainer {
+    margin-top: 0px;
+  }
   .title {
     font-size: 30px;
     margin-bottom: 40px;

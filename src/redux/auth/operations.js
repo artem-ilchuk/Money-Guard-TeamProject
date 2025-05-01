@@ -129,3 +129,31 @@ export const getTotalBalanceThunk = createAsyncThunk(
     }
   }
 );
+
+export const resetPassword = createAsyncThunk(
+  "users/resetPassword",
+  async (credentials, thunkAPI) => {
+    try {
+      const data = await moneyGuardAPI.post(`/auth/send-reset-email`, credentials);
+      toast.success("Reset Email password was sent successfully");
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const changePassword = createAsyncThunk(
+  "users/changePassword",
+  async(credentials, thunkAPI) => {
+    try {
+      const data = await moneyGuardAPI.post('/auth/reset-pwd', credentials);
+      toast.success("Password was changed successfully");
+      return data.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+)
+
+

@@ -23,6 +23,7 @@ const LoginPage = lazy(() => import("./pages/LoginPage/LoginPage"));
 const RegistrationPage = lazy(() =>
   import("./pages/RegistrationPage/RegistrationPage")
 );
+const ChangePasswordPage = lazy(() => import("./pages/ChangePasswordPage/ChangePasswordPage"));
 const CurrencyTab = lazy(() => import("./components/Currency/Currency"));
 const StatisticsTab = lazy(() =>
   import("./components/StatisticsDashboard/StatisticsDashboard")
@@ -84,6 +85,14 @@ function App() {
           element={
             <PublicRoute>
               <LoginPage />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="/reset-password"
+          element={
+            <PublicRoute>
+              <ChangePasswordPage />
             </PublicRoute>
           }
         />

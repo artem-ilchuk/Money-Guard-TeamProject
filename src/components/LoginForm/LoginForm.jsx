@@ -12,6 +12,7 @@ import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useState } from "react";
 import Loader from "../Loader/Loader.jsx";
 
+
 const LoginForm = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -47,7 +48,7 @@ const LoginForm = () => {
         initialValues={{ email: "", password: "" }}
         validationSchema={loginSchema}
         onSubmit={handleSubmit}
-      ><div className={s.formik}
+      >
         {({ isSubmitting, values }) => (
           <div className={s.formik}>
             <Form className={s.form}>
@@ -75,35 +76,34 @@ const LoginForm = () => {
                     className={s.error}
                   />
                 </div>
-                <Field
-                  className={s.field}
-                  type={passwordVisibility ? "text" : "password"}
-                  name="password"
-                  placeholder="Password"
-                />
-                {passwordVisibility ? (
-                  <svg
-                    className={s.eyeButton}
-                    onClick={handlePasswordVisibility}
-                  >
-                    <use href={"/icons.svg#icon-eye"}></use>
-                  </svg>
-                ) : (
-                  <svg
-                    className={s.eyeButton}
-                    onClick={handlePasswordVisibility}
-                  >
-                    <use href={"/icons.svg#icon-eye-blocked"}></use>
-                  </svg>
-                )}
-                <ErrorMessage
-                  name="password"
-                  component="div"
-                  className={s.error}
-                />
+  
+                <div className={s.label}>
+                  <div className={s.iconWrapper}>
+                    <FaLock className={s.icon} />
+                  </div>
+                  <Field
+                    className={s.field}
+                    type={passwordVisibility ? "text" : "password"}
+                    name="password"
+                    placeholder="Password"
+                  />
+                  {passwordVisibility ? (
+                <svg className={s.eyeButton} onClick={handlePasswordVisibility}>
+                  <use href={"/icons.svg#icon-eye"}></use>
+                </svg>
+              ) : (
+                <svg className={s.eyeButton} onClick={handlePasswordVisibility}>
+                  <use href={"/icons.svg#icon-eye-blocked"}></use>
+                </svg>
+              )}
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className={s.error}
+                  />
+                </div>
               </div>
-            </div>
-            <div className={s.buttonBox}>
+              <div className={s.buttonBox}>
               {isSubmitting ? (
                 <Loader />
               ) : (
@@ -117,8 +117,8 @@ const LoginForm = () => {
                 </>
               )}
             </div>
-          </Form>
-             <button
+            </Form>
+            <button
             type="button"
             className={s.forgotBtn}
             onClick={() => handleResetPassword(values.email)}

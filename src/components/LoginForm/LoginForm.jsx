@@ -16,16 +16,10 @@ const LoginForm = () => {
   const navigate = useNavigate();
 
   const handleSubmit = async (values, { setSubmitting, resetForm }) => {
-    try {
+
       const data = await dispatch(loginThunk(values)).unwrap();
-      toast.success("Welcome, ${data.user.username}!");
       navigate("/dashboard");
       resetForm();
-    } catch (error) {
-      toast.error("Invalid email or password");
-    } finally {
-      setSubmitting(false);
-    }
   };
 
   const handleResetPassword = (email) => {

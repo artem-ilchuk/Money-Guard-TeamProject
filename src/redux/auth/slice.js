@@ -7,6 +7,8 @@ import {
   editUserName,
   editUserAvatar,
   getTotalBalanceThunk,
+  resetPassword,
+  changePassword
 } from "./operations";
 
 const initialState = {
@@ -73,6 +75,32 @@ const authSlice = createSlice({
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.isAuthLoading = false;
+      })
+      .addCase(resetPassword.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.resetEmailSent = false;
+      })
+      .addCase(resetPassword.fulfilled, (state) => {
+        state.isLoading = false;
+        state.resetEmailSent = true;
+      })
+      .addCase(resetPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(changePassword.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+        state.passwordChanged = false;
+      })
+      .addCase(changePassword.fulfilled, (state) => {
+        state.isLoading = false;
+        state.passwordChanged = true;
+      })
+      .addCase(changePassword.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       })
       .addMatcher(
         isAnyOf(registerThunk.fulfilled, loginThunk.fulfilled),

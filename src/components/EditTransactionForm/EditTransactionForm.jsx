@@ -19,7 +19,6 @@ import { RiCloseLargeLine } from "react-icons/ri";
 import clsx from "clsx";
 import "react-datepicker/dist/react-datepicker.css";
 
-
 export default function EditTransactionForm() {
   const dispatch = useDispatch();
   const transactionId = useSelector(selectIsEditID);
@@ -261,7 +260,7 @@ export default function EditTransactionForm() {
                   onChange={(date) =>
                     field.onChange(format(date, "dd-MM-yyyy"))
                   } // Форматируем дату при изменении
-                  dateFormat="dd-MM-yyyy" // Устанавливаем отображение даты в формате dd-MM-yyyy
+                  dateFormat="dd.MM.yyyy" // Устанавливаем отображение даты в формате dd-MM-yyyy
                   className={s.customDatePicker}
                   calendarClassName={s.calendarClassName}
                   maxDate={new Date()}

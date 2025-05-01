@@ -37,12 +37,12 @@
   box-shadow: 0 4px 60px 0 rgba(0, 0, 0, 0.25);
   background: var(--form-color); */
 
-  padding: 24px 20px 30px;
+  padding: 32px 20px 30px;
 }
 
 .title {
   margin-top: 0; /* Або менше значення */
-  margin-bottom: 40px; /* Залиште нижній маргін, якщо потрібно */
+  margin-bottom: 32px; /* Залиште нижній маргін, якщо потрібно */
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 24px;
@@ -127,12 +127,13 @@
 }
 
 .sum_data_wrap {
+  margin: 0 auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 32px;
-  margin-bottom: 48px;
-  cursor: pointer;
+  gap: 40px;
+  width: 280px;
 }
 
 .customDatePicker {
@@ -144,6 +145,7 @@
 .sum_wrap {
   position: relative;
   width: 181px;
+  height: 32px;
 
   input {
     padding: 0;
@@ -204,6 +206,7 @@ input[type="number"]:focus {
   justify-content: center;
   align-items: center;
   width: 181px;
+  height: 32px;
 
   &::after {
     content: "";
@@ -217,7 +220,6 @@ input[type="number"]:focus {
 
   input {
     padding: 0;
-    /* width: 93px; */
     color: #fbfbfb;
     font-family: Poppins;
     font-size: 18px;
@@ -314,7 +316,7 @@ input[type="number"]:focus {
   text-transform: uppercase;
   display: block;
   margin: 0 auto;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   cursor: pointer;
 
   color: rgba(251, 251, 251, 1);
@@ -442,9 +444,9 @@ input[type="number"]:focus {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 48px;
+    gap: 40px;
     width: 280px;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
   .sum_wrap {
     width: 280px;
@@ -473,8 +475,9 @@ input[type="number"]:focus {
   .comment {
     max-width: 280px;
     margin: 0 auto;
-    margin-bottom: 36px;
+    margin-bottom: 40px;
     padding: 0 20px;
+    height: 35px;
 
     &::after {
       bottom: 0px;
@@ -509,6 +512,7 @@ input[type="number"]:focus {
 @media screen and (min-width: 768px) {
   .title {
     font-size: 30px;
+    margin-bottom: 40px;
   }
   .modalCloseBtn {
     all: unset;
@@ -555,5 +559,26 @@ input[type="number"]:focus {
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
+  .sum_data_wrap {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    width: 394px;
+    margin-bottom: 40px;
+  }
+  .data_wrap {
+    width: 181px;
+  }
+  .customDatePicker {
+    width: 110px;
+  }
+  .data_wrap {
+    input {
+      margin-right: 31px;
+    }
   }
 }

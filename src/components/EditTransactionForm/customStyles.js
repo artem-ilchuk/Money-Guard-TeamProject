@@ -1,7 +1,7 @@
 export const customStyles = {
   option: (provided) => ({
     ...provided,
-    padding: "0px",
+    // padding: "0px",
     background: "transparent",
     border: "none",
     outline: "none",
@@ -11,8 +11,8 @@ export const customStyles = {
     backgroundColor: "transparent",
     cursor: "pointer",
     "&:hover": {
-      backgroundColor: "var(--bg-form)",
-      color: "var(--red-color)",
+      backgroundColor: "rgba(255, 255, 255, 0.1)",
+      color: "#FF868D",
       fontWeight: "400",
     },
     textAlign: "left",

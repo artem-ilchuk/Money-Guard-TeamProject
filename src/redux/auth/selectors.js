@@ -6,3 +6,4 @@ export const selectIsAuthError = (state) => state.auth.isAuthError;
 export const selectTotalBalance = (state) => state.auth.user.balance;
 export const selectAvatarPreview = (state) => state.avatar.preview;
 export const selectIsRegistering = (state) => state.auth.isRegistering;
+export const resetEmailSent = (state) => state.resetEmailSent;

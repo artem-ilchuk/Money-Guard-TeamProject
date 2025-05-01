@@ -12,6 +12,10 @@
     height: 100%;
     overflow-y: auto;
 }
+.message {
+    margin-top: 15px;
+    margin-left: 15px;
+}
 
 @media screen and (min-width: 768px) {
 
@@ -19,7 +23,7 @@
   /* background-color: linear-gradient(207deg, #341fa0 44.63%, #652392 88.57%); */
 	height: calc(100vh - 400px);
 	margin-bottom: 25px;
-    padding: 0;
+    padding: 0 20px;
 }
 
     .ListHeader {

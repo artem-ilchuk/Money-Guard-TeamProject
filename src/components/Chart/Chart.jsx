@@ -4,12 +4,14 @@ import { selectTotalBalance } from "../../redux/auth/selectors";
 import styles from "./Chart.module.css";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
+import { selectSummary } from "../../redux/statistics/selectors";
 
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 const Chart = () => {
   const categoriesData = useSelector(selectCategories) || [];
   const balance = useSelector(selectTotalBalance) ?? 0;
+  const { expenseSummary } = useSelector(selectSummary) ?? 0;
 
   const categoryColors = {
     "Main expenses": "#FFD700",
@@ -64,7 +66,7 @@ const Chart = () => {
         <Doughnut data={data} options={options} />
         <div className={styles.balanceDisplay}>
           <p className={styles.balanceAmount}>
-            ₴ {balance.toLocaleString("uk-UA", { minimumFractionDigits: 2 })}
+            ₴ {expenseSummary.toLocaleString("uk-UA", { minimumFractionDigits: 2 })}
           </p>
         </div>
       </div>

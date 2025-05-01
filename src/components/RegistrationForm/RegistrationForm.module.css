@@ -113,6 +113,13 @@
 }
 
 .regButton {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 18px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--white);
   background: var(--button-gradient);
   color: var(--white);
 }

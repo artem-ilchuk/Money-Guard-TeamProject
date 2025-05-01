@@ -10,6 +10,7 @@ import { loginSchema } from "../../schemas/schemas.js";
 import s from "./LoginForm.module.css";
 import { FaEnvelope, FaLock } from "react-icons/fa";
 import { useState } from "react";
+import Loader from "../Loader/Loader.jsx";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
@@ -79,14 +80,20 @@ const LoginForm = () => {
                   placeholder="Password"
                 />
                 {passwordVisibility ? (
-              <svg className={s.eyeButton} onClick={handlePasswordVisibility}>
-                <use href={"/icons.svg#icon-eye"}></use>
-              </svg>
-            ) : (
-              <svg className={s.eyeButton} onClick={handlePasswordVisibility}>
-                <use href={"/icons.svg#icon-eye-blocked"}></use>
-              </svg>
-            )}
+                  <svg
+                    className={s.eyeButton}
+                    onClick={handlePasswordVisibility}
+                  >
+                    <use href={"/icons.svg#icon-eye"}></use>
+                  </svg>
+                ) : (
+                  <svg
+                    className={s.eyeButton}
+                    onClick={handlePasswordVisibility}
+                  >
+                    <use href={"/icons.svg#icon-eye-blocked"}></use>
+                  </svg>
+                )}
                 <ErrorMessage
                   name="password"
                   component="div"
@@ -94,7 +101,7 @@ const LoginForm = () => {
                 />
               </div>
             </div>
-            <div className={s.buttonBox}>
+            {/* <div className={s.buttonBox}>
               <button
                 type="submit"
                 className={s.button_log}
@@ -105,6 +112,21 @@ const LoginForm = () => {
               <NavLink to="/register" className={s.button_reg}>
                 REGISTER
               </NavLink>
+            </div> */}
+
+            <div className={s.buttonBox}>
+              {isSubmitting ? (
+                <Loader />
+              ) : (
+                <>
+                  <button type="submit" className={s.button_log}>
+                    LOG IN
+                  </button>
+                  <NavLink to="/register" className={s.button_reg}>
+                    REGISTER
+                  </NavLink>
+                </>
+              )}
             </div>
           </Form>
         )}

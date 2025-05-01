@@ -22,6 +22,7 @@ const initialState = {
   isRefreshing: false,
   isAuthLoading: false,
   isAuthError: null,
+  isRegistering: false,
 };
 
 const authSlice = createSlice({
@@ -83,6 +84,7 @@ const authSlice = createSlice({
           state.user.avatar = action.payload.data.user.avatar;
           state.token = action.payload.data.accessToken;
           state.isLoggedIn = true;
+          state.isRegistering = false;
         }
       )
       .addMatcher(
@@ -90,6 +92,7 @@ const authSlice = createSlice({
         (state) => {
           state.isAuthLoading = true;
           state.isAuthError = null;
+          state.isRegistering = true;
         }
       )
       .addMatcher(
@@ -97,6 +100,7 @@ const authSlice = createSlice({
         (state, action) => {
           state.isAuthLoading = false;
           state.isAuthError = action.payload;
+          state.isRegistering = false;
         }
       );
   },

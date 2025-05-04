@@ -11,6 +11,8 @@ const initialState = {
   isAddModalOpen: false,
   isProfileModalOpen: false,
   isLogOutModalOpen: false,
+  isRepeatModalOpen: false,
+  repeatTransactionId: null,
   isEditId: " ",
 };
 const modalsSlice = createSlice({
@@ -50,6 +52,14 @@ const modalsSlice = createSlice({
     closeLogOutModal: (state) => {
       state.isLogOutModalOpen = false;
     },
+    openRepeatModal: (state, action) => {
+      state.isRepeatModalOpen = true;
+      state.repeatTransactionId = action.payload;
+    },
+    closeRepeatModal: (state) => {
+      state.isRepeatModalOpen = false;
+      state.repeatTransactionId = null;
+    },
   },
 });
 export const {
@@ -63,5 +73,7 @@ export const {
   closeProfileModal,
   openLogOutModal,
   closeLogOutModal,
+  openRepeatModal,
+  closeRepeatModal,
 } = modalsSlice.actions;
 export const modalsReducer = modalsSlice.reducer;

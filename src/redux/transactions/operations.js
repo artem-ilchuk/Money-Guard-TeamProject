@@ -62,3 +62,31 @@ export const deleteTransaction = createAsyncThunk(
     }
   }
 );
+
+export const copyTransaction = createAsyncThunk(
+  "transactions/copyTransaction",
+  async (id, thunkAPI) => {
+    try {
+      const { data: originalTransaction } = await moneyGuardAPI.get(
+        `/transactions/${id}`
+      );
+      const original = originalTransaction.data;
+      const transactionCopy = {
+        date: original.date,
+        type: original.type,
+        category: original.category,
+        comment: original.comment,
+        sum: original.sum,
+      };
+      const { data } = await moneyGuardAPI.post(
+        "/transactions",
+        transactionCopy
+      );
+			thunkAPI.dispatch(getTotalBalanceThunk());
+			toast.success("Transaction successfully repeated!");
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

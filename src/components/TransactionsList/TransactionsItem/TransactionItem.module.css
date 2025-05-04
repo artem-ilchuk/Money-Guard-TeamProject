@@ -44,10 +44,12 @@ button {
   border: none;
   border-radius: 20px;
   box-shadow: 1px 9px 15px 0 rgba(0, 0, 0, 0.2);
-  background: linear-gradient(167deg,
-      #ffc727 0%,
-      #9e40ba 61.46%,
-      #7000ff 90.54%);
+  background: linear-gradient(
+    167deg,
+    #ffc727 0%,
+    #9e40ba 61.46%,
+    #7000ff 90.54%
+  );
 
   letter-spacing: 0.1em;
   color: var(--white);
@@ -62,7 +64,6 @@ button {
 .edit {
   display: flex;
   align-items: center;
-  /* justify-content: flex-start; */
   flex-direction: row;
   gap: 4px;
   font-weight: 400;
@@ -71,12 +72,19 @@ button {
   text-align: center;
   color: rgba(255, 255, 255, 0.6);
   cursor: pointer;
+  position: relative;
+}
+
+.tooltip {
+  visibility: hidden;
+  position: absolute;
 }
 
 .deleteEdit {
   border: 0;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 12px 0;
 }
 
@@ -125,9 +133,7 @@ button {
 } */
 
 @media screen and (min-width: 768px) {
-
   .transactionListContainer {
-
     width: 100%;
     height: fit-content;
     border-radius: 0;
@@ -146,12 +152,11 @@ button {
     padding: 13px 20px;
     margin: 0;
     overflow: auto;
-
   }
 
   .listItem {
     display: flex;
-    width: calc(100% /6);
+    width: calc(100% / 6);
     border: 0;
     padding: 0;
     justify-content: flex-start;
@@ -176,12 +181,32 @@ button {
     display: none;
   }
 
+  .tooltip {
+    visibility: hidden;
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: black;
+    color: white;
+    text-align: center;
+    border-radius: 5px;
+    padding: 5px;
+    font-size: 12px;
+    white-space: nowrap;
+    z-index: 10;
+  }
+
+  .edit:hover .tooltip {
+    visibility: visible;
+  }
+
   .editSpan {
     display: none;
   }
 
   .deleteEdit {
-    width: calc(100% /6);
+    width: calc(100% / 6);
     border: 0;
     padding: 0;
     display: flex;

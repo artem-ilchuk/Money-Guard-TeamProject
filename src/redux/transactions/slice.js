@@ -4,6 +4,7 @@ import {
   deleteTransaction,
   addTransaction,
   editTransaction,
+  copyTransaction,
 } from "../transactions/operations";
 import { logoutThunk } from "../auth/operations";
 const initialState = {
@@ -38,6 +39,10 @@ const transactionsSlice = createSlice({
         );
         state.isTransLoading = false;
       })
+      .addCase(copyTransaction.fulfilled, (state, action) => {
+        state.transactions.push(action.payload.data.transaction);
+        state.isTransLoading = false;
+      })
       .addCase(logoutThunk.fulfilled, (state) => {
         state.transactions = [];
         state.isTransError = null;
@@ -47,7 +52,8 @@ const transactionsSlice = createSlice({
           fetchTransactions.pending,
           addTransaction.pending,
           deleteTransaction.pending,
-          editTransaction.pending
+          editTransaction.pending,
+          copyTransaction.pending
         ),
         (state) => {
           state.isTransLoading = true;
@@ -59,7 +65,8 @@ const transactionsSlice = createSlice({
           fetchTransactions.rejected,
           addTransaction.rejected,
           deleteTransaction.rejected,
-          editTransaction.rejected
+          editTransaction.rejected,
+          copyTransaction.rejected
         ),
         (state, action) => {
           state.isTransError = action.payload;

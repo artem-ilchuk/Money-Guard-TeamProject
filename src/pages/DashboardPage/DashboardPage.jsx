@@ -3,6 +3,9 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   selectIsLogOutModalOpen,
   selectIsProfileModalOpen,
+  selectIsRepeatModalOpen,
+  selectIsAddModalOpen,
+  selectIsEditModalOpen,
 } from "../../redux/modal/selectors";
 import { closeLogOutModal, closeProfileModal } from "../../redux/modal/slice";
 import LogOutModal from "../../components/LogOutModal/LogOutModal";
@@ -14,14 +17,15 @@ import Balance from "../../components/Balance/Balance";
 import Currency from "../../components/Currency/Currency";
 import s from "./Dashboard.module.css";
 import { useLocation } from "react-router-dom";
-import { selectIsAddModalOpen, selectIsEditModalOpen } from "../../redux/modal/selectors";
 import ModalAddTransaction from "../../components/ModalAddTransaction/ModalAddTransaction";
 import ModalEditTransaction from "../../components/ModalEditTransaction/ModalEditTransaction";
+import ModalRepeatTransaction from "../../components/ModalRepeatTransaction/ModalRepeatTransaction";
 
 const DashboardPage = () => {
   const isLogOutModalOpen = useSelector(selectIsLogOutModalOpen);
   const isProfileModalOpen = useSelector(selectIsProfileModalOpen);
-  const isEditModalOpen = useSelector(selectIsEditModalOpen);
+	const isEditModalOpen = useSelector(selectIsEditModalOpen);
+	const isRepeatModalOpen = useSelector(selectIsRepeatModalOpen);
   const dispatch = useDispatch();
 
   const handleCloseModal = () => {
@@ -45,6 +49,7 @@ const DashboardPage = () => {
       {isProfileModalOpen && <UserModal closeModal={handleCloseProfile} />}
       {isAddModalOpen && <ModalAddTransaction />}
       {isEditModalOpen && <ModalEditTransaction />}
+      {isRepeatModalOpen && <ModalRepeatTransaction />}
       <section className={s.main_container}>
         <div className={isTablet || isDesktop ? s.nav_container : undefined}>
           <div
@@ -58,8 +63,8 @@ const DashboardPage = () => {
           {(isTablet || isDesktop) && <Currency />}
         </div>
         <div className={s.outlet_container}>
-					<Outlet />
-				</div>
+          <Outlet />
+        </div>
       </section>
     </div>
   );

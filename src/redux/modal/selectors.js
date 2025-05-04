@@ -5,4 +5,5 @@ export const selectIsEditID = (state) => state.modals.isEditId;
 export const selectIsProfileModalOpen = (state) =>
   state.modals.isProfileModalOpen;
 export const selectIsLogOutModalOpen = (state) =>
-  state.modals.isLogOutModalOpen;
+	state.modals.isLogOutModalOpen;
+export const selectIsRepeatModalOpen = (state) => state.modals.isRepeatModalOpen;
